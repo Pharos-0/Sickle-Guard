@@ -1,0 +1,75 @@
+# Provenance of every official figure in data/official/.
+#
+# All tables were read on 2026-10-12 from the Tamil Nadu Agriculture
+# Department's AGRISNET dashboard, "Salient Statistics on Agriculture, 2021"
+# (https://tnagrisnet.tn.gov.in/dashboard/book). Each PDF was fetched, its
+# text extracted with `pdftotext -raw`, and the rows parsed by script into
+# the CSVs here. No figure was typed by hand. tests/test_official_records.py
+# re-checks every rice row for internal consistency (yield = production /
+# area) so a transcription error cannot pass silently.
+
+retrieved_on: "2026-10-12"
+publisher: "Department of Agriculture, Government of Tamil Nadu (TN AGRISNET)"
+book: "Salient Statistics on Agriculture, 2021"
+
+files:
+  tn_rice_district_season_2019_20.csv:
+    table: "V.5 Area, Yield and Production of Rice - Season wise, Districtwise 2019-20"
+    url: "https://www.tnagrisnet.tn.gov.in/dashboard/report/05_05.pdf"
+    units:
+      area: hectare
+      production: tonnes of RICE (cleaned), not paddy
+      yield: kg of RICE (cleaned) per hectare
+    seasons: ["Kar/Kuruvai/Sornavari", "Samba/Thaladi/Pishanam", "Navarai/Kodai"]
+    method_of_estimation: >
+      The Season and Crop Report states that "the estimates of the
+      productivity and production of various crops were made based on the
+      crop cutting experiment" (Season and Crop Report of Tamil Nadu 2009-10,
+      preface; the 2022-23 Statistical Handbook repeats "Paddy - In terms of
+      Rice").
+    caution: >
+      Several districts carry exactly the state seasonal average (4,104
+      Kuruvai, 3,641 Samba, 4,303 Navarai). Where a district grew little of
+      a season's crop, its yield appears to have been filled with the state
+      figure rather than measured. The core delta districts' Samba/Thaladi
+      yields are district-specific.
+    delta_status: >
+      core = every block is a delta block; partial = some blocks are
+      (Table VII.13). Mayiladuthurai is a core delta district in the
+      2021 tables but has no row of its own in the 2019-20 yield table.
+
+  tn_sdrf_crop_relief_2019_2021.csv:
+    tables:
+      XXII.7: "SDRF disbursement for crops affected in North East Monsoon 2019 (extent damaged, amount sanctioned, farmers)"
+      XXII.9: "SDRF disbursement for Nivar cyclone affected farmers in 2020"
+      XXII.10: "SDRF disbursement for Burevi cyclone affected farmers in 2020"
+      XXII.11: "SDRF disbursement for farmers affected due to unprecedented heavy rain in January, 2021"
+    urls:
+      XXII.7: "http://www.tnagrisnet.tn.gov.in/dashboard/report/22_07.pdf"
+      XXII.9: "http://www.tnagrisnet.tn.gov.in/dashboard/report/22_09.pdf"
+      XXII.10: "http://www.tnagrisnet.tn.gov.in/dashboard/report/22_10.pdf"
+      XXII.11: "http://www.tnagrisnet.tn.gov.in/dashboard/report/22_11.pdf"
+    units: "Rs. lakh; agriculture column only (horticulture excluded)"
+    note: >
+      XXII.9-11 report fund allocation and disbursal "upto 26.2.2021".
+      XXII.7 reports amount sanctioned and extent damaged. Rows whose blank
+      cells made the column assignment ambiguous were not parsed (one
+      Burevi row, Chengalpet, not a delta district).
+
+conversion:
+  table: "XXVI.9 Conversion factors for various commodities"
+  url: "http://www.tnagrisnet.tn.gov.in/dashboard/report/26_09.pdf"
+  rice_from_paddy: "Rice (Cleaned) Production = 2/3 of Paddy Production"
+
+delta_districts:
+  table: "VII.13 Cauvery Delta Region - Districts & Blocks"
+  url: "http://www.tnagrisnet.tn.gov.in/dashboard/report/07_13.pdf"
+  core: [Thanjavur, Nagapattinam, Mayiladuthurai, Thiruvarur]
+  partial: [Cuddalore, Trichy, Karur, Ariyalur, Pudukkottai]
+
+not_found:
+  - >
+    District rice yields for 2020-21 in an official public table. The
+    Season and Crop Report 2020-21 exists (cited by TNAU district sheets)
+    but its district-season table was not located in this session; it is
+    needed to compare official and recalled yields in the damage season.
