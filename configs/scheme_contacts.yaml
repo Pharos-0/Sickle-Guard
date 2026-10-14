@@ -1,0 +1,68 @@
+last_review_attempt: '2026-10-11'
+official_sources_to_check:
+- https://pmfby.gov.in/   (Farmer Corner, Application Status)
+- the farmer's own bank branch or Common Service Centre
+- the District Agriculture Officer
+contacts:
+- name: Krishi Rakshak Portal & Helpline (KRPH)
+  value: '14447'
+  verified: true
+  source: 'VERIFIED 2026-10-11 against PIB, Ministry of Agriculture & Farmers
+    Welfare, 08 Feb 2024: ''Union Agriculture Minister Shri Arjun Munda unveils
+    LMS, Krishi Rakshak Portal, Helpline (KRPH) - 14447''. Pan-India toll free,
+    24x7. https://www.pib.gov.in/PressReleasePage.aspx?PRID=2004173&reg=3&lang=2'
+- name: PMFBY WhatsApp
+  value: '7065514447'
+  verified: false
+  source: state-government circular; not confirmed on pmfby.gov.in
+- name: Crop Insurance mobile app
+  value: search 'Crop Insurance' by Govt. of India on the app store
+  verified: false
+  source: referenced across scheme documentation; app identity not confirmed here
+- name: Claim status
+  value: pmfby.gov.in -> Farmer Corner -> Application Status
+  verified: false
+  source: secondary guides; page not reachable at review time
+deadlines:
+- applies_to: localised calamity (hailstorm, landslide, inundation, cloudburst)
+    and post-harvest loss
+  limit: report within 72 hours of the event
+  verified: false
+  note: 'Individual-farm assessment applies to these. Late intimation is a common
+    ground for rejection, so a farmer should report immediately and not wait for
+    any model output, including this one.
+
+    '
+- applies_to: widespread loss across a notified area (e.g. drought, flood)
+  limit: no individual intimation required
+  verified: false
+  note: 'Settled on area-yield data from crop-cutting experiments at the Insurance
+    Unit. An individual field estimate, including this system''s, has no standing
+    in that process.
+
+    '
+mandatory_notices:
+  never_discourage: 'This system CANNOT tell you whether you have a valid claim.
+    If you believe your crop was damaged, report it through the official channels
+    within the deadline, whatever this report says.
+
+    '
+  not_official: 'This is a research prototype. It is not connected to PMFBY, is
+    not an insurer, and its output has no official standing.
+
+    '
+verification_log:
+- item: 14447 helpline
+  status: VERIFIED
+  source: https://www.pib.gov.in/PressReleasePage.aspx?PRID=2004173&reg=3&lang=2
+  quote: Krishi Rakshak Portal, Helpline (KRPH) - 14447
+- item: WhatsApp 7065514447
+  status: UNVERIFIED
+  note: 'PIB confirms a WhatsApp chatbot is listed on the PMFBY homepage but the
+    number itself was not readable: pmfby.gov.in returns an empty document body
+    to both a plain fetch and a rendered browser load.'
+- item: 72-hour intimation limit
+  status: UNVERIFIED
+  note: Consistent across secondary sources and a state circular; not located
+    verbatim in an official page during review. The report therefore still tells
+    the farmer to confirm it and to report immediately regardless.

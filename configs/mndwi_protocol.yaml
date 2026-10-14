@@ -1,0 +1,126 @@
+# Frozen protocol: does a water/vegetation decoupling signal at the
+# transplanting window identify field-seasons that end below threshold?
+#
+# WRITTEN BEFORE ANY RESULT WAS COMPUTED. 2026-10-11.
+#
+# This is the one concrete, untested and buildable safeguard hypothesis to
+# come out of reviewing a proposed system architecture: a paddy field
+# should be FLOODED shortly after transplanting, so a plot that looks green
+# (high NDVI) while showing little standing water (low MNDWI) during that
+# window may be green with something other than establishing paddy.
+#
+# Seven reliability signals have already been tested in this project and
+# none beat chance (results/metrics/reliability.json). The prior for this
+# one is therefore not favourable, and the protocol is frozen so that a
+# negative result cannot be rescued by moving the window, the threshold or
+# the index after the fact.
+#
+# src/mndwi_screen.py loads this file and aborts if its own behaviour
+# disagrees with it.
+
+version: 1
+frozen_on: "2026-10-11"
+frozen_before_results: true
+
+question: >
+  Does a decoupling between vegetation greenness and surface water during
+  the transplanting window identify field-seasons whose recorded yield
+  ends below the study threshold, on plots never used to fit anything?
+
+hypothesis: >
+  H1: the decoupling index ranks below-threshold field-seasons better than
+  chance, and better than a ranking built from the plot's own past
+  harvests alone.
+  H0: it does not.
+
+# ---------------------------------------------------------------- signal
+signal:
+  name: water_vegetation_decoupling
+  bands:
+    mndwi: "(B3 - B11) / (B3 + B11)"       # green vs SWIR: open water
+    ndvi:  "(B8 - B4) / (B8 + B4)"         # greenness
+  rationale: >
+    MNDWI uses the SWIR band and responds to OPEN WATER. NDMI, which this
+    project already computes, uses B8 against B11 and responds to canopy
+    moisture. They are not interchangeable, and only MNDWI speaks to
+    whether a field is flooded.
+  window:
+    anchor: TRANSPLANTING_DATE
+    days_before: 7
+    days_after: 21
+    rationale: >
+      Paddy is flooded at transplanting and stays flooded through
+      establishment. The window opens a week early because the recorded
+      date is farmer-reported and the acquisition grid is sparse.
+  definition: >
+    Within the window, take the mean NDVI and the mean MNDWI over the
+    plot's valid pixels across all cloud-screened acquisitions. Standardise
+    each using the mean and standard deviation of the TRAINING SPLIT ONLY.
+    decoupling = z(ndvi_window) - z(mndwi_window). Higher means greener and
+    drier than the training distribution.
+  label_free: true
+  min_acquisitions_in_window: 1
+  action_if_no_acquisition: >
+    Report the field-season as NOT SCORABLE and count it. Do not impute a
+    value, and do not silently drop it from the denominator.
+
+# ---------------------------------------------------------------- target
+target:
+  name: below_threshold_field_season
+  definition: "yield < 0.80 x mean(training-split yield)"
+  provenance: >
+    The same target as every other screening experiment in this project,
+    so results are comparable. It is a RELATIVE cut on farmer-recalled
+    yield, not a measurement of crop damage, and must never be reported as
+    loss detection.
+
+# ------------------------------------------------------------ evaluation
+evaluation_set: "held-out test split only (27 plots, 62 field-seasons)"
+secondary_set: "all field-seasons, reported separately and never as the headline"
+independent_unit: plot
+bootstrap:
+  unit: plot
+  replicates: 10000
+  seed: 0
+  note: "all seasons of a resampled plot travel together"
+
+baselines:
+  - name: random
+    definition: "permutation null over the same labels, not a single draw"
+  - name: history_only
+    definition: "rank by the mean of the plot's causal prior harvests, area mean where none"
+  - name: ndvi_alone
+    definition: "window-mean NDVI alone, to show the water term is doing work"
+  - name: mndwi_alone
+    definition: "window-mean MNDWI alone, for the same reason"
+
+metrics: ["auroc", "auroc_ci", "recall_at_budget", "precision_at_budget"]
+budgets: [0.25, 0.33, 0.50]
+
+# -------------------------------------------------------------- decision
+rejection_criteria:
+  - "H1 is NOT supported if the plot-bootstrap CI on AUROC includes 0.5."
+  - "H1 is NOT supported if the paired difference against history_only includes 0."
+  - "If ndvi_alone or mndwi_alone matches the combined signal, the decoupling framing is not supported even when the combined signal beats chance."
+  - "A point estimate above chance with an interval spanning it is reported as NOT DEMONSTRATED."
+
+sensitivity:
+  windows: [[0, 14], [7, 21], [14, 28], [0, 30]]
+  note: >
+    Reported as sensitivity only. The pre-specified window is
+    days_before 7 / days_after 21 and that is the one the verdict rests
+    on; the others exist to show whether the result is an artefact of one
+    choice, not to select the best.
+
+reporting_rule: >
+  A negative outcome is reported with the same prominence a positive one
+  would receive, in README.md and in ARCHITECTURE_ASSESSMENT.md, which
+  currently lists this hypothesis as the most promising untested item in a
+  proposed architecture. If it fails, that listing is corrected.
+
+power_statement: >
+  27 held-out plots and roughly 11 below-threshold field-seasons. This can
+  indicate whether the signal carries information. It cannot establish an
+  operating threshold, and no threshold from it may be called deployable.
+
+amendments: []

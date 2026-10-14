@@ -1,0 +1,658 @@
+# Every number this project's prose quotes, bound to the artefact it came
+# from and to the exact string the documents must contain.
+#
+# WHY THIS FILE EXISTS
+# --------------------
+# Four documents now quote results: README.md, EVIDENCE_TO_DESIGN.md,
+# ARCHITECTURE_ASSESSMENT.md and THESIS_SCOPE.md. Nothing checked that any
+# of them still agreed with the artefacts. A rerun that moved a number
+# would leave the prose stating the old one, and the prose is what a
+# reader believes.
+#
+# src/check_claims.py enforces two things per entry:
+#
+#   VALUE   the number recomputed from the artefact still equals `expected`
+#           within `tolerance`
+#   PROSE   the string in `renders_as` appears verbatim in every document
+#           listed in `quoted_in`
+#
+# The second check is the one that catches stale writing: if an artefact
+# moves and `expected` is updated, the rendered string changes and every
+# document quoting it fails until it is rewritten.
+#
+# TOLERANCES
+# ----------
+# Almost everything here is deterministic arithmetic over stored artefacts
+# or a seeded bootstrap, so the default is exact to 1e-9. Entries whose
+# value depends on a model fit that is refitted on each run carry a wider
+# tolerance with the reason stated inline.
+
+version: 1
+declared_on: "2026-10-11"
+default_tolerance: 1.0e-9
+
+policy: >
+  A value outside tolerance, or a document that no longer contains the
+  rendered string, fails the check. Fix the document or re-derive the
+  number; never edit `expected` alone to make the check pass.
+
+claims:
+
+  # ------------------------------------------------ prototype ranking
+  - id: guard_auroc_test
+    description: SICKLE-Guard ranking AUROC on the held-out test split.
+    file: evaluate_prototype.json
+    path: "ranking/held-out test split/SICKLE-Guard (as shipped)/auroc"
+    expected: 0.8074866310160428
+    renders_as: "0.807"
+    quoted_in: [README.md, EVIDENCE_TO_DESIGN.md]
+
+  - id: last_harvest_auroc_test
+    description: Ranking by the single most recent prior harvest, same split.
+    file: evaluate_prototype.json
+    path: "ranking/held-out test split/last harvest only/auroc"
+    expected: 0.803030303030303
+    renders_as: "0.803"
+    quoted_in: [README.md]
+
+  - id: history_auroc_test
+    description: Ranking by the mean of causal prior harvests, same split.
+    file: evaluate_prototype.json
+    path: "ranking/held-out test split/history only, no imagery/auroc"
+    expected: 0.7967914438502673
+    renders_as: "0.797"
+    quoted_in: [README.md, EVIDENCE_TO_DESIGN.md, ARCHITECTURE_ASSESSMENT.md]
+
+  - id: guard_auroc_oof
+    description: The same hybrid, out-of-fold over all field-seasons.
+    file: evaluate_prototype.json
+    path: "ranking/all field-seasons, out-of-fold (secondary, more power)/SICKLE-Guard (as shipped)/auroc"
+    expected: 0.8236983969357355
+    renders_as: "0.824"
+    quoted_in: [README.md, EVIDENCE_TO_DESIGN.md]
+
+  - id: history_auroc_oof
+    description: History-only out-of-fold, the strongest ranking measured.
+    file: evaluate_prototype.json
+    path: "ranking/all field-seasons, out-of-fold (secondary, more power)/history only, no imagery/auroc"
+    expected: 0.8381685345439069
+    renders_as: "0.838"
+    quoted_in: [README.md, EVIDENCE_TO_DESIGN.md, ARCHITECTURE_ASSESSMENT.md]
+
+  - id: smallest_first_auroc_test
+    description: >
+      Visiting the smallest fields first. Anti-correlated, and the reason
+      a vulnerability-weighted triage cannot be justified as finding more
+      problems on this data.
+    file: evaluate_prototype.json
+    path: "ranking/held-out test split/smallest field first/auroc"
+    expected: 0.23529411764705882
+    renders_as: "0.235"
+    quoted_in: [SAFEGUARD_FRAMEWORK_MAPPING.md, ARCHITECTURE_ASSESSMENT.md]
+
+  # ------------------------------------------------ prototype safeguards
+  - id: flag_difference_test
+    description: >
+      Share below threshold among flagged minus unflagged fields, the one
+      clearly supported prototype claim.
+    file: evaluate_prototype.json
+    path: "flag_adds_information/held-out test split/difference"
+    expected: 0.3285714285714286
+    renders_as: "+33"
+    quoted_in: [README.md, EVIDENCE_TO_DESIGN.md]
+
+  - id: flag_missed_test
+    description: >
+      Below-threshold fields NOT flagged. The justification for having no
+      reassuring state.
+    file: evaluate_prototype.json
+    path: "flag_adds_information/held-out test split/n_missed"
+    expected: 3
+    renders_as: "3 of 11"
+    quoted_in: [README.md, EVIDENCE_TO_DESIGN.md, SAFEGUARD_FRAMEWORK_MAPPING.md, ARCHITECTURE_ASSESSMENT.md]
+
+  - id: warning_difference_test
+    description: >
+      Error difference between warned and unwarned field-seasons. The
+      refuted safeguard.
+    file: evaluate_prototype.json
+    path: "warning_calibration/held-out test split/difference"
+    expected: 40.706897052609975
+    renders_as: ["+41 kg/acre", "+40.7"]
+    quoted_in: [README.md, EVIDENCE_TO_DESIGN.md, SAFEGUARD_FRAMEWORK_MAPPING.md, ARCHITECTURE_ASSESSMENT.md]
+
+  # ------------------------------------------------------ mndwi screen
+  - id: mndwi_auroc_test
+    description: >
+      The pre-registered water/vegetation decoupling signal, held-out
+      split. Eighth reliability signal tested, eighth to fail.
+    file: mndwi_screen.json
+    path: "sets/held-out test split (PRIMARY)/signals/decoupling (pre-specified)/auroc"
+    expected: 0.5115864527629234
+    renders_as: "0.512"
+    quoted_in: [README.md, ARCHITECTURE_ASSESSMENT.md, SAFEGUARD_FRAMEWORK_MAPPING.md]
+
+  - id: mndwi_n_scorable
+    description: Field-seasons with a usable acquisition in the window.
+    file: mndwi_screen.json
+    path: n_scorable
+    expected: 316
+    renders_as: "316"
+    quoted_in: [README.md, ARCHITECTURE_ASSESSMENT.md]
+
+  - id: mndwi_vs_ndvi_oof
+    description: >
+      Adding the water term made the signal WORSE. The interval excludes
+      zero on the secondary set.
+    file: mndwi_screen.json
+    path: "sets/all scorable field-seasons (secondary)/vs/ndvi alone/delta_auroc"
+    expected: -0.0931917641150728
+    renders_as: "-0.093"
+    quoted_in: [README.md, ARCHITECTURE_ASSESSMENT.md]
+
+  # ------------------------------------------------- label and evidence
+  - id: frac_losses_chronic
+    description: >
+      Share of labelled losses sitting at plots below threshold in every
+      season. The reason this is a level ranking, not loss detection.
+    file: label_validity.json
+    path: frac_losses_chronic
+    expected: 0.6037735849056604
+    renders_as: "60"
+    quoted_in: [README.md, EVIDENCE_TO_DESIGN.md, THESIS_SCOPE.md]
+
+  - id: event_plot_auroc
+    description: AUROC on plots where the answer is not already in the record.
+    file: label_validity.json
+    path: "ranking_by_subset/EVENT plots only (the real case)/auroc"
+    expected: 0.6263736263736264
+    renders_as: "0.626"
+    quoted_in: [README.md, EVIDENCE_TO_DESIGN.md, THESIS_SCOPE.md]
+
+  - id: quantile_coverage
+    description: >
+      Empirical coverage of the quantile interval at nominal 90 %. Looks
+      like a working safeguard; discrimination is what is missing.
+    file: reliability.json
+    path: quantile_interval_empirical_coverage_nominal_90
+    expected: 0.9032258064516129
+    renders_as: "90.3"
+    quoted_in: [README.md, EVIDENCE_TO_DESIGN.md, ARCHITECTURE_ASSESSMENT.md, SAFEGUARD_FRAMEWORK_MAPPING.md]
+
+  - id: satellite_cold_start_gain
+    description: >
+      Cold-start MAE gain from the satellite fallback; interval includes
+      zero.
+    file: does_satellite_add.json
+    path: "paired_mae_hybrid_minus_history_only/cold_start/delta"
+    expected: -14.31612357436051
+    renders_as: ["14.3", "-14.3"]
+    quoted_in: [README.md, EVIDENCE_TO_DESIGN.md]
+
+  - id: season_swap_real
+    description: Ranking AUROC with the real season's features.
+    file: season_swap.json
+    path: "1 real features/loss_auroc"
+    expected: 0.7166264718399773
+    renders_as: "0.717"
+    quoted_in: [EVIDENCE_TO_DESIGN.md, SAFEGUARD_FRAMEWORK_MAPPING.md]
+
+  - id: season_swap_swapped
+    description: >
+      The same, fed a DIFFERENT season from the same plot. 83 % of the
+      skill survives, so the model is reading the site.
+    file: season_swap.json
+    path: "2 same-plot season swap/loss_auroc"
+    expected: 0.6791034189246702
+    renders_as: "0.679"
+    quoted_in: [EVIDENCE_TO_DESIGN.md, SAFEGUARD_FRAMEWORK_MAPPING.md]
+
+  # -------------------------------------------- where the ranking fails
+  - id: recall_has_record_test
+    description: >
+      Ranking recall on held-out field-seasons that have a causal prior
+      harvest. Expectation filled by --update, per the amendment below.
+    file: error_breakdown.json
+    path: "sets/held-out test split (PRIMARY)/has_record/has a record/recall"
+    expected: 1.0
+    renders_as: "1.00"
+    quoted_in: [README.md]
+
+  - id: recall_cold_start_test
+    description: Ranking recall on held-out cold-start field-seasons.
+    file: error_breakdown.json
+    path: "sets/held-out test split (PRIMARY)/has_record/cold start/recall"
+    expected: 0.25
+    renders_as: "0.25"
+    quoted_in: [README.md]
+
+  - id: missed_cold_start_test
+    description: >
+      Below-threshold cold starts not flagged. Equals every miss on the
+      held-out split.
+    file: error_breakdown.json
+    path: "sets/held-out test split (PRIMARY)/has_record/cold start/n_missed"
+    expected: 3
+    renders_as: "3"
+    quoted_in: [README.md]
+
+  # ----------------------------------------- synthetic conditions study
+  - id: synth_register_recall_event
+    description: >
+      Recall on event losses for the register baseline at the calibrated
+      operating point. The bar the prototype has to clear.
+    file: synthetic_triage.json
+    path: "sweeps/share of fields with a record/rows/0.59/register only (what the team already knows)/recall_event"
+    expected: 0.7341784475450067
+    renders_as: ["**0.73** of event losses"]
+    quoted_in: [SYNTHETIC_CONDITIONS.md]
+
+  - id: synth_prototype_recall_event
+    description: Recall on event losses for the prototype at the same point.
+    file: synthetic_triage.json
+    path: "sweeps/share of fields with a record/rows/0.59/prototype (history, satellite fallback)/recall_event"
+    expected: 0.6387388639963929
+    renders_as: ["**0.64** for the prototype"]
+    quoted_in: [SYNTHETIC_CONDITIONS.md]
+
+  - id: synth_tight_budget_inversion
+    description: >
+      At a 10 percent budget the prototype recalls FEWER event losses than
+      its own history component, because weak satellite picks crowd out
+      strong ones.
+    file: synthetic_triage.json
+    path: "sweeps/inspection budget/rows/0.1/prototype (history, satellite fallback)/recall_event"
+    expected: 0.12115228173518175
+    renders_as: "0.12"
+    quoted_in: [SYNTHETIC_CONDITIONS.md]
+
+  - id: synth_history_first_tight_budget
+    description: >
+      The history-first policy at a 10 percent budget: repairs the
+      hybrid's cold-start damage, ties with plain history-only.
+    file: synthetic_triage.json
+    path: "sweeps/inspection budget/rows/0.1/history-first (record fields only, then cold starts)/recall_event"
+    expected: 0.2511111675018251
+    renders_as: "0.25"
+    quoted_in: [SYNTHETIC_CONDITIONS.md]
+
+  - id: synth_shock_bias_register_poor
+    description: >
+      Register recall when bad seasons land on already-poor plots, the
+      regime the real data sits in.
+    file: synthetic_triage.json
+    path: "sweeps/where shocks land (+1 poor plots, -1 good plots)/rows/1.0/register only (what the team already knows)/recall_event"
+    expected: 0.6115979708686361
+    renders_as: "0.61"
+    quoted_in: [SYNTHETIC_CONDITIONS.md]
+
+  # ------------------------------------------ verification policies
+  - id: vp_within_cold_satellite_vs_random
+    description: >
+      Satellite ordering versus random within the cold-start pool, 33 %
+      budget, proportional reserve. Not demonstrated.
+    file: verification_policies.json
+    path: "experiment_b/all_oof/budgets/0.33/_within_cold/delta"
+    expected: 0.0625
+    renders_as: ["+0.062"]
+    quoted_in: [README.md]
+
+  - id: vp_reserve10_cold_recall
+    description: Cold-start recall with a 10 % reserve at a 33 % budget.
+    file: verification_policies.json
+    path: "experiment_b/all_oof/budgets/0.33/0.10|satellite/recall_cold_start"
+    expected: 0.1875
+    renders_as: ["19 %"]
+    quoted_in: [README.md]
+
+  # ------------------------------- labels against official records (L)
+  - id: off_kuruvai_ratio
+    description: >
+      Recalled Kuruvai 2019-20 yield at the state's 2/3 conversion, over the core delta districts' crop-cutting yield. OBSERVED.
+    file: official_records.json
+    path: "headline/kuruvai_ratio_to_official"
+    expected: 0.7740100028079969
+    renders_as: ["0.77 of the crop-cutting"]
+    quoted_in: [README.md]
+
+  - id: off_samba_ratio
+    description: >
+      The same for Samba/Thaladi 2019-20. OBSERVED.
+    file: official_records.json
+    path: "headline/samba_ratio_to_official"
+    expected: 0.901182615011242
+    renders_as: ["at 0.90, inside"]
+    quoted_in: [README.md]
+
+  - id: off_samba_recalled_change
+    description: >
+      Same-plot change in recalled Samba yield into the 2020-21 relief season. OBSERVED.
+    file: official_records.json
+    path: "headline/samba_recalled_change"
+    expected: -0.03949826883535043
+    renders_as: ["-3.9 %"]
+    quoted_in: [README.md]
+
+  - id: off_samba_model_change
+    description: >
+      Same-plot change in the out-of-fold satellite model's estimates. It did not move. OBSERVED.
+    file: official_records.json
+    path: "headline/samba_model_change"
+    expected: -0.00013471046415695963
+    renders_as: ["move: 0.0 %"]
+    quoted_in: [README.md]
+
+  - id: off_contrast
+    description: >
+      Samba change minus the Kuruvai control. OBSERVED.
+    file: official_records.json
+    path: "headline/samba_minus_kuruvai"
+    expected: -0.0025548514481211135
+    renders_as: ["difference -0.3 %"]
+    quoted_in: [README.md]
+
+  # --------------------------------------------- blind sheets (C, observed)
+  - id: exposure_inspected_reassuring
+    description: >
+      Inspected below-threshold field-seasons at 20 % whose estimate sits above the threshold. OBSERVED.
+    file: inspection_sim.json
+    path: "observed_exposure/held-out test split/budgets/0.2/n_inspected_bad_estimate_at_or_above_threshold"
+    expected: 4
+    renders_as: ["4 of them carry"]
+    quoted_in: [README.md]
+
+  - id: exposure_missed_reassuring
+    description: >
+      Missed below-threshold field-seasons at 20 % whose estimate sits above the threshold. OBSERVED.
+    file: inspection_sim.json
+    path: "observed_exposure/held-out test split/budgets/0.2/n_missed_estimate_at_or_above_threshold"
+    expected: 3
+    renders_as: ["all 3 carry"]
+    quoted_in: [README.md]
+
+  # ------------------------------------- imperfect inspectors (C, SIMULATED)
+  - id: sim_break_even
+    description: >
+      Break-even inspector sensitivity, register vs random, 20 % budget.
+    file: inspection_sim.json
+    path: "sets/held-out test split (VERDICT)/budgets/0.2/register/break_even_sensitivity"
+    expected: 0.304147465437788
+    renders_as: ["a sensitivity of 0.30 confirms"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  - id: sim_precision_register
+    description: >
+      Share of confirmed findings that are real, register-guided, s=0.70 f=0.10.
+    file: inspection_sim.json
+    path: "sets/held-out test split (VERDICT)/budgets/0.2/grid/s=0.70|f=0.10/register/precision_of_confirmed"
+    expected: 0.9074074074074074
+    renders_as: ["0.91 of the problems"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  - id: sim_precision_random
+    description: >
+      The same for random visits.
+    file: inspection_sim.json
+    path: "sets/held-out test split (VERDICT)/budgets/0.2/grid/s=0.70|f=0.10/random/precision_of_confirmed"
+    expected: 0.6015624999999999
+    renders_as: ["against 0.60 for random"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  - id: sim_surviving_oof
+    description: >
+      Lowest sensitivity at which register beats random, all out-of-fold, 20 %.
+    file: inspection_sim.json
+    path: "sets/all field-seasons out-of-fold (secondary)/monte_carlo_register_vs_random/0.2/lowest_surviving_sensitivity"
+    expected: 0.3
+    renders_as: ["sensitivity of 0.3 at a 20"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  # ------------------------------------------ YES-TECH what-if (D, SIMULATED)
+  - id: yt_full_weight_020
+    description: >
+      P(paid nothing | 10 % short), 100 % weight, error 0.20.
+    file: yestech_whatif.json
+    path: "conditional_curves/w=1.00|sd_t=0.20|bias=+0.00|sd_c=0.10/0.10/p_paid_nothing"
+    expected: 0.289125
+    renders_as: ["is 29 % at 100 %"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  - id: yt_min_weight_020
+    description: >
+      The same at the 30 % minimum weight.
+    file: yestech_whatif.json
+    path: "conditional_curves/w=0.30|sd_t=0.20|bias=+0.00|sd_c=0.10/0.10/p_paid_nothing"
+    expected: 0.11418
+    renders_as: ["against 11 % at the"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  - id: yt_full_weight_030
+    description: >
+      P(paid nothing | 10 % short), 100 % weight, error 0.30.
+    file: yestech_whatif.json
+    path: "conditional_curves/w=1.00|sd_t=0.30|bias=+0.00|sd_c=0.10/0.10/p_paid_nothing"
+    expected: 0.3563
+    renders_as: ["figures are 36 %"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  - id: yt_min_weight_030
+    description: >
+      The same at the 30 % minimum weight.
+    file: yestech_whatif.json
+    path: "conditional_curves/w=0.30|sd_t=0.30|bias=+0.00|sd_c=0.10/0.10/p_paid_nothing"
+    expected: 0.163885
+    renders_as: ["and 16 %. Blending"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  - id: yt_near_threshold_cost
+    description: >
+      Rechecks per wrongly unpaid unit recovered, near-threshold rule.
+    file: yestech_whatif.json
+    path: "guard/loss=0.20|w=1.00|sd_t=0.20|bias=+0.00/budgets/0.05/policies/near_threshold/rechecks_per_recovery"
+    expected: 5.382131324004305
+    renders_as: ["closest first | 5.4"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  - id: yt_random_cost
+    description: >
+      The same for random rechecks.
+    file: yestech_whatif.json
+    path: "guard/loss=0.20|w=1.00|sd_t=0.20|bias=+0.00/budgets/0.05/policies/random/rechecks_per_recovery"
+    expected: 19.455252918287936
+    renders_as: ["random units | 19.5"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  - id: yt_near_threshold_share
+    description: >
+      Share of wrongly unpaid units recovered with a 5 % budget.
+    file: yestech_whatif.json
+    path: "guard/loss=0.20|w=1.00|sd_t=0.20|bias=+0.00/budgets/0.05/policies/near_threshold/recovered_share"
+    expected: 0.13880173315404154
+    renders_as: ["recovers 14 % of the wrongly"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  - id: yt_near_threshold_flipped
+    description: >
+      Not-due units the same rechecks pay, because a recheck is itself noisy.
+    file: yestech_whatif.json
+    path: "guard/loss=0.20|w=1.00|sd_t=0.20|bias=+0.00/budgets/0.05/policies/near_threshold/correctly_unpaid_flipped_to_paid"
+    expected: 658
+    renders_as: ["pay 658 units"]
+    quoted_in: [SIMULATED_EXTENSIONS.md]
+
+  # ------------------------------------------ pilot sizing (planning)
+  - id: pilot_register_vs_random
+    description: >
+      Fields to enrol for register vs random selection, out-of-fold effect.
+    file: pilot_power.json
+    path: "sets/all field-seasons out-of-fold/comparisons/register vs random/fields_to_enrol"
+    expected: 117.6164916723798
+    renders_as: ["about 118 fields"]
+    quoted_in: [PILOT_PROTOCOL.md]
+
+  - id: pilot_workflow_vs_register_d
+    description: >
+      Observed out-of-fold recall difference, workflow minus register, 20 %.
+    file: pilot_power.json
+    path: "sets/all field-seasons out-of-fold/comparisons/workflow vs register/difference"
+    expected: 0.018867924528301886
+    renders_as: ["is +0.019 in recall"]
+    quoted_in: [PILOT_PROTOCOL.md]
+
+  - id: pilot_workflow_vs_register_bad
+    description: >
+      Below-threshold fields needed for workflow vs register.
+    file: pilot_power.json
+    path: "sets/all field-seasons out-of-fold/comparisons/workflow vs register/below_threshold_fields_needed"
+    expected: 2077.5936968754504
+    renders_as: ["needs 2,078 below-threshold"]
+    quoted_in: [PILOT_PROTOCOL.md]
+
+  - id: pilot_workflow_vs_register_n
+    description: >
+      Fields to enrol for workflow vs register.
+    file: pilot_power.json
+    path: "sets/all field-seasons out-of-fold/comparisons/workflow vs register/fields_to_enrol"
+    expected: 12504.762062325824
+    renders_as: ["about 12,505 fields"]
+    quoted_in: [PILOT_PROTOCOL.md]
+
+  - id: pilot_heldout_bad
+    description: >
+      The held-out split's optimistic figure, from one discordant field.
+    file: pilot_power.json
+    path: "sets/held-out test split/comparisons/workflow vs register/below_threshold_fields_needed"
+    expected: 83.94050624476264
+    renders_as: ["suggests 84"]
+    quoted_in: [PILOT_PROTOCOL.md]
+
+# ---------------------------------------------------------------- prose
+# Numbers are not the only thing that drifts. A claim can be overstated in
+# a sentence that contains no figure at all, and that is the failure mode
+# this project is most exposed to: every result so far pushes the honest
+# claim DOWN, so the temptation is always to write it slightly stronger
+# than the evidence.
+#
+# must_appear   a canonical sentence that has to be present verbatim.
+# must_not_appear  phrasings the evidence rules out. These are checked
+#               against every markdown file in the project, not only the
+#               ones listed above, because an overstatement is just as
+#               damaging in a file nobody declared.
+
+prose_rules:
+  must_appear:
+    - id: synthetic_page_declares_itself
+      document: SYNTHETIC_CONDITIONS.md
+      text: >-
+        **Every number on this page is simulated.**
+      why: >
+        Simulated and empirical results are kept apart. The page carrying
+        the simulation says so in its opening, so a reader who arrives at
+        a table mid-document cannot mistake it for field performance.
+    - id: simulated_extensions_page_declares_itself
+      document: SIMULATED_EXTENSIONS.md
+      text: >-
+        **Every number on this page is simulated.**
+      why: >
+        Experiments C and D are simulated. Their page says so in its
+        opening, like the generator's page.
+    - id: canonical_objective
+      document: THESIS_SCOPE.md
+      text: >-
+        We identify conditions under which satellite-based agricultural
+        predictions can be unreliable, empirically evaluate safeguards for
+        detecting those failures, and develop a decision-support prototype
+        to help prioritize verification while guarding against false
+        reassurance.
+      why: >
+        The objective is stated once, in one place, so that every other
+        document can be checked against it rather than paraphrasing it
+        into something stronger.
+
+  must_not_appear:
+    - phrase: "protecting farmers from false reassurance"
+      why: >
+        Superseded wording. It claims an outcome for a person; nobody has
+        used this system. The canonical objective says guarding against
+        false reassurance, which is a property of the artefact and is
+        demonstrated: no reassuring state, blind task sheets, wording
+        invariant to the estimate.
+    - phrase: "validated with farmers"
+      why: "No farmer has used this. 82 passing tests are not a user study."
+    - phrase: "ready for PMFBY"
+      why: >
+        No Insurance Unit identity exists in this data, so nothing here
+        can reproduce a scheme decision.
+    - phrase: "improves insurance"
+      why: "No claim, payout or decision has been measured."
+    - phrase: "proven crop-loss"
+      why: >
+        On the plots where the answer is not already in the record, AUROC
+        is 0.626 with an interval including chance.
+    - phrase: "detects crop damage"
+      why: >
+        The target is a relative cut on farmer-recalled yield. Documents
+        may say the system does NOT do this; the checker is
+        negation-aware.
+    - phrase: "farmers are better off"
+      why: "Ranking better than an alternative is not an outcome for anyone."
+    - phrase: "eight reliability signals"
+      why: >
+        The count is nine: seven in reliability.json, plus the
+        released-ensemble screen and the MNDWI screen. An earlier README
+        table dropped `low predicted yield` and four documents repeated
+        its "eight".
+    - phrase: "eighth reliability signal"
+      why: "Same stale count."
+    - phrase: "validated against YES-TECH"
+      why: "No YES-TECH output was used; none is public."
+    - phrase: "YES-TECH misses"
+      why: >
+        Unproven. The evidence on YES-TECH's accuracy is contested and no
+        matched data is public; Experiment D is a mechanism, not a finding.
+    - phrase: "ready for deployment"
+      why: "Nobody has used the workflow or the console in the field."
+    - phrase: "detects damage"
+      why: "Same reason as detects crop damage."
+    - phrase: "observed recall of"
+      why: >
+        Simulated recall must never be written as observed. The synthetic
+        study is labelled on its own page and its numbers do not appear
+        beside empirical ones without that label.
+
+amendments:
+  - date: "2026-10-11"
+    entries: [history_auroc_test, mndwi_vs_ndvi_oof, event_plot_auroc]
+    change: >
+      Expected values corrected to the figures the artefacts produce:
+      0.7973333333333333 -> 0.7967914438502673,
+      -0.09316037735849061 -> -0.0931917641150728,
+      0.6262626262626263 -> 0.6263736263736264.
+    reason: >
+      All three were entered at full precision when only the rounded
+      figure printed to the console had actually been computed, and the
+      remaining digits were invented. No measurement changed; the registry
+      was wrong, and the check caught it on its first run. The rendered
+      strings (0.797, -0.093, 0.626) were correct throughout, so no
+      document needed rewriting.
+      This is the third time the same mistake has been made in this
+      project -- twice in sickle-project/configs/tolerances.yaml and once
+      here. The working rule, now stated in both registries: add an entry
+      with a placeholder expectation and let --update fill it in. Never
+      type a value at a precision that was not measured.
+    measured_values_unchanged: true
+    documents_rewritten: none
+  - date: "2026-10-12"
+    entries: [canonical_objective]
+    change: >
+      Canonical objective revised at the author's request: "to prioritize
+      verification while minimizing the risk of false reassurance" became
+      "to help prioritize verification while guarding against false
+      reassurance". "Conditions under which" and "empirically evaluate"
+      kept, for the reasons in THESIS_SCOPE.md.
+    reason: >
+      The author's wording. Neither change strengthens a claim: "help"
+      weakens one, and "guarding against" names the same property of the
+      artefact. "protecting farmers from false reassurance" stays forbidden.
+    measured_values_unchanged: true
+    documents_rewritten: [THESIS_SCOPE.md, tests/test_claim_guards.py]

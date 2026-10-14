@@ -1,0 +1,205 @@
+# Frozen protocol: three extensions to the prototype's evaluation.
+#
+# WRITTEN BEFORE ANY RESULT OF C, D OR L WAS COMPUTED. 2026-10-12.
+#
+#   C  IMPERFECT INSPECTORS        SIMULATED. Experiment A assumed a visit
+#                                  reveals the truth. What survives when the
+#                                  inspector misses problems or raises false
+#                                  ones? Plus one OBSERVED count: how many
+#                                  real misses a reassuring display would
+#                                  have reassured.
+#   D  YES-TECH WHAT-IF            SIMULATED. No YES-TECH output is public.
+#                                  How does an error in a technology yield
+#                                  estimate travel into an Insurance Unit
+#                                  claim at the weightages states actually
+#                                  use, and which re-verification rule
+#                                  recovers wrongly unpaid units?
+#   L  LABELS AGAINST OFFICIAL     OBSERVED. Do SICKLE's farmer-recalled
+#      RECORDS                     yields agree with the state's crop-cutting
+#                                  yields, and do they fall in a season the
+#                                  state paid crop-damage relief across the
+#                                  delta?
+#
+# src/inspection_sim.py (C), src/yestech_whatif.py (D) and
+# src/official_records.py (L) each load this file and abort if their
+# behaviour disagrees with it.
+#
+# DISCLOSURE FOR L (what was seen before this file was written)
+# While searching for official data on 2026-10-12, SICKLE's mean recalled
+# yield by year and season, and the official 2019-20 district yields for
+# the delta, were printed and compared informally in conversation. The
+# verdict rules below were written after that and are therefore not blind
+# for L. They are fixed here so they cannot move again. C and D had not
+# been run in any form.
+
+version: 1
+frozen_on: "2026-10-12"
+frozen_before_results: true
+seen_before_freezing:
+  C: nothing
+  D: nothing
+  L: >
+    season means of SICKLE recalled yield (2019 and 2020, every season) and
+    the official 2019-20 delta district yields
+
+bootstrap: {unit: plot, replicates: 10000, seed: 0}
+target: "yield < 0.80 x mean(training-split yield), farmer-recalled; not crop damage"
+
+# ------------------------------------------------------------ experiment C
+experiment_c:
+  label: SIMULATED
+  question: >
+    Experiment A scored a visit as revealing the truth. If inspectors miss
+    real problems or report false ones, does record-guided prioritisation
+    still confirm more real problems than random referral, and how weak can
+    an inspector be before it stops?
+  sets: ["held-out test split (VERDICT)", "all field-seasons out-of-fold (secondary)"]
+  policies: [random, register, history_only, workflow]   # exactly as in verification_protocol.yaml
+  budgets: [0.10, 0.20, 0.33]
+  inspector:
+    sensitivity: [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3]
+    false_alarm: [0.0, 0.05, 0.10, 0.20]
+    model: >
+      Each inspected field-season that is truly below threshold is confirmed
+      with probability `sensitivity`; each inspected field-season that is not
+      is falsely confirmed with probability `false_alarm`. Independent across
+      field-seasons and of the policy that chose them.
+  metrics:
+    confirmed_real: "sensitivity x n_found"
+    confirmed_false: "false_alarm x (n_inspections - n_found)"
+    precision_of_confirmed: "confirmed_real / (confirmed_real + confirmed_false)"
+    break_even_sensitivity: >
+      mean random n_found / policy n_found: the sensitivity at which a
+      guided inspector confirms as many real problems as a PERFECT inspector
+      sent at random
+  monte_carlo: >
+    10000 joint draws: resample plots, rank on the resample, draw one random
+    referral, then draw inspection outcomes for both. Paired difference in
+    confirmed real problems, register minus random.
+  verdict_rule: >
+    At each budget, record-guided prioritisation is said to SURVIVE an
+    inspector of a given sensitivity if the 95 % interval of (register
+    confirmed real - random confirmed real) excludes zero. Report the lowest
+    grid sensitivity at which it survives. The register is used, not the
+    workflow, because Experiment A found the workflow's advantage over it
+    not demonstrated.
+  observed_exposure:
+    label: OBSERVED
+    definition: >
+      On the held-out split, for the workflow as shipped at each budget:
+      below-threshold field-seasons NOT inspected, and how many of them carry
+      an estimate at or above the study threshold. A display that equated an
+      estimate above threshold with "looks fine" would have reassured exactly
+      these farmers. Also counted: inspected below-threshold field-seasons
+      whose estimate is at or above threshold, the cases an anchored
+      inspector would be most likely to clear.
+    anchoring_sweep: [0.1, 0.3, 0.5]
+    anchoring_model: >
+      SIMULATED: an inspector shown an estimate at or above threshold has
+      sensitivity reduced by the factor (1 - a). Expected confirmations lost
+      = sensitivity x a x (inspected, below threshold, estimate >= threshold).
+    design_rule_tested: >
+      The inspection task sheet omits the yield estimate (blind inspection),
+      so this exposure is zero by construction for the workflow software.
+
+# ------------------------------------------------------------ experiment D
+experiment_d:
+  label: SIMULATED
+  question: >
+    How does error in a technology yield estimate propagate into an
+    Insurance Unit's claim under PMFBY's area approach at the weightages
+    states use, and which re-verification rule recovers wrongly unpaid
+    units most efficiently?
+  sources:
+    claim_formula: "claim = max(0, (TY - AY) / TY) x Sum Insured (PMFBY Operational Guidelines; CSE 2026 presentation)"
+    weights: "30 % mandatory minimum; Maharashtra 50 % and Madhya Pradesh 100 % in 2025-26 (Lok Sabha Starred Q.25, 21 July 2026)"
+    error_range: >
+      0.30 is the largest IU-level nRMSE the January 2023 YES-TECH manual
+      (superseded) permitted; insurers interviewed by CSE conceded 'room for
+      20-30 per cent error'. Reading either as a 1-sigma relative error is
+      THIS STUDY'S ASSUMPTION.
+  unit: "Insurance Unit-season; R = true yield / threshold yield"
+  claim_fraction: "max(0, 1 - Y_used / TY), a fraction of Sum Insured; no rupee figure"
+  weights: [0.30, 0.50, 1.00]
+  tech_error_sd: [0.10, 0.20, 0.30]
+  tech_bias: [-0.10, 0.0, 0.10]          # positive = over-estimates yield = under-pays
+  cce_error_sd: [0.05, 0.10, 0.20]
+  primary: {tech_bias: 0.0, cce_error_sd: 0.10, loss_share: 0.20}
+  error_model: >
+    Y_tech = Y_true (1 + bias + sd_t e1); Y_cce = Y_true (1 + sd_c e2);
+    e1, e2 independent standard normal. Y_used = w Y_tech + (1 - w) Y_cce.
+    Independence probably understates real correlation, because YES-TECH
+    models are trained on historical CCE yields.
+  conditional_curves:
+    true_shortfall: [0.05, 0.10, 0.20, 0.30]
+    draws: 200000
+    outputs: ["P(paid nothing)", "E(paid) / due"]
+  guard:
+    population: "R ~ Normal(mu, 0.15), mu set so that P(R < 1) = loss_share"
+    loss_share: [0.10, 0.20, 0.30]
+    n_units: 100000
+    recheck_budget: [0.05, 0.10]
+    recheck_error: "a fresh crop-cut estimate with sd = cce_error_sd replaces Y_used"
+    policies:
+      random: "recheck a random set of units"
+      near_threshold: "recheck currently UNPAID units, closest above the threshold first"
+      lowest_estimate: "recheck the units with the lowest Y_used first"
+    metrics: [wrongly_unpaid_recovered_share, rechecks_per_recovery,
+              due_restored_share, correctly_unpaid_flipped_to_paid]
+  verdict_rule: >
+    Near-threshold re-verification is called the efficient guard UNDER THESE
+    ASSUMPTIONS if it recovers more wrongly unpaid units than random
+    recheck at every weight, every tech error and both budgets, at the
+    primary bias, CCE error and loss share. Nothing here is a statement
+    about how accurate YES-TECH actually is.
+
+# ------------------------------------------------------------ experiment L
+experiment_l:
+  label: OBSERVED
+  official_data:
+    yields: >
+      data/official/tn_rice_district_season_2019_20.csv, transcribed from
+      TN Agrisnet Salient Statistics on Agriculture 2021, Table V.5
+    conversion: "Rice (Cleaned) Production = 2/3 of Paddy Production (Table XXVI.9)"
+    delta: "Cauvery Delta districts and blocks (Table VII.13)"
+    relief: "SDRF relief tables XXII.7, XXII.9, XXII.10, XXII.11"
+  season_map:
+    "Kar/Kuruvai/Sornavari": [may-sep, jun-oct]
+    "Samba/Thaladi/Pishanam": [sep-feb, oct-mar]
+    "Navarai/Kodai": [dec-may]
+  l1_level:
+    question: "Is SICKLE's recalled yield at the level of the state's crop-cutting yields?"
+    cells: "2019-20 Kuruvai and 2019-20 Samba/Thaladi; cells with fewer than 20 field-seasons are not judged"
+    sickle_unit: "kg/acre of paddy; to kg/ha divide by 0.404686; to rice-equivalent multiply by 2/3"
+    official_band: "min to max across core delta districts in the 2019-20 table: Thanjavur, Thiruvarur, Nagapattinam"
+    verdict_rule: >
+      Per cell: CONSISTENT if the plot-bootstrap 95 % interval of SICKLE's
+      mean rice-equivalent yield overlaps the official band; HIGHER or LOWER
+      otherwise. Sensitivity, not verdict: all nine delta districts, and
+      conversion factors 0.62 and 0.70.
+  l2_event:
+    question: >
+      In the season the state paid heavy crop-damage relief across every
+      core delta district (2020-21 Samba/Thaladi: cyclone Burevi, December
+      2020, and the unprecedented rain of January 2021), did recalled yields
+      at the same plots fall relative to 2019-20, when relief in the delta
+      was small?
+    pairs: "plots with a Samba/Thaladi field-season in both 2019 and 2020"
+    statistic: "mean within-plot relative change, y2020 / y2019 - 1, plot bootstrap"
+    control: "the same statistic for Kuruvai plots with both years"
+    contrast: "Samba change minus Kuruvai change, independent bootstraps"
+    model: "the same paired change in out-of-fold satellite-model predictions"
+    verdict_rule: >
+      Recalled yields REGISTER the damage season if the Samba interval lies
+      below zero; the decline is EVENT-SPECIFIC if the contrast interval
+      lies below zero; the model REGISTERS it if its interval lies below
+      zero. Otherwise each is NOT DEMONSTRATED. No verdict here can show
+      that SICKLE plots were or were not damaged: relief is paid per
+      district and the plots carry no district.
+
+reporting_rule: >
+  Every result is reported at the same prominence whatever it shows. C and D
+  appear only in sections labelled SIMULATED. L is observed and is reported
+  as a check on the labels, not as validation of damage detection.
+
+amendments: []

@@ -1,0 +1,24 @@
+# Python and tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.streamlit/secrets.toml
+logs/
+*.log
+
+# ---------------------------------------------------------------------------
+# SICKLE LABELS stay out of git (2026-10-14). The SICKLE dataset is shared
+# only through its authors' access form and carries no licence, so no file
+# holding per-field labels, or values derived field by field from them, is
+# committed. They stay on disk; reproduce.sh regenerates all of them after
+# you obtain data access (set SICKLE_DATA_ROOT, see sickle-project/.env.example).
+#   results/features.csv              per field-season features with yield
+#   results/predictions/              per-field predictions, histories, references
+#   results/console/*.html            embeds a below-threshold flag per field-season
+#   results/workflow/*.sqlite         simulated findings drawn from the labels
+# Aggregate metrics (results/metrics/*.json) and figures are committed.
+# ---------------------------------------------------------------------------
+/results/features.csv
+/results/predictions/
+/results/console/*.html
+/results/workflow/*.sqlite

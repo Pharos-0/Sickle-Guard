@@ -1,0 +1,16 @@
+# Install into the sickle-project venv (shared).
+#
+# scikit-learn is PINNED to 1.5.2 deliberately. Version 1.9.1 installs
+# cleanly but Windows Smart App Control blocks its compiled tree extension
+# (sklearn.tree._criterion) with WinError/ImportError "An Application
+# Control policy has blocked this file"; 1.5.2 loads. If 1.5.2 is also
+# blocked on your machine, src/models.py falls back to the numpy trees in
+# src/trees.py, which tests/test_trees_vs_sklearn.py shows give the same
+# headline MAE on this data.
+scikit-learn==1.5.2
+numpy
+tifffile
+matplotlib
+pytest
+pyyaml
+streamlit

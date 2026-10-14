@@ -1,0 +1,122 @@
+# Frozen protocol: does the decision-support workflow make verification more
+# effective than the simple alternatives a team already has?
+#
+# WRITTEN BEFORE ANY RESULT WAS COMPUTED. 2026-10-12.
+#
+# Two experiments, specified together and reported separately.
+#
+#   A  VERIFICATION POLICIES   four policies, same plots, same target, three
+#                              budgets. Does the workflow beat the register
+#                              and history-only ranking, not just random?
+#   B  COLD-START ALLOCATION   reserve part of the budget for fields with no
+#                              record. What is the trade-off between finding
+#                              recurring problems and finding problems on
+#                              fields nobody has data for?
+#
+# src/verification_policies.py loads this file and aborts if its behaviour
+# disagrees with it.
+#
+# WHAT THE TARGET IS, AND IS NOT
+# A field-season counts as needing review when its recorded yield is below
+# 80 % of the training-split mean. That is a relative cut on FARMER-RECALLED
+# yield. It is not verified crop damage and not an insurance-eligible loss.
+# Every result is reported as "fields below the study's yield threshold"
+# and never as "damaged farmers found" or "claims caught".
+
+version: 1
+frozen_on: "2026-10-12"
+frozen_before_results: true
+
+target:
+  name: below_threshold
+  definition: "yield < 0.80 x mean(training-split yield)"
+  is_not: ["verified crop damage", "an insurance claim", "a farmer outcome"]
+
+independent_unit: plot
+bootstrap: {unit: plot, replicates: 10000, seed: 0}
+
+# ----------------------------------------------------------- experiment A
+experiment_a:
+  question: >
+    At a fixed inspection budget, does the proposed workflow find more
+    below-threshold field-seasons than the register a team already keeps,
+    and than ranking by the field's own past harvests?
+  evaluation_set: "held-out test split: 27 plots never used to fit anything"
+  secondary_set: >
+    all field-seasons, with grouped-CV out-of-fold satellite predictions so
+    no field-season is scored by a model that saw its plot. Reported, never
+    the verdict.
+  budgets: [0.10, 0.20, 0.33]
+  policies:
+    random: >
+      Random referral as a permutation NULL over 10000 orderings, not one
+      draw. One random ordering of 62 field-seasons can land anywhere.
+    register: >
+      What a verification office already holds: rank by the LOWEST prior
+      recorded yield at the plot, lowest first. A field with no prior
+      harvest cannot be on a register; such fields go after every recorded
+      one, in a fixed random order (seed 0).
+    history_only: >
+      Rank by the MEAN of the plot's causal prior harvests; a field with no
+      record takes the training mean, which puts it mid-list.
+    workflow: >
+      SICKLE-Guard as shipped: causal history where it exists, the
+      satellite estimate where it does not.
+  metrics: [n_found, n_missed, n_inspections, recall,
+            n_missed_with_record, n_missed_cold_start]
+  primary_comparisons: ["workflow - register", "workflow - history_only"]
+  multiplicity: >
+    Two comparisons at three budgets is six. The verdict uses
+    Bonferroni-adjusted intervals at 1 - 0.05/6 = 99.17 %. Unadjusted 95 %
+    intervals are reported beside them.
+  success_criterion: >
+    The workflow is said to DEMONSTRATE an advantage only if its paired
+    recall difference against BOTH the register and history-only excludes
+    zero on the adjusted interval at one or more budgets, AND it is not
+    significantly worse than either at any budget. Beating random is
+    necessary and not sufficient.
+
+# ----------------------------------------------------------- experiment B
+experiment_b:
+  question: >
+    If part of the budget is reserved for fields with no record, how much
+    is lost on recurring problems and how much is gained on cold-start
+    ones?
+  evaluation_set: >
+    all field-seasons with out-of-fold satellite predictions. PRIMARY here,
+    because the held-out split holds only four below-threshold cold-start
+    field-seasons, too few to read. The held-out split is reported and
+    marked underpowered.
+  budgets: [0.20, 0.33]
+  reserve_fraction: [0.0, 0.10, 0.25, proportional, 0.50]
+  reserve_note: >
+    proportional reserves the cold-start share of all field-seasons, so
+    cold starts receive inspections in proportion to how many there are.
+  cold_start_order:
+    satellite: "lowest satellite estimate first"
+    random: "fixed random order, seed 0 -- tests whether satellite helps WITHIN cold starts"
+  recorded_order: "lowest causal-history mean first"
+  metrics: [recall_recorded, recall_cold_start, recall_total,
+            n_found_recorded, n_found_cold_start]
+  verdict_rule: >
+    No allocation is declared best unless it is at least as good on BOTH
+    recorded and cold-start recall as every alternative, by a margin of
+    0.02. Otherwise the result is the trade-off curve itself, reported as
+    such.
+  within_cold_start_test: >
+    Satellite ordering is said to help inside the cold-start pool only if
+    its cold-start recall exceeds the random ordering's on a paired
+    interval excluding zero.
+
+reporting_rule: >
+  Both results are written into the thesis paper and the README at the
+  same prominence whatever they show. If the workflow does not beat the
+  register or history-only, that is the finding: do not deploy complexity
+  that has not earned its place.
+
+power_statement: >
+  62 held-out field-seasons, 11 below threshold, 4 of them cold starts. 319
+  field-seasons overall, 53 below threshold, 16 cold starts. Intervals will
+  be wide and no operating threshold can be established.
+
+amendments: []
