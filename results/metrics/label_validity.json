@@ -1,0 +1,51 @@
+{
+  "threshold_level": 0.8,
+  "threshold_value": 1468.8568275862071,
+  "n": 319,
+  "n_loss": 53,
+  "plots": {
+    "chronic": 12,
+    "event": 20,
+    "never": 99
+  },
+  "loss_seasons": {
+    "at_chronic_plots": 32,
+    "at_event_plots": 21
+  },
+  "frac_losses_chronic": 0.6037735849056604,
+  "ranking_by_subset": {
+    "everything (the headline)": {
+      "n": 319,
+      "n_loss": 53,
+      "auroc": 0.8381685345439069,
+      "ci": [
+        0.7760982318288312,
+        0.8889411123867147
+      ],
+      "informative": true
+    },
+    "chronic + never plots only": {
+      "n": 272,
+      "n_loss": 32,
+      "auroc": 0.85390625,
+      "ci": [
+        0.8089441488850327,
+        0.8866707918170199
+      ],
+      "informative": true
+    },
+    "EVENT plots only (the real case)": {
+      "n": 47,
+      "n_loss": 21,
+      "auroc": 0.6263736263736264,
+      "ci": [
+        0.38620689655172413,
+        0.8871654161056335
+      ],
+      "informative": false,
+      "recall_at_budget": 0.42857142857142855
+    }
+  },
+  "verdict": "the headline is largely circular: it is driven by chronically poor fields, which a record already identifies",
+  "construct_validity_note": "The label is yield < 80% of the training-split mean, on farmer-recalled yields. It is a relative cut against the area, not a measurement of crop damage. A chronically low-yielding field is labelled a loss every season; a field that lost half its crop from a high base may never be labelled at all."
+}

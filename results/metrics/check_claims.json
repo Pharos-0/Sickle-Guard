@@ -1,0 +1,660 @@
+{
+  "registry_version": 1,
+  "n_claims": 52,
+  "prose_rules": {
+    "must_appear": [
+      {
+        "id": "synthetic_page_declares_itself",
+        "document": "SYNTHETIC_CONDITIONS.md",
+        "present": true
+      },
+      {
+        "id": "simulated_extensions_page_declares_itself",
+        "document": "SIMULATED_EXTENSIONS.md",
+        "present": true
+      },
+      {
+        "id": "canonical_objective",
+        "document": "THESIS_SCOPE.md",
+        "present": true
+      }
+    ],
+    "must_not_appear": [
+      {
+        "phrase": "protecting farmers from false reassurance",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "validated with farmers",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "ready for PMFBY",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "improves insurance",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "proven crop-loss",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "detects crop damage",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "farmers are better off",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "eight reliability signals",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "eighth reliability signal",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "validated against YES-TECH",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "YES-TECH misses",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "ready for deployment",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "detects damage",
+        "unnegated_hits": []
+      },
+      {
+        "phrase": "observed recall of",
+        "unnegated_hits": []
+      }
+    ]
+  },
+  "prose_ok": true,
+  "n_ok": 52,
+  "value_drift": [],
+  "stale_prose": [],
+  "missing_artefact": [],
+  "claims": [
+    {
+      "id": "guard_auroc_test",
+      "expected": 0.8074866310160428,
+      "found": 0.8074866310160428,
+      "value_ok": true,
+      "renders_as": "0.807",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "last_harvest_auroc_test",
+      "expected": 0.803030303030303,
+      "found": 0.803030303030303,
+      "value_ok": true,
+      "renders_as": "0.803",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "history_auroc_test",
+      "expected": 0.7967914438502673,
+      "found": 0.7967914438502673,
+      "value_ok": true,
+      "renders_as": "0.797",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "guard_auroc_oof",
+      "expected": 0.8236983969357355,
+      "found": 0.8236983969357355,
+      "value_ok": true,
+      "renders_as": "0.824",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "history_auroc_oof",
+      "expected": 0.8381685345439069,
+      "found": 0.8381685345439069,
+      "value_ok": true,
+      "renders_as": "0.838",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "smallest_first_auroc_test",
+      "expected": 0.23529411764705882,
+      "found": 0.23529411764705882,
+      "value_ok": true,
+      "renders_as": "0.235",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "flag_difference_test",
+      "expected": 0.3285714285714286,
+      "found": 0.3285714285714286,
+      "value_ok": true,
+      "renders_as": "+33",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "flag_missed_test",
+      "expected": 3,
+      "found": 3,
+      "value_ok": true,
+      "renders_as": "3 of 11",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "warning_difference_test",
+      "expected": 40.706897052609975,
+      "found": 40.706897052609975,
+      "value_ok": true,
+      "renders_as": "+41 kg/acre | +40.7",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "mndwi_auroc_test",
+      "expected": 0.5115864527629234,
+      "found": 0.5115864527629234,
+      "value_ok": true,
+      "renders_as": "0.512",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "mndwi_n_scorable",
+      "expected": 316,
+      "found": 316,
+      "value_ok": true,
+      "renders_as": "316",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "mndwi_vs_ndvi_oof",
+      "expected": -0.0931917641150728,
+      "found": -0.0931917641150728,
+      "value_ok": true,
+      "renders_as": "-0.093",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "frac_losses_chronic",
+      "expected": 0.6037735849056604,
+      "found": 0.6037735849056604,
+      "value_ok": true,
+      "renders_as": "60",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "event_plot_auroc",
+      "expected": 0.6263736263736264,
+      "found": 0.6263736263736264,
+      "value_ok": true,
+      "renders_as": "0.626",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "quantile_coverage",
+      "expected": 0.9032258064516129,
+      "found": 0.9032258064516129,
+      "value_ok": true,
+      "renders_as": "90.3",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "satellite_cold_start_gain",
+      "expected": -14.31612357436051,
+      "found": -14.31612357436051,
+      "value_ok": true,
+      "renders_as": "14.3 | -14.3",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "season_swap_real",
+      "expected": 0.7166264718399773,
+      "found": 0.7166264718399773,
+      "value_ok": true,
+      "renders_as": "0.717",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "season_swap_swapped",
+      "expected": 0.6791034189246702,
+      "found": 0.6791034189246702,
+      "value_ok": true,
+      "renders_as": "0.679",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "recall_has_record_test",
+      "expected": 1.0,
+      "found": 1.0,
+      "value_ok": true,
+      "renders_as": "1.00",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "recall_cold_start_test",
+      "expected": 0.25,
+      "found": 0.25,
+      "value_ok": true,
+      "renders_as": "0.25",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "missed_cold_start_test",
+      "expected": 3,
+      "found": 3,
+      "value_ok": true,
+      "renders_as": "3",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "synth_register_recall_event",
+      "expected": 0.7341784475450067,
+      "found": 0.7341784475450067,
+      "value_ok": true,
+      "renders_as": "**0.73** of event losses",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "synth_prototype_recall_event",
+      "expected": 0.6387388639963929,
+      "found": 0.6387388639963929,
+      "value_ok": true,
+      "renders_as": "**0.64** for the prototype",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "synth_tight_budget_inversion",
+      "expected": 0.12115228173518175,
+      "found": 0.12115228173518175,
+      "value_ok": true,
+      "renders_as": "0.12",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "synth_history_first_tight_budget",
+      "expected": 0.2511111675018251,
+      "found": 0.2511111675018251,
+      "value_ok": true,
+      "renders_as": "0.25",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "synth_shock_bias_register_poor",
+      "expected": 0.6115979708686361,
+      "found": 0.6115979708686361,
+      "value_ok": true,
+      "renders_as": "0.61",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "vp_within_cold_satellite_vs_random",
+      "expected": 0.0625,
+      "found": 0.0625,
+      "value_ok": true,
+      "renders_as": "+0.062",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "vp_reserve10_cold_recall",
+      "expected": 0.1875,
+      "found": 0.1875,
+      "value_ok": true,
+      "renders_as": "19 %",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "off_kuruvai_ratio",
+      "expected": 0.7740100028079969,
+      "found": 0.7740100028079969,
+      "value_ok": true,
+      "renders_as": "0.77 of the crop-cutting",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "off_samba_ratio",
+      "expected": 0.901182615011242,
+      "found": 0.901182615011242,
+      "value_ok": true,
+      "renders_as": "at 0.90, inside",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "off_samba_recalled_change",
+      "expected": -0.03949826883535043,
+      "found": -0.03949826883535043,
+      "value_ok": true,
+      "renders_as": "-3.9 %",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "off_samba_model_change",
+      "expected": -0.00013471046415695963,
+      "found": -0.00013471046415695963,
+      "value_ok": true,
+      "renders_as": "move: 0.0 %",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "off_contrast",
+      "expected": -0.0025548514481211135,
+      "found": -0.0025548514481211135,
+      "value_ok": true,
+      "renders_as": "difference -0.3 %",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "exposure_inspected_reassuring",
+      "expected": 4,
+      "found": 4,
+      "value_ok": true,
+      "renders_as": "4 of them carry",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "exposure_missed_reassuring",
+      "expected": 3,
+      "found": 3,
+      "value_ok": true,
+      "renders_as": "all 3 carry",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "sim_break_even",
+      "expected": 0.304147465437788,
+      "found": 0.304147465437788,
+      "value_ok": true,
+      "renders_as": "a sensitivity of 0.30 confirms",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "sim_precision_register",
+      "expected": 0.9074074074074074,
+      "found": 0.9074074074074074,
+      "value_ok": true,
+      "renders_as": "0.91 of the problems",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "sim_precision_random",
+      "expected": 0.6015624999999999,
+      "found": 0.6015624999999999,
+      "value_ok": true,
+      "renders_as": "against 0.60 for random",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "sim_surviving_oof",
+      "expected": 0.3,
+      "found": 0.3,
+      "value_ok": true,
+      "renders_as": "sensitivity of 0.3 at a 20",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "yt_full_weight_020",
+      "expected": 0.289125,
+      "found": 0.289125,
+      "value_ok": true,
+      "renders_as": "is 29 % at 100 %",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "yt_min_weight_020",
+      "expected": 0.11418,
+      "found": 0.11418,
+      "value_ok": true,
+      "renders_as": "against 11 % at the",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "yt_full_weight_030",
+      "expected": 0.3563,
+      "found": 0.3563,
+      "value_ok": true,
+      "renders_as": "figures are 36 %",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "yt_min_weight_030",
+      "expected": 0.163885,
+      "found": 0.163885,
+      "value_ok": true,
+      "renders_as": "and 16 %. Blending",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "yt_near_threshold_cost",
+      "expected": 5.382131324004305,
+      "found": 5.382131324004305,
+      "value_ok": true,
+      "renders_as": "closest first | 5.4",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "yt_random_cost",
+      "expected": 19.455252918287936,
+      "found": 19.455252918287936,
+      "value_ok": true,
+      "renders_as": "random units | 19.5",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "yt_near_threshold_share",
+      "expected": 0.13880173315404154,
+      "found": 0.13880173315404154,
+      "value_ok": true,
+      "renders_as": "recovers 14 % of the wrongly",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "yt_near_threshold_flipped",
+      "expected": 658,
+      "found": 658,
+      "value_ok": true,
+      "renders_as": "pay 658 units",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "pilot_register_vs_random",
+      "expected": 117.6164916723798,
+      "found": 117.6164916723798,
+      "value_ok": true,
+      "renders_as": "about 118 fields",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "pilot_workflow_vs_register_d",
+      "expected": 0.018867924528301886,
+      "found": 0.018867924528301886,
+      "value_ok": true,
+      "renders_as": "is +0.019 in recall",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "pilot_workflow_vs_register_bad",
+      "expected": 2077.5936968754504,
+      "found": 2077.5936968754504,
+      "value_ok": true,
+      "renders_as": "needs 2,078 below-threshold",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "pilot_workflow_vs_register_n",
+      "expected": 12504.762062325824,
+      "found": 12504.762062325824,
+      "value_ok": true,
+      "renders_as": "about 12,505 fields",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    },
+    {
+      "id": "pilot_heldout_bad",
+      "expected": 83.94050624476264,
+      "found": 83.94050624476264,
+      "value_ok": true,
+      "renders_as": "suggests 84",
+      "prose_ok": true,
+      "documents_missing_the_string": [],
+      "inconsistent_renderings": [],
+      "note": ""
+    }
+  ]
+}

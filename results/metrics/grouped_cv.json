@@ -1,0 +1,34 @@
+{
+  "backend": "scikit-learn",
+  "k": 5,
+  "repeats": 4,
+  "n_rows": 319,
+  "n_plots": 131,
+  "oof_mae": 277.86403154407947,
+  "floor_mae": 303.01045508593666,
+  "sd_ratio": 0.29021917509654943,
+  "r": 0.46797451099673826,
+  "level": 0.8,
+  "budget": 0.33,
+  "n_true_losses": 53,
+  "auroc": 0.7166264718399773,
+  "auroc_ci": {
+    "lo": 0.6176392274243162,
+    "hi": 0.8123296499053798
+  },
+  "auroc_excludes_half": true,
+  "recall": 0.6415094339622641,
+  "recall_ci": {
+    "lo": 0.4589993169398907,
+    "hi": 0.7586366538952746
+  },
+  "recall_excludes_random": true,
+  "ci_width_by_plot_count": {
+    "27": 0.375592479254254,
+    "50": 0.3108330106541226,
+    "80": 0.24500176566865495,
+    "110": 0.2152044375501295,
+    "131": 0.19382294826225108
+  },
+  "status": "Exploratory follow-up to an underpowered confirmatory run. Out-of-fold estimates reuse plots across folds and are optimistic relative to the untouched test split. This does NOT overturn the confirmatory verdict."
+}

@@ -1,0 +1,339 @@
+{
+  "plan": {
+    "plan_id": 1,
+    "created_at": "2026-10-12T08:51:00+00:00",
+    "split": "test",
+    "budget": 0.33,
+    "reserve": 0.1,
+    "seed": 0,
+    "n_pool": 62,
+    "n_tasks": 20,
+    "n_record": 18,
+    "n_reserve": 2,
+    "audit_seq": 1
+  },
+  "n_tasks": 20,
+  "n_inspected": 20,
+  "n_reserved_for_no_record": 2,
+  "findings": {
+    "below expectation observed": 7,
+    "no problem observed": 13,
+    "could not assess": 0
+  },
+  "n_simulated": 20,
+  "label": "SIMULATED inspections -- no field visit took place",
+  "n_pool_not_inspected": 42,
+  "not_inspected_means": "NOT INSPECTED. This is not evidence that the crop is fine; farmers can still report damage themselves.",
+  "audit": {
+    "ok": true,
+    "n_entries": 21,
+    "problems": [],
+    "head": "5b9eb701cbd3d2124d82e470d4788383ce1dda5bd59c660b131dbeb46742e34f"
+  },
+  "against_study_threshold": {
+    "below_threshold_among_tasks": 7,
+    "confirmed_real": 4,
+    "confirmed_not_below": 3,
+    "note": "below threshold on farmer-recalled yield, not damage"
+  },
+  "audit_tail": [
+    {
+      "seq": 16,
+      "ts": "2026-10-12T08:51:01+00:00",
+      "actor": "simulator",
+      "action": "record (SIMULATED)",
+      "prev_hash": "c8ee7bb33e24ad056c38a16d87814db4c52a1ab7dee26d28f05e5f9fa153cdfa",
+      "hash": "3a5d1000331eda9e76e9181ff26bba438aa47340aa9bea20f7f87a9de1cd1d86"
+    },
+    {
+      "seq": 17,
+      "ts": "2026-10-12T08:51:01+00:00",
+      "actor": "simulator",
+      "action": "record (SIMULATED)",
+      "prev_hash": "3a5d1000331eda9e76e9181ff26bba438aa47340aa9bea20f7f87a9de1cd1d86",
+      "hash": "1a6028d6218292160a7e9e3adce127ba7a13849933bfdf56d17dda6d60e3fd74"
+    },
+    {
+      "seq": 18,
+      "ts": "2026-10-12T08:51:01+00:00",
+      "actor": "simulator",
+      "action": "record (SIMULATED)",
+      "prev_hash": "1a6028d6218292160a7e9e3adce127ba7a13849933bfdf56d17dda6d60e3fd74",
+      "hash": "9d80c449f1b1e98fe3a42bba1d195e57a989d03df887836bd7dee55b1461391b"
+    },
+    {
+      "seq": 19,
+      "ts": "2026-10-12T08:51:01+00:00",
+      "actor": "simulator",
+      "action": "record (SIMULATED)",
+      "prev_hash": "9d80c449f1b1e98fe3a42bba1d195e57a989d03df887836bd7dee55b1461391b",
+      "hash": "536b62e07db19f1473809c2956fd0836d1297d03246d2486d92757986ea1415e"
+    },
+    {
+      "seq": 20,
+      "ts": "2026-10-12T08:51:01+00:00",
+      "actor": "simulator",
+      "action": "record (SIMULATED)",
+      "prev_hash": "536b62e07db19f1473809c2956fd0836d1297d03246d2486d92757986ea1415e",
+      "hash": "a46f316498a523b66a0db8bb44dc894efcd37261e6ae2fc710e3489f5ee1fd5e"
+    },
+    {
+      "seq": 21,
+      "ts": "2026-10-12T08:51:01+00:00",
+      "actor": "simulator",
+      "action": "record (SIMULATED)",
+      "prev_hash": "a46f316498a523b66a0db8bb44dc894efcd37261e6ae2fc710e3489f5ee1fd5e",
+      "hash": "5b9eb701cbd3d2124d82e470d4788383ce1dda5bd59c660b131dbeb46742e34f"
+    }
+  ],
+  "example_task_sheet": "================================================================\n  INSPECTION TASK 1     field 301     season oct-mar 2020\n================================================================\n  Why this field: has a harvest record: among the lowest past harvests.\n\n  The yield estimate is withheld from this sheet on purpose. Record\n  what you see in the field, not what a model expected.\n\n  Record exactly one finding:\n    [ ] below expectation observed   (attach a photo or a note)\n    [ ] no problem observed\n    [ ] could not assess\n\n  Write what you saw. Do not write a decision: this record is an\n  observation, and decisions on any claim belong to the scheme.\n================================================================",
+  "tasks": [
+    {
+      "task_id": 1,
+      "plan_id": 1,
+      "uid": "2063",
+      "plot": 301.0,
+      "season": "oct-mar",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 1,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 2,
+      "plan_id": 1,
+      "uid": "2260",
+      "plot": 391.0,
+      "season": "sep-feb",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 2,
+      "status": "done",
+      "finding": "below expectation observed"
+    },
+    {
+      "task_id": 3,
+      "plan_id": 1,
+      "uid": "2151",
+      "plot": 345.0,
+      "season": "jun-oct",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 3,
+      "status": "done",
+      "finding": "below expectation observed"
+    },
+    {
+      "task_id": 4,
+      "plan_id": 1,
+      "uid": "2319",
+      "plot": 418.0,
+      "season": "oct-mar",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 4,
+      "status": "done",
+      "finding": "below expectation observed"
+    },
+    {
+      "task_id": 5,
+      "plan_id": 1,
+      "uid": "2317",
+      "plot": 418.0,
+      "season": "oct-mar",
+      "year": "2019.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 5,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 6,
+      "plan_id": 1,
+      "uid": "2320",
+      "plot": 418.0,
+      "season": "may-sep",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 6,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 7,
+      "plan_id": 1,
+      "uid": "2150",
+      "plot": 345.0,
+      "season": "oct-mar",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 7,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 8,
+      "plan_id": 1,
+      "uid": "2116",
+      "plot": 326.0,
+      "season": "sep-feb",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 8,
+      "status": "done",
+      "finding": "below expectation observed"
+    },
+    {
+      "task_id": 9,
+      "plan_id": 1,
+      "uid": "2130",
+      "plot": 335.0,
+      "season": "oct-mar",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 9,
+      "status": "done",
+      "finding": "below expectation observed"
+    },
+    {
+      "task_id": 10,
+      "plan_id": 1,
+      "uid": "2118",
+      "plot": 327.0,
+      "season": "sep-feb",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 10,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 11,
+      "plan_id": 1,
+      "uid": "2153",
+      "plot": 346.0,
+      "season": "sep-feb",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 11,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 12,
+      "plan_id": 1,
+      "uid": "2165",
+      "plot": 352.0,
+      "season": "sep-feb",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 12,
+      "status": "done",
+      "finding": "below expectation observed"
+    },
+    {
+      "task_id": 13,
+      "plan_id": 1,
+      "uid": "2168",
+      "plot": 353.0,
+      "season": "jun-oct",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 13,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 14,
+      "plan_id": 1,
+      "uid": "2222",
+      "plot": 375.0,
+      "season": "sep-feb",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 14,
+      "status": "done",
+      "finding": "below expectation observed"
+    },
+    {
+      "task_id": 15,
+      "plan_id": 1,
+      "uid": "2167",
+      "plot": 353.0,
+      "season": "sep-feb",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 15,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 16,
+      "plan_id": 1,
+      "uid": "2108",
+      "plot": 322.0,
+      "season": "sep-feb",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 16,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 17,
+      "plan_id": 1,
+      "uid": "2170",
+      "plot": 354.0,
+      "season": "sep-feb",
+      "year": "2020.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 17,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 18,
+      "plan_id": 1,
+      "uid": "2197",
+      "plot": 364.0,
+      "season": "sep-feb",
+      "year": "2019.0",
+      "reason": "has a harvest record: among the lowest past harvests",
+      "rank": 18,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 19,
+      "plan_id": 1,
+      "uid": "2273",
+      "plot": 398.0,
+      "season": "sep-feb",
+      "year": "2019.0",
+      "reason": "no harvest record: part of the reserved share, chosen at random",
+      "rank": 19,
+      "status": "done",
+      "finding": "no problem observed"
+    },
+    {
+      "task_id": 20,
+      "plan_id": 1,
+      "uid": "2117",
+      "plot": 327.0,
+      "season": "sep-feb",
+      "year": "2019.0",
+      "reason": "no harvest record: part of the reserved share, chosen at random",
+      "rank": 20,
+      "status": "done",
+      "finding": "no problem observed"
+    }
+  ],
+  "inspector_model": {
+    "sensitivity": 0.8,
+    "false_alarm": 0.1,
+    "seed": 0,
+    "label": "SIMULATED"
+  },
+  "threshold_kg_per_acre": 1470.118416243655
+}

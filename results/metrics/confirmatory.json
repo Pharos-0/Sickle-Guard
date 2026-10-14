@@ -1,0 +1,147 @@
+{
+  "backend": "scikit-learn",
+  "benchmark": 1837.6480203045687,
+  "inflation_factor_from_validation": 2.094027640368339,
+  "n_test_rows": 62,
+  "n_test_plots": 27,
+  "mae": 253.6271339936861,
+  "floor_mae": 290.7401309972163,
+  "bias": 18.807109712520887,
+  "sd_ratio": 0.570806428287731,
+  "r": 0.49134022543442313,
+  "criteria": {
+    "A1": {
+      "description": "test MAE <= train-mean floor",
+      "pass": true,
+      "detail": "MAE 253.6 vs floor 290.7"
+    },
+    "A2": {
+      "description": "|bias| <= 184 kg/acre",
+      "pass": true,
+      "detail": "bias +18.8"
+    },
+    "A3": {
+      "description": "SD ratio reported, must not exceed 1.0",
+      "pass": true,
+      "detail": "SD ratio 0.571, MSE-optimal would be 0.491 (report only)"
+    },
+    "B1": {
+      "description": "AUROC CI excludes 0.5 at the 80% level",
+      "pass": false,
+      "detail": "AUROC 0.738, 95% CI [0.434, 0.947], 11 true losses of 62"
+    },
+    "C1": {
+      "description": "recall CI lower bound > 33% (random) at a 33% budget",
+      "pass": false,
+      "detail": "recall 55% (6/11), 95% CI [14%, 100%], random 33%, 20 of 62 referred"
+    }
+  },
+  "B2_sensitivity": {
+    "0.70": {
+      "auroc": 0.7169811320754716,
+      "ci": {
+        "lo": 0.4,
+        "hi": 0.9133429487179487,
+        "n": 3998
+      },
+      "n_true": 9
+    },
+    "0.90": {
+      "auroc": 0.6957070707070707,
+      "ci": {
+        "lo": 0.4774970238095238,
+        "hi": 0.8568496240601503,
+        "n": 4000
+      },
+      "n_true": 18
+    }
+  },
+  "C3_grid": {
+    "0.70_0.20": {
+      "n_true": 9,
+      "referred": 12,
+      "caught": 5,
+      "missed": 4,
+      "recall": 0.5555555555555556,
+      "random_expected": 0.2,
+      "false_referrals": 7
+    },
+    "0.70_0.33": {
+      "n_true": 9,
+      "referred": 20,
+      "caught": 5,
+      "missed": 4,
+      "recall": 0.5555555555555556,
+      "random_expected": 0.33,
+      "false_referrals": 15
+    },
+    "0.70_0.50": {
+      "n_true": 9,
+      "referred": 31,
+      "caught": 7,
+      "missed": 2,
+      "recall": 0.7777777777777778,
+      "random_expected": 0.5,
+      "false_referrals": 24
+    },
+    "0.80_0.20": {
+      "n_true": 11,
+      "referred": 12,
+      "caught": 6,
+      "missed": 5,
+      "recall": 0.5454545454545454,
+      "random_expected": 0.2,
+      "false_referrals": 6
+    },
+    "0.80_0.33": {
+      "n_true": 11,
+      "referred": 20,
+      "caught": 6,
+      "missed": 5,
+      "recall": 0.5454545454545454,
+      "random_expected": 0.33,
+      "false_referrals": 14
+    },
+    "0.80_0.50": {
+      "n_true": 11,
+      "referred": 31,
+      "caught": 9,
+      "missed": 2,
+      "recall": 0.8181818181818182,
+      "random_expected": 0.5,
+      "false_referrals": 22
+    },
+    "0.90_0.20": {
+      "n_true": 18,
+      "referred": 12,
+      "caught": 6,
+      "missed": 12,
+      "recall": 0.3333333333333333,
+      "random_expected": 0.2,
+      "false_referrals": 6
+    },
+    "0.90_0.33": {
+      "n_true": 18,
+      "referred": 20,
+      "caught": 8,
+      "missed": 10,
+      "recall": 0.4444444444444444,
+      "random_expected": 0.33,
+      "false_referrals": 12
+    },
+    "0.90_0.50": {
+      "n_true": 18,
+      "referred": 31,
+      "caught": 14,
+      "missed": 4,
+      "recall": 0.7777777777777778,
+      "random_expected": 0.5,
+      "false_referrals": 17
+    }
+  },
+  "verdict": {
+    "primary_all_pass": false,
+    "guards_all_pass": true,
+    "summary": "system NOT accepted"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "backend": "scikit-learn",
+  "cut": "2020-06-01",
+  "n_train": 184,
+  "n_test": 135,
+  "test_plots_seen_in_training": 131,
+  "frac_test_with_history": 1.0,
+  "estimators": {
+    "global mean": {
+      "mae": 355.89471698872785,
+      "ci": [
+        297.5918108168149,
+        416.18210449879234
+      ],
+      "r": 6.585989429905088e-16,
+      "n": 135
+    },
+    "causal history": {
+      "mae": 200.14814814814815,
+      "ci": [
+        159.09031131109157,
+        240.25130924325742
+      ],
+      "r": 0.7704666742613829,
+      "n": 135
+    },
+    "satellite model": {
+      "mae": 345.8942251412753,
+      "ci": [
+        290.315540874761,
+        403.0633468279235
+      ],
+      "r": 0.25201181558996844,
+      "n": 135
+    },
+    "history-first hybrid": {
+      "mae": 200.14814814814815,
+      "ci": [
+        159.09031131109157,
+        240.25130924325742
+      ],
+      "r": 0.7704666742613829,
+      "n": 135
+    }
+  },
+  "paired_history_minus_satellite": {
+    "delta": -145.74607699312713,
+    "ci": [
+      -198.4155532710748,
+      -92.84188627584673
+    ]
+  },
+  "decision": {
+    "random": {
+      "auroc": 0.5,
+      "recall": 0.33
+    },
+    "satellite model": {
+      "auroc": 0.6565420560747663,
+      "ci": [
+        0.5279753615033381,
+        0.7730082275468927
+      ],
+      "recall": 0.5,
+      "caught": 14,
+      "n_loss": 28
+    },
+    "history-first hybrid": {
+      "auroc": 0.9037049399198932,
+      "ci": [
+        0.8317745776419841,
+        0.9640166326928017
+      ],
+      "recall": 0.8928571428571429,
+      "caught": 25,
+      "n_loss": 28
+    }
+  },
+  "hybrid_minus_satellite_auroc": {
+    "delta": 0.24716288384512686,
+    "ci": [
+      0.127592776816609,
+      0.3735107250795689
+    ]
+  },
+  "caveat": "Test plots were seen in training in their earlier season. This evaluates a new SEASON at known fields, not a new field. No claim about unseen fields follows from it."
+}

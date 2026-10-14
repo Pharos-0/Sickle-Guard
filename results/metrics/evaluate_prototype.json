@@ -1,0 +1,594 @@
+{
+  "ranking": {
+    "held-out test split": {
+      "SICKLE-Guard (as shipped)": {
+        "auroc": 0.8074866310160428,
+        "auroc_ci": [
+          0.5648066448801743,
+          0.9975490196078431
+        ],
+        "informative": true,
+        "budgets": {
+          "0.25": {
+            "n_visited": 16,
+            "budget_realised": 0.25806451612903225,
+            "n_caught": 8,
+            "recall": 0.7272727272727273,
+            "precision": 0.5
+          },
+          "0.33": {
+            "n_visited": 20,
+            "budget_realised": 0.3225806451612903,
+            "n_caught": 8,
+            "recall": 0.7272727272727273,
+            "precision": 0.4
+          },
+          "0.5": {
+            "n_visited": 31,
+            "budget_realised": 0.5,
+            "n_caught": 9,
+            "recall": 0.8181818181818182,
+            "precision": 0.2903225806451613
+          }
+        },
+        "recall_excess_at_33": 0.404692082111437,
+        "recall_excess_ci": [
+          0.005445269808743177,
+          0.6721311475409837
+        ],
+        "beats_random": true
+      },
+      "history only, no imagery": {
+        "auroc": 0.7967914438502673,
+        "auroc_ci": [
+          0.6096329857663025,
+          0.9358873906705535
+        ],
+        "informative": true,
+        "budgets": {
+          "0.25": {
+            "n_visited": 16,
+            "budget_realised": 0.25806451612903225,
+            "n_caught": 7,
+            "recall": 0.6363636363636364,
+            "precision": 0.4375
+          },
+          "0.33": {
+            "n_visited": 20,
+            "budget_realised": 0.3225806451612903,
+            "n_caught": 7,
+            "recall": 0.6363636363636364,
+            "precision": 0.35
+          },
+          "0.5": {
+            "n_visited": 31,
+            "budget_realised": 0.5,
+            "n_caught": 9,
+            "recall": 0.8181818181818182,
+            "precision": 0.2903225806451613
+          }
+        },
+        "recall_excess_at_33": 0.31378299120234604,
+        "recall_excess_ci": [
+          0.01025641025641022,
+          0.5757575757575757
+        ],
+        "beats_random": true
+      },
+      "satellite only": {
+        "auroc": 0.7344028520499108,
+        "auroc_ci": [
+          0.4166287878787879,
+          0.9454545454545454
+        ],
+        "informative": false,
+        "budgets": {
+          "0.25": {
+            "n_visited": 16,
+            "budget_realised": 0.25806451612903225,
+            "n_caught": 6,
+            "recall": 0.5454545454545454,
+            "precision": 0.375
+          },
+          "0.33": {
+            "n_visited": 20,
+            "budget_realised": 0.3225806451612903,
+            "n_caught": 6,
+            "recall": 0.5454545454545454,
+            "precision": 0.3
+          },
+          "0.5": {
+            "n_visited": 31,
+            "budget_realised": 0.5,
+            "n_caught": 9,
+            "recall": 0.8181818181818182,
+            "precision": 0.2903225806451613
+          }
+        },
+        "recall_excess_at_33": 0.2228739002932551,
+        "recall_excess_ci": [
+          -0.19047619047619047,
+          0.6666666666666667
+        ],
+        "beats_random": false
+      },
+      "last harvest only": {
+        "auroc": 0.803030303030303,
+        "auroc_ci": [
+          0.6188127202985694,
+          0.9358873906705535
+        ],
+        "informative": true,
+        "budgets": {
+          "0.25": {
+            "n_visited": 16,
+            "budget_realised": 0.25806451612903225,
+            "n_caught": 7,
+            "recall": 0.6363636363636364,
+            "precision": 0.4375
+          },
+          "0.33": {
+            "n_visited": 20,
+            "budget_realised": 0.3225806451612903,
+            "n_caught": 7,
+            "recall": 0.6363636363636364,
+            "precision": 0.35
+          },
+          "0.5": {
+            "n_visited": 31,
+            "budget_realised": 0.5,
+            "n_caught": 9,
+            "recall": 0.8181818181818182,
+            "precision": 0.2903225806451613
+          }
+        },
+        "recall_excess_at_33": 0.31378299120234604,
+        "recall_excess_ci": [
+          0.01025641025641022,
+          0.5757575757575757
+        ],
+        "beats_random": true
+      },
+      "smallest field first": {
+        "auroc": 0.23529411764705882,
+        "auroc_ci": [
+          0.13636363636363635,
+          0.3409090909090909
+        ],
+        "informative": false,
+        "budgets": {
+          "0.25": {
+            "n_visited": 16,
+            "budget_realised": 0.25806451612903225,
+            "n_caught": 0,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "0.33": {
+            "n_visited": 20,
+            "budget_realised": 0.3225806451612903,
+            "n_caught": 0,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "0.5": {
+            "n_visited": 31,
+            "budget_realised": 0.5,
+            "n_caught": 2,
+            "recall": 0.18181818181818182,
+            "precision": 0.06451612903225806
+          }
+        },
+        "recall_excess_at_33": -0.3225806451612903,
+        "recall_excess_ci": [
+          -0.3333333333333333,
+          -0.19257608220583863
+        ],
+        "beats_random": false
+      },
+      "largest field first": {
+        "auroc": 0.7647058823529411,
+        "auroc_ci": [
+          0.6590909090909091,
+          0.8636363636363636
+        ],
+        "informative": true,
+        "budgets": {
+          "0.25": {
+            "n_visited": 16,
+            "budget_realised": 0.25806451612903225,
+            "n_caught": 5,
+            "recall": 0.45454545454545453,
+            "precision": 0.3125
+          },
+          "0.33": {
+            "n_visited": 20,
+            "budget_realised": 0.3225806451612903,
+            "n_caught": 5,
+            "recall": 0.45454545454545453,
+            "precision": 0.25
+          },
+          "0.5": {
+            "n_visited": 31,
+            "budget_realised": 0.5,
+            "n_caught": 9,
+            "recall": 0.8181818181818182,
+            "precision": 0.2903225806451613
+          }
+        },
+        "recall_excess_at_33": 0.13196480938416422,
+        "recall_excess_ci": [
+          -0.1225806451612903,
+          0.6724137931034483
+        ],
+        "beats_random": false
+      },
+      "arbitrary order": {
+        "auroc": 0.49376114081996436,
+        "auroc_ci": [
+          0.24213836477987422,
+          0.6897222825300332
+        ],
+        "informative": false,
+        "budgets": {
+          "0.25": {
+            "n_visited": 16,
+            "budget_realised": 0.25806451612903225,
+            "n_caught": 4,
+            "recall": 0.36363636363636365,
+            "precision": 0.25
+          },
+          "0.33": {
+            "n_visited": 20,
+            "budget_realised": 0.3225806451612903,
+            "n_caught": 5,
+            "recall": 0.45454545454545453,
+            "precision": 0.25
+          },
+          "0.5": {
+            "n_visited": 31,
+            "budget_realised": 0.5,
+            "n_caught": 5,
+            "recall": 0.45454545454545453,
+            "precision": 0.16129032258064516
+          }
+        },
+        "recall_excess_at_33": 0.13196480938416422,
+        "recall_excess_ci": [
+          -0.16145833333333334,
+          0.34358974358974353
+        ],
+        "beats_random": false
+      }
+    },
+    "all field-seasons, out-of-fold (secondary, more power)": {
+      "SICKLE-Guard (as shipped)": {
+        "auroc": 0.8236983969357355,
+        "auroc_ci": [
+          0.7461935556593265,
+          0.8904079028032026
+        ],
+        "informative": true,
+        "budgets": {
+          "0.25": {
+            "n_visited": 80,
+            "budget_realised": 0.2507836990595611,
+            "n_caught": 37,
+            "recall": 0.6981132075471698,
+            "precision": 0.4625
+          },
+          "0.33": {
+            "n_visited": 105,
+            "budget_realised": 0.329153605015674,
+            "n_caught": 38,
+            "recall": 0.7169811320754716,
+            "precision": 0.3619047619047619
+          },
+          "0.5": {
+            "n_visited": 160,
+            "budget_realised": 0.5015673981191222,
+            "n_caught": 45,
+            "recall": 0.8490566037735849,
+            "precision": 0.28125
+          }
+        },
+        "recall_excess_at_33": 0.38782752705979767,
+        "recall_excess_ci": [
+          0.2559154323643292,
+          0.48873369537633854
+        ],
+        "beats_random": true
+      },
+      "history only, no imagery": {
+        "auroc": 0.8381685345439069,
+        "auroc_ci": [
+          0.7788414856666971,
+          0.8892992898757209
+        ],
+        "informative": true,
+        "budgets": {
+          "0.25": {
+            "n_visited": 80,
+            "budget_realised": 0.2507836990595611,
+            "n_caught": 35,
+            "recall": 0.660377358490566,
+            "precision": 0.4375
+          },
+          "0.33": {
+            "n_visited": 105,
+            "budget_realised": 0.329153605015674,
+            "n_caught": 38,
+            "recall": 0.7169811320754716,
+            "precision": 0.3619047619047619
+          },
+          "0.5": {
+            "n_visited": 160,
+            "budget_realised": 0.5015673981191222,
+            "n_caught": 42,
+            "recall": 0.7924528301886793,
+            "precision": 0.2625
+          }
+        },
+        "recall_excess_at_33": 0.38782752705979767,
+        "recall_excess_ci": [
+          0.2903716216216216,
+          0.49042180687169334
+        ],
+        "beats_random": true
+      },
+      "satellite only": {
+        "auroc": 0.7166264718399773,
+        "auroc_ci": [
+          0.6172203805250914,
+          0.8123279888932226
+        ],
+        "informative": true,
+        "budgets": {
+          "0.25": {
+            "n_visited": 80,
+            "budget_realised": 0.2507836990595611,
+            "n_caught": 26,
+            "recall": 0.49056603773584906,
+            "precision": 0.325
+          },
+          "0.33": {
+            "n_visited": 105,
+            "budget_realised": 0.329153605015674,
+            "n_caught": 34,
+            "recall": 0.6415094339622641,
+            "precision": 0.3238095238095238
+          },
+          "0.5": {
+            "n_visited": 160,
+            "budget_realised": 0.5015673981191222,
+            "n_caught": 40,
+            "recall": 0.7547169811320755,
+            "precision": 0.25
+          }
+        },
+        "recall_excess_at_33": 0.31235582894659014,
+        "recall_excess_ci": [
+          0.12938383402199188,
+          0.4251196907410803
+        ],
+        "beats_random": true
+      },
+      "last harvest only": {
+        "auroc": 0.8378138743084126,
+        "auroc_ci": [
+          0.7798959817922114,
+          0.8874358533568495
+        ],
+        "informative": true,
+        "budgets": {
+          "0.25": {
+            "n_visited": 80,
+            "budget_realised": 0.2507836990595611,
+            "n_caught": 36,
+            "recall": 0.6792452830188679,
+            "precision": 0.45
+          },
+          "0.33": {
+            "n_visited": 105,
+            "budget_realised": 0.329153605015674,
+            "n_caught": 37,
+            "recall": 0.6981132075471698,
+            "precision": 0.3523809523809524
+          },
+          "0.5": {
+            "n_visited": 160,
+            "budget_realised": 0.5015673981191222,
+            "n_caught": 42,
+            "recall": 0.7924528301886793,
+            "precision": 0.2625
+          }
+        },
+        "recall_excess_at_33": 0.3689596025314958,
+        "recall_excess_ci": [
+          0.280604183705481,
+          0.4791941616941617
+        ],
+        "beats_random": true
+      },
+      "smallest field first": {
+        "auroc": 0.3130940558944531,
+        "auroc_ci": [
+          0.24546484349014955,
+          0.3897522561965616
+        ],
+        "informative": false,
+        "budgets": {
+          "0.25": {
+            "n_visited": 80,
+            "budget_realised": 0.2507836990595611,
+            "n_caught": 4,
+            "recall": 0.07547169811320754,
+            "precision": 0.05
+          },
+          "0.33": {
+            "n_visited": 105,
+            "budget_realised": 0.329153605015674,
+            "n_caught": 4,
+            "recall": 0.07547169811320754,
+            "precision": 0.0380952380952381
+          },
+          "0.5": {
+            "n_visited": 160,
+            "budget_realised": 0.5015673981191222,
+            "n_caught": 13,
+            "recall": 0.24528301886792453,
+            "precision": 0.08125
+          }
+        },
+        "recall_excess_at_33": -0.25368190690246645,
+        "recall_excess_ci": [
+          -0.3301282051282051,
+          -0.14608111943847624
+        ],
+        "beats_random": false
+      },
+      "largest field first": {
+        "auroc": 0.6869059441055468,
+        "auroc_ci": [
+          0.6102477438034385,
+          0.7545351565098505
+        ],
+        "informative": true,
+        "budgets": {
+          "0.25": {
+            "n_visited": 80,
+            "budget_realised": 0.2507836990595611,
+            "n_caught": 19,
+            "recall": 0.3584905660377358,
+            "precision": 0.2375
+          },
+          "0.33": {
+            "n_visited": 105,
+            "budget_realised": 0.329153605015674,
+            "n_caught": 26,
+            "recall": 0.49056603773584906,
+            "precision": 0.24761904761904763
+          },
+          "0.5": {
+            "n_visited": 160,
+            "budget_realised": 0.5015673981191222,
+            "n_caught": 47,
+            "recall": 0.8867924528301887,
+            "precision": 0.29375
+          }
+        },
+        "recall_excess_at_33": 0.16141243272017508,
+        "recall_excess_ci": [
+          -0.0008012262843306849,
+          0.3610980132366865
+        ],
+        "beats_random": false
+      },
+      "arbitrary order": {
+        "auroc": 0.4699957440771741,
+        "auroc_ci": [
+          0.3956873794293837,
+          0.5437276362523177
+        ],
+        "informative": false,
+        "budgets": {
+          "0.25": {
+            "n_visited": 80,
+            "budget_realised": 0.2507836990595611,
+            "n_caught": 9,
+            "recall": 0.16981132075471697,
+            "precision": 0.1125
+          },
+          "0.33": {
+            "n_visited": 105,
+            "budget_realised": 0.329153605015674,
+            "n_caught": 16,
+            "recall": 0.3018867924528302,
+            "precision": 0.1523809523809524
+          },
+          "0.5": {
+            "n_visited": 160,
+            "budget_realised": 0.5015673981191222,
+            "n_caught": 25,
+            "recall": 0.4716981132075472,
+            "precision": 0.15625
+          }
+        },
+        "recall_excess_at_33": -0.0272668125628438,
+        "recall_excess_ci": [
+          -0.13119022262272922,
+          0.08497691405261197
+        ],
+        "beats_random": false
+      }
+    }
+  },
+  "warning_calibration": {
+    "held-out test split": {
+      "n_warned": 27,
+      "n_not_warned": 35,
+      "mae_warned": 265.46880181451473,
+      "mae_not_warned": 224.76190476190476,
+      "difference": 40.706897052609975,
+      "ci": [
+        -57.73492845301403,
+        129.84215500880785
+      ],
+      "calibrated": false
+    },
+    "all field-seasons": {
+      "n_warned": 131,
+      "n_not_warned": 188,
+      "mae_warned": 169.04446497115336,
+      "mae_not_warned": 201.56914893617022,
+      "difference": -32.52468396501686,
+      "ci": [
+        -83.2564514597004,
+        15.380490391473261
+      ],
+      "calibrated": false
+    }
+  },
+  "flag_adds_information": {
+    "held-out test split": {
+      "n_flagged": 20,
+      "share_bad_flagged": 0.4,
+      "share_bad_unflagged": 0.07142857142857142,
+      "difference": 0.3285714285714286,
+      "ci": [
+        0.011260255875399807,
+        0.6239950779327317
+      ],
+      "informative": true,
+      "n_missed": 3,
+      "n_bad": 11
+    },
+    "all field-seasons": {
+      "n_flagged": 105,
+      "share_bad_flagged": 0.42857142857142855,
+      "share_bad_unflagged": 0.037383177570093455,
+      "difference": 0.3911882510013351,
+      "ci": [
+        0.26075132337616397,
+        0.5147910359183637
+      ],
+      "informative": true,
+      "n_missed": 8,
+      "n_bad": 53
+    }
+  },
+  "not_established": [
+    "No farmer has used this. Comprehension, trust and whether the wording changes behaviour are all unmeasured.",
+    "No verification officer has used this. Time saved, visits reordered and decisions changed are all unmeasured.",
+    "No outcome for any person is measured: no claim filed, no claim paid, no income, no yield.",
+    "The target is a relative cut on farmer-recalled yield. It is not crop damage, and src/label_validity.py shows 60 % of the labelled losses sit at plots that are below threshold every season.",
+    "The test split is 27 plots. Every interval here is wide and none of them establishes an operating threshold.",
+    "Ranking better than an alternative is not the same as people being better off. Nothing here bridges that gap, and only a field study can."
+  ],
+  "loss_definition": {
+    "level": 0.8,
+    "threshold_kg_per_acre": 1470.118416243655,
+    "note": "relative cut on the training-split mean of farmer-recalled yield; not a measurement of crop damage"
+  },
+  "n_boot": 10000
+}

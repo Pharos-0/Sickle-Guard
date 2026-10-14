@@ -1,0 +1,155 @@
+{
+  "checks": [
+    {
+      "check": 1,
+      "title": "Split is fixed, plot-disjoint and consistent with its own config",
+      "status": "PASS",
+      "detail": [
+        "seed 20261011, grouped on PLOT_ID, stratified by plot-mean yield tercile",
+        "131 plots; plots appearing in more than one split: 0",
+        "  train  197 field-seasons,  80 plots",
+        "  val     60 field-seasons,  24 plots",
+        "  test    62 field-seasons,  27 plots",
+        "  the split file predates every artefact that consumes it",
+        "NOTE, and it is a real limit rather than a leak: the satellite model in",
+        "  the shipped hybrid is fitted on train+val, so test rows are out-of-sample",
+        "  for it, but the FEATURE SET and the model family were chosen while looking",
+        "  at val. The test split is held out from fitting, not from every design",
+        "  decision ever made. Only src/confirmatory.py was frozen in that stronger",
+        "  sense, and it FAILED both its primary criteria."
+      ]
+    },
+    {
+      "check": 2,
+      "title": "Hybrid and last-harvest compared on identical splits, labels and metrics",
+      "status": "REPORT",
+      "detail": [
+        "coverage: 188 field-seasons have causal history, 188 have a last harvest (identical sets)",
+        "held-out test split: n=62, losses=11, satellite=shipped model",
+        "   hybrid 0.807 | last harvest 0.803 | history mean 0.797",
+        "   paired hybrid - last harvest = +0.004, 95% CI [-0.092, +0.078]  -> INCONCLUSIVE",
+        "all field-seasons, out-of-fold: n=319, losses=53, satellite=out-of-fold",
+        "   hybrid 0.824 | last harvest 0.838 | history mean 0.838",
+        "   paired hybrid - last harvest = -0.014, 95% CI [-0.059, +0.024]  -> INCONCLUSIVE",
+        "WHAT DIFFERS: on the 188 field-seasons that have a record, the hybrid uses",
+        "   the MEAN of all prior harvests and the baseline uses the LAST one; on the",
+        "   131 without a record the hybrid falls back to satellite and",
+        "   the baseline to the area average. The comparison is therefore fair but",
+        "   conflates two choices, which is why history mean is shown alongside."
+      ]
+    },
+    {
+      "check": 3,
+      "title": "Flagged-versus-unflagged denominators, interval method and clustering",
+      "status": "REPORT",
+      "detail": [
+        "held-out test split: 62 field-seasons at 27 plots",
+        "   denominators: flagged 20 (8 bad), unflagged 42 (3 bad); 20+42=62 = n OK",
+        "   budget realised 32.3% against a 33% target",
+        "   difference in share below threshold +32.9%, 95% CI [+1.1%, +62.4%]",
+        "   interval method: percentile bootstrap, 10000 replicates, resampling PLOTS and carrying every season of a plot together",
+        "   replicates discarded as degenerate (one side empty): 0 of 10000 = 0.00%",
+        "all field-seasons: 319 field-seasons at 131 plots",
+        "   denominators: flagged 105 (45 bad), unflagged 214 (8 bad); 105+214=319 = n OK",
+        "   budget realised 32.9% against a 33% target",
+        "   difference in share below threshold +39.1%, 95% CI [+26.1%, +51.5%]",
+        "   interval method: percentile bootstrap, 10000 replicates, resampling PLOTS and carrying every season of a plot together",
+        "   replicates discarded as degenerate (one side empty): 0 of 10000 = 0.00%",
+        "CAVEAT the numbers cannot carry: the target is yield below 80% of a",
+        "   training-split mean on FARMER-RECALLED yield. An association with that",
+        "   label is not evidence of detecting crop damage."
+      ]
+    },
+    {
+      "check": 4,
+      "title": "Warning wording matches the evidence, and tests cover every interface",
+      "status": "PASS",
+      "detail": [
+        "src/farmer_report.py: states the warning means a missing record -> yes",
+        "app.py: states the warning means a missing record -> yes",
+        "tests reference the CLI report: yes",
+        "tests reference the Streamlit interface: yes"
+      ]
+    },
+    {
+      "check": 5,
+      "title": "Every matrix row carries a verdict its own test supports",
+      "status": "PASS",
+      "detail": [
+        "9 design rows, 9 verdicts",
+        "   row 1: Supported  <- Supported.",
+        "   row 2: Inconclusive  <- Inconclusive for the satellite half.",
+        "   row 3: Supported  <- Supported as a limit, FAIL as a capability.",
+        "   row 4: Supported  <- Supported.",
+        "   row 5: Honest limit  <- Honest limit, and the miss count is the justification.",
+        "   row 6: Refuted  <- REFUTED as calibration.",
+        "   row 7: Supported  <- Supported as a limit.",
+        "   row 8: Supported  <- Supported by a negative result.",
+        "   row 9: Partly supported  <- Partly supported."
+      ]
+    }
+  ],
+  "baseline_comparison": {
+    "held-out test split": {
+      "aurocs": {
+        "hybrid": 0.8074866310160428,
+        "last harvest": 0.803030303030303,
+        "history mean": 0.7967914438502673
+      },
+      "paired_delta": 0.004456327985739805,
+      "ci": [
+        -0.091515522875817,
+        0.07770050125313269
+      ],
+      "verdict": "INCONCLUSIVE",
+      "degenerate_replicates_skipped": 2,
+      "satellite": "shipped"
+    },
+    "all field-seasons, out-of-fold": {
+      "aurocs": {
+        "hybrid": 0.8236983969357355,
+        "last harvest": 0.8378138743084126,
+        "history mean": 0.8381685345439069
+      },
+      "paired_delta": -0.014115477372677043,
+      "ci": [
+        -0.05855729292118287,
+        0.024069845606730804
+      ],
+      "verdict": "INCONCLUSIVE",
+      "degenerate_replicates_skipped": 0,
+      "satellite": "out-of-fold"
+    }
+  },
+  "flag_comparison": {
+    "held-out test split": {
+      "n_flagged": 20,
+      "n_unflagged": 42,
+      "n_bad_flagged": 8,
+      "n_bad_unflagged": 3,
+      "difference": 0.3285714285714286,
+      "ci": [
+        0.011260255875399807,
+        0.6239950779327317
+      ],
+      "discarded_replicates": 0,
+      "clustered_on": "plot",
+      "informative": true
+    },
+    "all field-seasons": {
+      "n_flagged": 105,
+      "n_unflagged": 214,
+      "n_bad_flagged": 45,
+      "n_bad_unflagged": 8,
+      "difference": 0.3911882510013351,
+      "ci": [
+        0.26075132337616397,
+        0.5147910359183637
+      ],
+      "discarded_replicates": 0,
+      "clustered_on": "plot",
+      "informative": true
+    }
+  },
+  "n_boot": 10000
+}

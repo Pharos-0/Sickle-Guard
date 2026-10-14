@@ -1,0 +1,216 @@
+{
+  "label": "OBSERVED",
+  "protocol_version": 1,
+  "protocol_frozen": "2026-10-12",
+  "seen_before_freezing": "season means of SICKLE recalled yield (2019 and 2020, every season) and the official 2019-20 delta district yields\n",
+  "conversion_rice_from_paddy": 0.6666666666666666,
+  "acre_in_ha": 0.404686,
+  "l1_level": {
+    "unit_note": "SICKLE kg/acre paddy -> kg/ha (/0.404686) -> rice-equivalent (x 2/3); official kg/ha rice",
+    "cells": {
+      "Kar/Kuruvai/Sornavari 2019-20": {
+        "n_field_seasons": 27,
+        "n_plots": 27,
+        "sickle_seasons": [
+          "may-sep",
+          "jun-oct"
+        ],
+        "official_core_districts": {
+          "Thanjavur": 3755.0,
+          "Thiruvarur": 3940.0,
+          "Nagapattinam": 3819.0
+        },
+        "official_core_band": [
+          3755.0,
+          3940.0
+        ],
+        "official_core_area_weighted": 3823.1554933374814,
+        "official_all_delta_band": [
+          3410.0,
+          5254.0
+        ],
+        "by_conversion": {
+          "2/3 (official)": {
+            "sickle_mean_rice_eq_kg_ha": 2959.160594133553,
+            "ci95": [
+              2787.1021843303233,
+              3112.9149177875024
+            ],
+            "ratio_to_core_weighted": 0.7740100028079969,
+            "verdict_core_band": "LOWER",
+            "verdict_all_delta_band": "LOWER"
+          },
+          "0.62": {
+            "sickle_mean_rice_eq_kg_ha": 2752.019352544204,
+            "ci95": [
+              2592.0050314272007,
+              2895.010873542377
+            ],
+            "ratio_to_core_weighted": 0.7198293026114372,
+            "verdict_core_band": "LOWER",
+            "verdict_all_delta_band": "LOWER"
+          },
+          "0.70": {
+            "sickle_mean_rice_eq_kg_ha": 3107.1186238402297,
+            "ci95": [
+              2926.4572935468395,
+              3268.5606636768766
+            ],
+            "ratio_to_core_weighted": 0.8127105029483965,
+            "verdict_core_band": "LOWER",
+            "verdict_all_delta_band": "LOWER"
+          }
+        },
+        "sickle_mean_paddy_kg_ha": 4438.740891200328,
+        "verdict": "LOWER"
+      },
+      "Samba/Thaladi/Pishanam 2019-20": {
+        "n_field_seasons": 129,
+        "n_plots": 129,
+        "sickle_seasons": [
+          "sep-feb",
+          "oct-mar"
+        ],
+        "official_core_districts": {
+          "Thanjavur": 3661.0,
+          "Thiruvarur": 3553.0,
+          "Nagapattinam": 3154.0
+        },
+        "official_core_band": [
+          3154.0,
+          3661.0
+        ],
+        "official_core_area_weighted": 3461.356398587606,
+        "official_all_delta_band": [
+          3079.0,
+          4169.0
+        ],
+        "by_conversion": {
+          "2/3 (official)": {
+            "sickle_mean_rice_eq_kg_ha": 3119.3142107650733,
+            "ci95": [
+              3004.2496181778274,
+              3241.9536748439064
+            ],
+            "ratio_to_core_weighted": 0.901182615011242,
+            "verdict_core_band": "CONSISTENT",
+            "verdict_all_delta_band": "CONSISTENT"
+          },
+          "0.62": {
+            "sickle_mean_rice_eq_kg_ha": 2900.962216011518,
+            "ci95": [
+              2793.952144905379,
+              3015.016917604833
+            ],
+            "ratio_to_core_weighted": 0.838099831960455,
+            "verdict_core_band": "LOWER",
+            "verdict_all_delta_band": "LOWER"
+          },
+          "0.70": {
+            "sickle_mean_rice_eq_kg_ha": 3275.279921303327,
+            "ci95": [
+              3154.4620990867184,
+              3404.0513585861017
+            ],
+            "ratio_to_core_weighted": 0.946241745761804,
+            "verdict_core_band": "CONSISTENT",
+            "verdict_all_delta_band": "CONSISTENT"
+          }
+        },
+        "sickle_mean_paddy_kg_ha": 4678.97131614761,
+        "verdict": "CONSISTENT"
+      }
+    },
+    "not_judged": {
+      "Navarai/Kodai 2019-20": {
+        "n_field_seasons": 2,
+        "reason": "fewer than 20"
+      }
+    }
+  },
+  "l2_event": {
+    "relief": {
+      "agri_relief_lakh_by_district": {
+        "2019-20 Samba (north-east monsoon 2019)": {
+          "Thanjavur": 92.96,
+          "Thiruvarur": 14.35
+        },
+        "2020-21 Samba (Burevi Dec 2020 + January 2021 rain)": {
+          "Mayiladuthurai": 12161.52,
+          "Nagapattinam": 11691.01,
+          "Thanjavur": 22622.36,
+          "Thiruvarur": 31751.199999999997
+        }
+      },
+      "total_lakh": {
+        "2019-20 Samba (north-east monsoon 2019)": 107.30999999999999,
+        "2020-21 Samba (Burevi Dec 2020 + January 2021 rain)": 78226.09
+      },
+      "districts_with_relief_2020_21": [
+        "Mayiladuthurai",
+        "Nagapattinam",
+        "Thanjavur",
+        "Thiruvarur"
+      ],
+      "note": "2019-20 is amount sanctioned (XXII.7); 2020-21 is fund allocation (XXII.10, XXII.11). Agriculture column only."
+    },
+    "exposure": {
+      "n_samba_2020_21": 131,
+      "n_standing_in_january_2021": 131,
+      "harvest_range": [
+        "2021-01-05",
+        "2021-03-31"
+      ]
+    },
+    "samba_recalled": {
+      "n_plots": 129,
+      "mean_change": -0.03949826883535043,
+      "ci95": [
+        -0.07514953465520165,
+        -0.0021070916987009298
+      ]
+    },
+    "samba_model": {
+      "n_plots": 129,
+      "mean_change": -0.00013471046415695963,
+      "ci95": [
+        -0.010102207411932787,
+        0.009849231568307904
+      ]
+    },
+    "kuruvai_control": {
+      "n_plots": 27,
+      "mean_change": -0.03694341738722932,
+      "ci95": [
+        -0.08207526918165622,
+        0.009301560975481722
+      ]
+    },
+    "contrast_samba_minus_kuruvai": {
+      "delta": -0.0025548514481211135,
+      "ci95": [
+        -0.060349198448498044,
+        0.05543969265348953
+      ]
+    },
+    "recalled_minus_model": {
+      "delta": -0.03936355837119348,
+      "ci95": [
+        -0.07317328008070904,
+        -0.0027571031097603127
+      ]
+    },
+    "verdict": {
+      "recalled_registers_damage_season": true,
+      "decline_is_event_specific": false,
+      "model_registers_damage_season": false
+    }
+  },
+  "headline": {
+    "kuruvai_ratio_to_official": 0.7740100028079969,
+    "samba_ratio_to_official": 0.901182615011242,
+    "samba_recalled_change": -0.03949826883535043,
+    "samba_model_change": -0.00013471046415695963,
+    "samba_minus_kuruvai": -0.0025548514481211135
+  }
+}

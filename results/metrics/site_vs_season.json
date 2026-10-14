@@ -1,0 +1,70 @@
+{
+  "backend": "scikit-learn",
+  "n_rows": 319,
+  "n_plots": 131,
+  "stage1_level": {
+    "global mean (no info)": {
+      "mae": 303.01045508593666,
+      "r": 5.009323617996566e-16,
+      "n": 319
+    },
+    "plot history (no imagery)": {
+      "mae": 197.4085684430512,
+      "r": 0.7187176425956782,
+      "n": 319
+    },
+    "satellite model": {
+      "mae": 277.86403154407947,
+      "r": 0.46797451099673826,
+      "n": 319
+    }
+  },
+  "stage1_paired_sat_minus_hist_mae": 80.45546310102824,
+  "stage1_paired_ci": {
+    "lo": 40.92334013795201,
+    "hi": 124.79039195939431
+  },
+  "stage2": {
+    "n": 319,
+    "sd_deviation": 319.30381863721567,
+    "mae_model": 195.67106025259997,
+    "mae_predict_zero": 197.4085684430512,
+    "paired_ci": {
+      "lo": -8.783481457289447,
+      "hi": 5.1597583066429085
+    },
+    "r": 0.28828743365596277
+  },
+  "bad_season": {
+    "deviation < -10% of history": {
+      "n_bad": 45,
+      "auroc": 0.5975669099756691,
+      "ci": {
+        "lo": 0.4968387531657659,
+        "hi": 0.6931752659490031
+      },
+      "informative": false
+    },
+    "deviation < -20% of history": {
+      "n_bad": 22,
+      "auroc": 0.5904499540863177,
+      "ci": {
+        "lo": 0.45119984996863954,
+        "hi": 0.7165259655645388
+      },
+      "informative": false
+    },
+    "deviation < -1 SD of deviation": {
+      "n_bad": 29,
+      "auroc": 0.5859690844233056,
+      "ci": {
+        "lo": 0.46037501648530904,
+        "hi": 0.7057099580193955
+      },
+      "informative": false
+    }
+  },
+  "verdict_level": "satellite adds nothing over plot history",
+  "verdict_deviation": "deviation is NOT predictable from imagery",
+  "caveat": "Plot history needs persistent field identity and at least one prior season; it is not deployable for an unseen field. Exploratory grouped CV, not the spent confirmatory split."
+}

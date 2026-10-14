@@ -1,0 +1,70 @@
+{
+  "n": 319,
+  "n_plots": 131,
+  "n_with_causal_history": 188,
+  "frac_with_causal_history": 0.5893416927899686,
+  "mae_by_regime": {
+    "global mean": {
+      "all": 303.01045508593666,
+      "has_history": 323.3737986060161,
+      "cold_start": 273.7867254540668
+    },
+    "causal history": {
+      "all": 201.56914893617022,
+      "has_history": 201.56914893617022,
+      "cold_start": NaN
+    },
+    "satellite model": {
+      "all": 277.86403154407947,
+      "has_history": 290.68072987404156,
+      "cold_start": 259.47060187970635
+    },
+    "history-first hybrid": {
+      "all": 225.34686158696405,
+      "has_history": 201.56914893617022,
+      "cold_start": 259.47060187970635
+    }
+  },
+  "paired_history_minus_satellite_on_history_subset": {
+    "delta": -89.11158093787135,
+    "ci": [
+      -129.4867258032986,
+      -50.71087456825463
+    ],
+    "verdict": "history better"
+  },
+  "verification_ranking": {
+    "satellite model": {
+      "auroc": 0.7166264718399773,
+      "ci": [
+        0.6176392274243162,
+        0.8123296499053798
+      ],
+      "recall_33": 0.6415094339622641
+    },
+    "history-first hybrid": {
+      "auroc": 0.8236983969357355,
+      "ci": [
+        0.7446980443465088,
+        0.8906145663176116
+      ],
+      "recall_33": 0.7169811320754716
+    },
+    "leaky history (old)": {
+      "auroc": 0.8844162292523762,
+      "ci": [
+        0.817114510878991,
+        0.9362629975636503
+      ],
+      "recall_33": 0.9245283018867925
+    }
+  },
+  "hybrid_minus_satellite_auroc": {
+    "delta": 0.10707192509575825,
+    "ci": [
+      0.03661979050739209,
+      0.17715110025201297
+    ]
+  },
+  "note": "Supersedes site_vs_season.py, whose history baseline used future harvests. Causal history = mean yield of seasons at the same plot harvested before this season was sown."
+}

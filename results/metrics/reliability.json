@@ -1,0 +1,416 @@
+{
+  "predictor": "V7 random forest, all features",
+  "backend": "scikit-learn",
+  "quantile_interval_empirical_coverage_nominal_90": 0.9032258064516129,
+  "n_test_rows": 62,
+  "n_test_plots": 27,
+  "mae": 257.7652342408945,
+  "median_ape": 9.767755910033795,
+  "high_error_threshold_ape": 9.767755910033795,
+  "n_high_error": 31,
+  "signals": {
+    "rf_spread": {
+      "auroc": 0.6722164412070759,
+      "ci": {
+        "lo": 0.47977963128825196,
+        "hi": 0.8418608573479897
+      },
+      "informative": false
+    },
+    "seed_spread": {
+      "auroc": 0.44432882414151925,
+      "ci": {
+        "lo": 0.281880374011953,
+        "hi": 0.6153101000209833
+      },
+      "informative": false
+    },
+    "low_n_clear": {
+      "auroc": 0.5749219562955254,
+      "ci": {
+        "lo": 0.37073861480075904,
+        "hi": 0.7561266570934058
+      },
+      "informative": false
+    },
+    "small_n_px": {
+      "auroc": 0.558792924037461,
+      "ci": {
+        "lo": 0.37473541590549264,
+        "hi": 0.7398840714446696
+      },
+      "informative": false
+    },
+    "ood_distance": {
+      "auroc": 0.5691987513007284,
+      "ci": {
+        "lo": 0.36829737103174603,
+        "hi": 0.7675123106060605
+      },
+      "informative": false
+    },
+    "low_predicted_yield": {
+      "auroc": 0.4745057232049948,
+      "ci": {
+        "lo": 0.2766642512077295,
+        "hi": 0.650185296474359
+      },
+      "informative": false
+    },
+    "quantile_width": {
+      "auroc": 0.5306971904266389,
+      "ci": {
+        "lo": 0.318704898446834,
+        "hi": 0.7165836262956361
+      },
+      "informative": false
+    }
+  },
+  "screening_best_signal": "rf_spread",
+  "screening": {
+    "0.20": {
+      "workload": 0.1935483870967742,
+      "n_referred": 12,
+      "n_caught": 11,
+      "n_missed": 20,
+      "recall": 0.3548387096774194,
+      "precision": 0.9166666666666666,
+      "random_expected_recall": 0.1935483870967742
+    },
+    "0.33": {
+      "workload": 0.3225806451612903,
+      "n_referred": 20,
+      "n_caught": 17,
+      "n_missed": 14,
+      "recall": 0.5483870967741935,
+      "precision": 0.85,
+      "random_expected_recall": 0.3225806451612903
+    },
+    "0.50": {
+      "workload": 0.5,
+      "n_referred": 31,
+      "n_caught": 20,
+      "n_missed": 11,
+      "recall": 0.6451612903225806,
+      "precision": 0.6451612903225806,
+      "random_expected_recall": 0.5
+    }
+  },
+  "sensitivity": {
+    "15.0": {
+      "n_pos": 21,
+      "rf_spread": {
+        "auroc": 0.662020905923345,
+        "ci": {
+          "lo": 0.44332370215990907,
+          "hi": 0.8169203192640693
+        },
+        "excludes_half": false
+      },
+      "seed_spread": {
+        "auroc": 0.43902439024390244,
+        "ci": {
+          "lo": 0.28405385375494074,
+          "hi": 0.6216366366366365
+        },
+        "excludes_half": false
+      },
+      "low_n_clear": {
+        "auroc": 0.5807200929152149,
+        "ci": {
+          "lo": 0.3408519721019721,
+          "hi": 0.7669867348398169
+        },
+        "excludes_half": false
+      },
+      "small_n_px": {
+        "auroc": 0.6596980255516841,
+        "ci": {
+          "lo": 0.472359693877551,
+          "hi": 0.8231343537414966
+        },
+        "excludes_half": false
+      },
+      "ood_distance": {
+        "auroc": 0.5691056910569106,
+        "ci": {
+          "lo": 0.3888825757575758,
+          "hi": 0.7449249354914379
+        },
+        "excludes_half": false
+      },
+      "low_predicted_yield": {
+        "auroc": 0.554006968641115,
+        "ci": {
+          "lo": 0.3218853935698448,
+          "hi": 0.7569744674185461
+        },
+        "excludes_half": false
+      },
+      "quantile_width": {
+        "auroc": 0.5737514518002322,
+        "ci": {
+          "lo": 0.3452544757033248,
+          "hi": 0.7533473151569624
+        },
+        "excludes_half": false
+      }
+    },
+    "20.0": {
+      "n_pos": 13,
+      "rf_spread": {
+        "auroc": 0.8006279434850864,
+        "ci": {
+          "lo": 0.5499795081967214,
+          "hi": 0.9585399662257248
+        },
+        "excludes_half": true
+      },
+      "seed_spread": {
+        "auroc": 0.46781789638932497,
+        "ci": {
+          "lo": 0.2883673469387755,
+          "hi": 0.67678110896196
+        },
+        "excludes_half": false
+      },
+      "low_n_clear": {
+        "auroc": 0.6020408163265306,
+        "ci": {
+          "lo": 0.32765567765567766,
+          "hi": 0.7908680555555555
+        },
+        "excludes_half": false
+      },
+      "small_n_px": {
+        "auroc": 0.6357927786499215,
+        "ci": {
+          "lo": 0.46995303803339517,
+          "hi": 0.8032240896358543
+        },
+        "excludes_half": false
+      },
+      "ood_distance": {
+        "auroc": 0.6153846153846154,
+        "ci": {
+          "lo": 0.4692044959081057,
+          "hi": 0.781765028706518
+        },
+        "excludes_half": false
+      },
+      "low_predicted_yield": {
+        "auroc": 0.6624803767660911,
+        "ci": {
+          "lo": 0.42900132275132274,
+          "hi": 0.8415536286630034
+        },
+        "excludes_half": false
+      },
+      "quantile_width": {
+        "auroc": 0.7142857142857143,
+        "ci": {
+          "lo": 0.5188337264150943,
+          "hi": 0.8589795918367346
+        },
+        "excludes_half": true
+      }
+    },
+    "25.0": {
+      "n_pos": 13,
+      "rf_spread": {
+        "auroc": 0.8006279434850864,
+        "ci": {
+          "lo": 0.5499795081967214,
+          "hi": 0.9585399662257248
+        },
+        "excludes_half": true
+      },
+      "seed_spread": {
+        "auroc": 0.46781789638932497,
+        "ci": {
+          "lo": 0.2883673469387755,
+          "hi": 0.67678110896196
+        },
+        "excludes_half": false
+      },
+      "low_n_clear": {
+        "auroc": 0.6020408163265306,
+        "ci": {
+          "lo": 0.32765567765567766,
+          "hi": 0.7908680555555555
+        },
+        "excludes_half": false
+      },
+      "small_n_px": {
+        "auroc": 0.6357927786499215,
+        "ci": {
+          "lo": 0.46995303803339517,
+          "hi": 0.8032240896358543
+        },
+        "excludes_half": false
+      },
+      "ood_distance": {
+        "auroc": 0.6153846153846154,
+        "ci": {
+          "lo": 0.4692044959081057,
+          "hi": 0.781765028706518
+        },
+        "excludes_half": false
+      },
+      "low_predicted_yield": {
+        "auroc": 0.6624803767660911,
+        "ci": {
+          "lo": 0.42900132275132274,
+          "hi": 0.8415536286630034
+        },
+        "excludes_half": false
+      },
+      "quantile_width": {
+        "auroc": 0.7142857142857143,
+        "ci": {
+          "lo": 0.5188337264150943,
+          "hi": 0.8589795918367346
+        },
+        "excludes_half": true
+      }
+    },
+    "30.0": {
+      "n_pos": 9,
+      "rf_spread": {
+        "auroc": 0.750524109014675,
+        "ci": {
+          "lo": 0.3820235849056604,
+          "hi": 0.9636113643570634
+        },
+        "excludes_half": false
+      },
+      "seed_spread": {
+        "auroc": 0.42138364779874216,
+        "ci": {
+          "lo": 0.18820915926179085,
+          "hi": 0.6445833333333326
+        },
+        "excludes_half": false
+      },
+      "low_n_clear": {
+        "auroc": 0.5712788259958071,
+        "ci": {
+          "lo": 0.23301803959131545,
+          "hi": 0.795744854560644
+        },
+        "excludes_half": false
+      },
+      "small_n_px": {
+        "auroc": 0.6079664570230608,
+        "ci": {
+          "lo": 0.40155092592592595,
+          "hi": 0.8186846123609094
+        },
+        "excludes_half": false
+      },
+      "ood_distance": {
+        "auroc": 0.59958071278826,
+        "ci": {
+          "lo": 0.4096045197740113,
+          "hi": 0.8148148148148148
+        },
+        "excludes_half": false
+      },
+      "low_predicted_yield": {
+        "auroc": 0.660377358490566,
+        "ci": {
+          "lo": 0.413125,
+          "hi": 0.8772497650375937
+        },
+        "excludes_half": false
+      },
+      "quantile_width": {
+        "auroc": 0.6834381551362684,
+        "ci": {
+          "lo": 0.4451508564472655,
+          "hi": 0.8959241828087166
+        },
+        "excludes_half": false
+      }
+    },
+    "40.0": {
+      "n_pos": 7,
+      "rf_spread": {
+        "auroc": 0.6701298701298701,
+        "ci": {
+          "lo": 0.31721230158730157,
+          "hi": 0.9473121584699449
+        },
+        "excludes_half": false
+      },
+      "seed_spread": {
+        "auroc": 0.45454545454545453,
+        "ci": {
+          "lo": 0.18886243386243387,
+          "hi": 0.7109068627450974
+        },
+        "excludes_half": false
+      },
+      "low_n_clear": {
+        "auroc": 0.4961038961038961,
+        "ci": {
+          "lo": 0.21932041778975742,
+          "hi": 0.7621897699757854
+        },
+        "excludes_half": false
+      },
+      "small_n_px": {
+        "auroc": 0.6363636363636364,
+        "ci": {
+          "lo": 0.3869701867816092,
+          "hi": 0.8448343475321163
+        },
+        "excludes_half": false
+      },
+      "ood_distance": {
+        "auroc": 0.6545454545454545,
+        "ci": {
+          "lo": 0.46266911058741383,
+          "hi": 0.8353195028011203
+        },
+        "excludes_half": false
+      },
+      "low_predicted_yield": {
+        "auroc": 0.6337662337662338,
+        "ci": {
+          "lo": 0.3556891025641026,
+          "hi": 0.8699112758310867
+        },
+        "excludes_half": false
+      },
+      "quantile_width": {
+        "auroc": 0.6571428571428571,
+        "ci": {
+          "lo": 0.3934792843691149,
+          "hi": 0.8975087365591397
+        },
+        "excludes_half": false
+      }
+    }
+  },
+  "exploratory_grid_points_clearing_chance": [
+    {
+      "ape_threshold": 20.0,
+      "signal": "rf_spread"
+    },
+    {
+      "ape_threshold": 20.0,
+      "signal": "quantile_width"
+    },
+    {
+      "ape_threshold": 25.0,
+      "signal": "rf_spread"
+    },
+    {
+      "ape_threshold": 25.0,
+      "signal": "quantile_width"
+    }
+  ],
+  "verdict": "no signal demonstrated better than chance",
+  "note": "Signals use no label. Workload thresholds are quantiles of the signal, so they are label-free. Bootstrap resamples plots."
+}

@@ -1,0 +1,57 @@
+{
+  "n": 319,
+  "n_plots": 131,
+  "n_with_history": 188,
+  "n_cold_start": 131,
+  "mae": {
+    "history_only_overall": 231.22589665982056,
+    "hybrid_overall": 225.34686158696405,
+    "history_only_cold": 273.7867254540668,
+    "hybrid_cold": 259.47060187970635
+  },
+  "paired_mae_hybrid_minus_history_only": {
+    "overall": {
+      "delta": -5.879035072856511,
+      "ci": [
+        -12.534328214538753,
+        1.5119808815069264
+      ]
+    },
+    "cold_start": {
+      "delta": -14.31612357436051,
+      "ci": [
+        -30.423842214818155,
+        3.6488655595344754
+      ]
+    }
+  },
+  "ranking": {
+    "history-only (no imagery)": {
+      "auroc": 0.8381685345439069,
+      "ci": [
+        0.7760982318288312,
+        0.8889411123867147
+      ],
+      "recall": 0.7169811320754716
+    },
+    "hybrid = SICKLE-Guard": {
+      "auroc": 0.8236983969357355,
+      "ci": [
+        0.7446980443465088,
+        0.8906145663176116
+      ],
+      "recall": 0.7169811320754716
+    }
+  },
+  "ranking_delta": {
+    "delta": -0.014470137608171396,
+    "ci": [
+      -0.057809943057084555,
+      0.022412887583846738
+    ]
+  },
+  "satellite_helps_mae_on_cold_start": false,
+  "satellite_helps_ranking": false,
+  "verdict": "satellite adds NOTHING measurable over history-only; SICKLE-Guard should be a history table",
+  "note": "The forward-in-time split cannot answer this: causal history covered 100 % of its test set, so hybrid and history-only were the same predictor there and the reported 0.904 belonged entirely to history."
+}

@@ -1,0 +1,509 @@
+{
+  "level": 0.8,
+  "budget": 0.33,
+  "threshold_kg_per_acre": 1470.118416243655,
+  "categories_fixed_in_advance": [
+    "has_record",
+    "n_prior_seasons",
+    "area_tercile",
+    "season",
+    "plot_behaviour"
+  ],
+  "min_n_to_interpret": 15,
+  "min_positives_to_interpret": 3,
+  "n_boot": 10000,
+  "sets": {
+    "held-out test split (PRIMARY)": {
+      "has_record": {
+        "cold start": {
+          "n": 27,
+          "n_bad": 4,
+          "mae": 265.46880181451473,
+          "mae_ci": [
+            178.99312359262865,
+            362.2802481297875
+          ],
+          "recall": 0.25,
+          "precision": 0.125,
+          "n_missed": 3,
+          "n_flagged": 8,
+          "too_small_to_interpret": false
+        },
+        "has a record": {
+          "n": 35,
+          "n_bad": 7,
+          "mae": 224.76190476190476,
+          "mae_ci": [
+            135.8327380952381,
+            335.5922075726842
+          ],
+          "recall": 1.0,
+          "precision": 0.5833333333333334,
+          "n_missed": 0,
+          "n_flagged": 12,
+          "too_small_to_interpret": false
+        }
+      },
+      "n_prior_seasons": {
+        "0": {
+          "n": 27,
+          "n_bad": 4,
+          "mae": 265.46880181451473,
+          "mae_ci": [
+            178.99312359262865,
+            362.2802481297875
+          ],
+          "recall": 0.25,
+          "precision": 0.125,
+          "n_missed": 3,
+          "n_flagged": 8,
+          "too_small_to_interpret": false
+        },
+        "1": {
+          "n": 27,
+          "n_bad": 5,
+          "mae": 251.11111111111111,
+          "mae_ci": [
+            141.4814814814815,
+            374.44444444444446
+          ],
+          "recall": 1.0,
+          "precision": 0.5555555555555556,
+          "n_missed": 0,
+          "n_flagged": 9,
+          "too_small_to_interpret": false
+        },
+        "2": {
+          "n": 5,
+          "n_bad": 1,
+          "mae": 144.0,
+          "mae_ci": [
+            23.333333333333332,
+            280.0
+          ],
+          "recall": 1.0,
+          "precision": 0.5,
+          "n_missed": 0,
+          "n_flagged": 2,
+          "too_small_to_interpret": true
+        },
+        "3 or more": {
+          "n": 3,
+          "n_bad": 1,
+          "mae": 122.22222222222224,
+          "mae_ci": [
+            66.66666666666674,
+            160.0
+          ],
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_missed": 0,
+          "n_flagged": 1,
+          "too_small_to_interpret": true
+        }
+      },
+      "area_tercile": {
+        "largest third": {
+          "n": 16,
+          "n_bad": 6,
+          "mae": 161.46157618151273,
+          "mae_ci": [
+            68.5023867493475,
+            255.04767052251898
+          ],
+          "recall": 0.8333333333333334,
+          "precision": 0.625,
+          "n_missed": 1,
+          "n_flagged": 8,
+          "too_small_to_interpret": false
+        },
+        "middle third": {
+          "n": 26,
+          "n_bad": 5,
+          "mae": 306.7792848151045,
+          "mae_ci": [
+            158.74221403274788,
+            496.8562203032037
+          ],
+          "recall": 0.6,
+          "precision": 0.3,
+          "n_missed": 2,
+          "n_flagged": 10,
+          "too_small_to_interpret": false
+        },
+        "smallest third": {
+          "n": 20,
+          "n_bad": 0,
+          "mae": 223.73388457808218,
+          "mae_ci": [
+            107.22171992781801,
+            386.02089455048014
+          ],
+          "recall": NaN,
+          "precision": 0.0,
+          "n_missed": 0,
+          "n_flagged": 2,
+          "too_small_to_interpret": true
+        }
+      },
+      "season": {
+        "jun-oct": {
+          "n": 2,
+          "n_bad": 0,
+          "mae": 210.0,
+          "mae_ci": [
+            60.0,
+            360.0
+          ],
+          "recall": NaN,
+          "precision": 0.0,
+          "n_missed": 0,
+          "n_flagged": 1,
+          "too_small_to_interpret": true
+        },
+        "may-sep": {
+          "n": 6,
+          "n_bad": 2,
+          "mae": 174.43942216930387,
+          "mae_ci": [
+            101.33641128054126,
+            283.8234898169911
+          ],
+          "recall": 1.0,
+          "precision": 1.0,
+          "n_missed": 0,
+          "n_flagged": 2,
+          "too_small_to_interpret": true
+        },
+        "oct-mar": {
+          "n": 11,
+          "n_bad": 4,
+          "mae": 419.0430397505275,
+          "mae_ci": [
+            163.85705648147672,
+            728.2235151641677
+          ],
+          "recall": 0.75,
+          "precision": 0.5,
+          "n_missed": 1,
+          "n_flagged": 6,
+          "too_small_to_interpret": true
+        },
+        "sep-feb": {
+          "n": 43,
+          "n_bad": 5,
+          "mae": 208.33056617178926,
+          "mae_ci": [
+            131.30005222833017,
+            292.77130990686777
+          ],
+          "recall": 0.6,
+          "precision": 0.2727272727272727,
+          "n_missed": 2,
+          "n_flagged": 11,
+          "too_small_to_interpret": false
+        }
+      },
+      "plot_behaviour": {
+        "chronic": {
+          "n": 6,
+          "n_bad": 6,
+          "mae": 243.3967075322537,
+          "mae_ci": [
+            178.57841157516225,
+            373.03329944643673
+          ],
+          "recall": 0.8333333333333334,
+          "precision": 1.0,
+          "n_missed": 1,
+          "n_flagged": 5,
+          "too_small_to_interpret": true
+        },
+        "event": {
+          "n": 11,
+          "n_bad": 5,
+          "mae": 567.8681504571163,
+          "mae_ci": [
+            435.903624217002,
+            857.1715151719219
+          ],
+          "recall": 0.6,
+          "precision": 0.42857142857142855,
+          "n_missed": 2,
+          "n_flagged": 7,
+          "too_small_to_interpret": true
+        },
+        "never below": {
+          "n": 45,
+          "n_bad": 0,
+          "mae": 162.83098700970586,
+          "mae_ci": [
+            102.26257388107666,
+            241.16162349055304
+          ],
+          "recall": NaN,
+          "precision": 0.0,
+          "n_missed": 0,
+          "n_flagged": 8,
+          "too_small_to_interpret": true
+        }
+      }
+    },
+    "all field-seasons (secondary, more power, not held out)": {
+      "has_record": {
+        "cold start": {
+          "n": 131,
+          "n_bad": 16,
+          "mae": 169.0444649711534,
+          "mae_ci": [
+            138.63544417394675,
+            202.85909845578652
+          ],
+          "recall": 0.6875,
+          "precision": 0.2894736842105263,
+          "n_missed": 5,
+          "n_flagged": 38,
+          "too_small_to_interpret": false
+        },
+        "has a record": {
+          "n": 188,
+          "n_bad": 37,
+          "mae": 201.56914893617022,
+          "mae_ci": [
+            162.3485883424408,
+            246.7817244263485
+          ],
+          "recall": 0.918918918918919,
+          "precision": 0.5074626865671642,
+          "n_missed": 3,
+          "n_flagged": 67,
+          "too_small_to_interpret": false
+        }
+      },
+      "n_prior_seasons": {
+        "0": {
+          "n": 131,
+          "n_bad": 16,
+          "mae": 169.0444649711534,
+          "mae_ci": [
+            138.63544417394675,
+            202.85909845578652
+          ],
+          "recall": 0.6875,
+          "precision": 0.2894736842105263,
+          "n_missed": 5,
+          "n_flagged": 38,
+          "too_small_to_interpret": false
+        },
+        "1": {
+          "n": 131,
+          "n_bad": 26,
+          "mae": 222.51908396946564,
+          "mae_ci": [
+            176.25954198473283,
+            274.8110687022901
+          ],
+          "recall": 0.9230769230769231,
+          "precision": 0.4897959183673469,
+          "n_missed": 2,
+          "n_flagged": 49,
+          "too_small_to_interpret": false
+        },
+        "2": {
+          "n": 30,
+          "n_bad": 6,
+          "mae": 192.83333333333334,
+          "mae_ci": [
+            136.96853146853147,
+            260.6939655172413
+          ],
+          "recall": 0.8333333333333334,
+          "precision": 0.625,
+          "n_missed": 1,
+          "n_flagged": 8,
+          "too_small_to_interpret": false
+        },
+        "3 or more": {
+          "n": 27,
+          "n_bad": 5,
+          "mae": 109.62962962962963,
+          "mae_ci": [
+            69.99999999999999,
+            156.5153162055336
+          ],
+          "recall": 1.0,
+          "precision": 0.5,
+          "n_missed": 0,
+          "n_flagged": 10,
+          "too_small_to_interpret": false
+        }
+      },
+      "area_tercile": {
+        "largest third": {
+          "n": 106,
+          "n_bad": 28,
+          "mae": 139.20150714988264,
+          "mae_ci": [
+            108.29204506379062,
+            173.2084526532976
+          ],
+          "recall": 0.8928571428571429,
+          "precision": 0.7575757575757576,
+          "n_missed": 3,
+          "n_flagged": 33,
+          "too_small_to_interpret": false
+        },
+        "middle third": {
+          "n": 106,
+          "n_bad": 21,
+          "mae": 239.4047717951938,
+          "mae_ci": [
+            184.16731918791552,
+            300.44241552470197
+          ],
+          "recall": 0.8095238095238095,
+          "precision": 0.3148148148148148,
+          "n_missed": 4,
+          "n_flagged": 54,
+          "too_small_to_interpret": false
+        },
+        "smallest third": {
+          "n": 107,
+          "n_bad": 4,
+          "mae": 186.05195647703732,
+          "mae_ci": [
+            135.35857698180482,
+            250.23993037111134
+          ],
+          "recall": 0.75,
+          "precision": 0.16666666666666666,
+          "n_missed": 1,
+          "n_flagged": 18,
+          "too_small_to_interpret": false
+        }
+      },
+      "season": {
+        "dec-may": {
+          "n": 2,
+          "n_bad": 0,
+          "mae": 359.5441308433585,
+          "mae_ci": [
+            169.08826168671703,
+            550.0
+          ],
+          "recall": NaN,
+          "precision": NaN,
+          "n_missed": 0,
+          "n_flagged": 0,
+          "too_small_to_interpret": true
+        },
+        "jun-oct": {
+          "n": 6,
+          "n_bad": 2,
+          "mae": 269.4138716475223,
+          "mae_ci": [
+            60.0,
+            360.0
+          ],
+          "recall": 0.5,
+          "precision": 0.25,
+          "n_missed": 1,
+          "n_flagged": 4,
+          "too_small_to_interpret": true
+        },
+        "may-sep": {
+          "n": 51,
+          "n_bad": 9,
+          "mae": 151.26022315502638,
+          "mae_ci": [
+            115.17144614115962,
+            195.25340029755031
+          ],
+          "recall": 1.0,
+          "precision": 0.9,
+          "n_missed": 0,
+          "n_flagged": 10,
+          "too_small_to_interpret": false
+        },
+        "oct-mar": {
+          "n": 82,
+          "n_bad": 15,
+          "mae": 210.99927171893623,
+          "mae_ci": [
+            161.53617182535623,
+            273.48761759667053
+          ],
+          "recall": 0.8666666666666667,
+          "precision": 0.5,
+          "n_missed": 2,
+          "n_flagged": 26,
+          "too_small_to_interpret": false
+        },
+        "sep-feb": {
+          "n": 178,
+          "n_bad": 27,
+          "mae": 183.6406840325288,
+          "mae_ci": [
+            146.8760749875832,
+            224.67248819454915
+          ],
+          "recall": 0.8148148148148148,
+          "precision": 0.3384615384615385,
+          "n_missed": 5,
+          "n_flagged": 65,
+          "too_small_to_interpret": false
+        }
+      },
+      "plot_behaviour": {
+        "chronic": {
+          "n": 32,
+          "n_bad": 32,
+          "mae": 190.4866428873029,
+          "mae_ci": [
+            150.43758577634173,
+            245.79198588150692
+          ],
+          "recall": 0.90625,
+          "precision": 1.0,
+          "n_missed": 3,
+          "n_flagged": 29,
+          "too_small_to_interpret": false
+        },
+        "event": {
+          "n": 47,
+          "n_bad": 21,
+          "mae": 427.0261458786166,
+          "mae_ci": [
+            359.23508043222057,
+            513.1120719634633
+          ],
+          "recall": 0.7619047619047619,
+          "precision": 0.47058823529411764,
+          "n_missed": 5,
+          "n_flagged": 34,
+          "too_small_to_interpret": false
+        },
+        "never below": {
+          "n": 240,
+          "n_bad": 0,
+          "mae": 141.14176451055175,
+          "mae_ci": [
+            114.77274310658555,
+            173.61448933421076
+          ],
+          "recall": NaN,
+          "precision": 0.0,
+          "n_missed": 0,
+          "n_flagged": 42,
+          "too_small_to_interpret": true
+        }
+      }
+    }
+  },
+  "area_tercile_cuts_acre": [
+    0.75,
+    1.0
+  ],
+  "area_tercile_note": "split on rank, not value: recorded area is heavily tied and value cuts put 3 of 319 field-seasons in the largest third",
+  "design_note": "Descriptive, not confirmatory. Categories were fixed before results. Yield-estimation error and ranking error are reported separately because they are different failures. Subgroups below the stated size are marked and must not be read as findings."
+}

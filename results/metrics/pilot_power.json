@@ -1,0 +1,58 @@
+{
+  "budget": 0.2,
+  "alpha": 0.05,
+  "power": 0.8,
+  "method": "paired proportions (McNemar), normal approximation",
+  "sets": {
+    "held-out test split": {
+      "n": 62,
+      "n_bad": 11,
+      "base_rate": 0.1774193548387097,
+      "comparisons": {
+        "workflow vs register": {
+          "difference": 0.09090909090909091,
+          "discordant_share": 0.09090909090909091,
+          "below_threshold_fields_needed": 83.94050624476264,
+          "fields_to_enrol": 473.1192170159349
+        },
+        "workflow vs history_only": {
+          "difference": 0.09090909090909091,
+          "discordant_share": 0.09090909090909091,
+          "below_threshold_fields_needed": 83.94050624476264,
+          "fields_to_enrol": 473.1192170159349
+        },
+        "register vs random": {
+          "difference": 0.43636363636363634,
+          "discordant_share": 0.5818181818181819,
+          "below_threshold_fields_needed": 21.46187113764498,
+          "fields_to_enrol": 120.96691004854443
+        }
+      }
+    },
+    "all field-seasons out-of-fold": {
+      "n": 319,
+      "n_bad": 53,
+      "base_rate": 0.16614420062695925,
+      "comparisons": {
+        "workflow vs register": {
+          "difference": 0.018867924528301886,
+          "discordant_share": 0.09433962264150944,
+          "below_threshold_fields_needed": 2077.5936968754504,
+          "fields_to_enrol": 12504.762062325824
+        },
+        "workflow vs history_only": {
+          "difference": 0.03773584905660377,
+          "discordant_share": 0.07547169811320754,
+          "below_threshold_fields_needed": 413.6248971479747,
+          "fields_to_enrol": 2489.5536262302626
+        },
+        "register vs random": {
+          "difference": 0.460377358490566,
+          "discordant_share": 0.5962264150943396,
+          "below_threshold_fields_needed": 19.54129798945495,
+          "fields_to_enrol": 117.6164916723798
+        }
+      }
+    }
+  }
+}

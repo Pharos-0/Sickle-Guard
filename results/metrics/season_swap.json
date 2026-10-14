@@ -1,0 +1,30 @@
+{
+  "1 real features": {
+    "mae": 277.86403154407947,
+    "r": 0.4679745109967381,
+    "loss_auroc": 0.7166264718399773,
+    "within_plot_accuracy": 0.5371900826446281,
+    "n_within_pairs": 242
+  },
+  "2 same-plot season swap": {
+    "mae": 282.44735377084857,
+    "r": 0.4215331359824837,
+    "loss_auroc": 0.6791034189246702,
+    "within_plot_accuracy": 0.48760330578512395,
+    "n_within_pairs": 242
+  },
+  "3 different-plot swap (ctrl)": {
+    "mae": 326.4922217881048,
+    "r": 0.04336926517107502,
+    "loss_auroc": 0.46041991771882534,
+    "within_plot_accuracy": 0.5041322314049587,
+    "n_within_pairs": 242
+  },
+  "deltas": {
+    "mae_cost_of_season_swap": 4.5833222267690985,
+    "auroc_cost_of_season_swap": 0.03752305291530711,
+    "auroc_cost_of_control": 0.25620655412115195
+  },
+  "verdict": "the model is a SITE-QUALITY estimator: season-specific information contributes little or nothing",
+  "note": "Out-of-fold, grouped by plot, identical folds across conditions. Exploratory: not a confirmatory test on the spent held-out split."
+}

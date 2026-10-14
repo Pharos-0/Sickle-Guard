@@ -1,0 +1,1507 @@
+{
+  "calibration": {
+    "history_auroc": {
+      "measured": 0.838,
+      "accepted_range": [
+        0.788,
+        0.888
+      ],
+      "simulated": 0.8109315838693589,
+      "within": true,
+      "source": "does_satellite_add.json, ranking, history-only"
+    },
+    "frac_losses_chronic": {
+      "measured": 0.6,
+      "accepted_range": [
+        0.5,
+        0.7
+      ],
+      "simulated": 0.5779450075120922,
+      "within": true,
+      "source": "label_validity.json, frac_losses_chronic"
+    },
+    "event_auroc": {
+      "measured": 0.626,
+      "accepted_range": [
+        0.386,
+        0.887
+      ],
+      "simulated": 0.5054914171719226,
+      "within": true,
+      "source": "label_validity.json, EVENT plots, 95% CI as published"
+    },
+    "frac_with_record": {
+      "measured": 0.59,
+      "accepted_range": [
+        0.53,
+        0.65
+      ],
+      "simulated": 0.5849236641221374,
+      "within": true,
+      "source": "188 of 319 field-seasons"
+    }
+  },
+  "base": {
+    "n_plots": 131,
+    "seasons": 4,
+    "mu": 1840.0,
+    "sd_site": 380.0,
+    "sd_season": 120.0,
+    "sd_recall": 0.0,
+    "p_record": 0.78,
+    "rho_sat": 0.25,
+    "sd_sat": 380.0,
+    "shock_rate": 0.0,
+    "shock_size": 0.0,
+    "shock_site_bias": 0.0,
+    "budget": 0.33
+  },
+  "reps": 120,
+  "winner_margin": 0.02,
+  "sweeps": {
+    "share of fields with a record": {
+      "parameter": "p_record",
+      "rows": {
+        "0.2": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.34321641972304434,
+            "recall_event": 0.34572341683843294,
+            "auroc": 0.513382596664704,
+            "missed": 59.44166666666667,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.5394687958284498,
+            "recall_event": 0.5040885390192524,
+            "auroc": 0.6724108873052763,
+            "missed": 41.641666666666666,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.41465261297884387,
+            "recall_event": 0.4194885445199257,
+            "auroc": 0.5891539953289527,
+            "missed": 52.93333333333333,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "0.4": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.3365067025577402,
+            "recall_event": 0.33706136716703716,
+            "auroc": 0.544701719775595,
+            "missed": 60.00833333333333,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.6143666910039919,
+            "recall_event": 0.570160340036346,
+            "auroc": 0.7232648712743678,
+            "missed": 34.9,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.4888983834603245,
+            "recall_event": 0.49011855365525764,
+            "auroc": 0.6698073461396057,
+            "missed": 46.225,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "0.59": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.44623416806723637,
+            "recall_event": 0.4459613506568463,
+            "auroc": 0.594148643212137,
+            "missed": 50.18333333333333,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.6877199147877847,
+            "recall_event": 0.6387388639963929,
+            "auroc": 0.7733988393647484,
+            "missed": 28.308333333333334,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.5585228385114029,
+            "recall_event": 0.5582918264213129,
+            "auroc": 0.7410606292885091,
+            "missed": 40.016666666666666,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "0.8": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.6076624263680874,
+            "recall_event": 0.6143547374519026,
+            "auroc": 0.6738444930799817,
+            "missed": 35.55833333333333,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7701248387697827,
+            "recall_event": 0.7276226333627043,
+            "auroc": 0.8302210470851111,
+            "missed": 20.825,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.636899060586853,
+            "recall_event": 0.6434505127586186,
+            "auroc": 0.8148515199857085,
+            "missed": 32.875,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "1.0": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.7481373978618086,
+            "recall_event": 0.7449098798547553,
+            "auroc": 0.7636912888124742,
+            "missed": 22.775,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.8438886571062809,
+            "recall_event": 0.7987475224295486,
+            "auroc": 0.8805773001955305,
+            "missed": 14.141666666666667,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.7481373978618086,
+            "recall_event": 0.7449098798547553,
+            "auroc": 0.8755327677430145,
+            "missed": 22.775,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        }
+      },
+      "best_policy": {
+        "0.2": "register only (what the team already knows)",
+        "0.4": "register only (what the team already knows)",
+        "0.59": "register only (what the team already knows)",
+        "0.8": "tie: register / prototype",
+        "1.0": "prototype (history, satellite fallback)"
+      }
+    },
+    "season variance (sd_season, real ~150)": {
+      "parameter": "sd_season",
+      "rows": {
+        "50": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5903055736374825,
+            "recall_event": 0.5879694304618984,
+            "auroc": 0.6731545903108888,
+            "missed": 35.108333333333334,
+            "n_event_losses": 16.325
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7859153591247346,
+            "recall_event": 0.7631651300391684,
+            "auroc": 0.8403721730010797,
+            "missed": 18.375,
+            "n_event_losses": 16.325
+          },
+          "history only": {
+            "recall_all": 0.6278497663682386,
+            "recall_event": 0.6293840890891662,
+            "auroc": 0.8162857921861516,
+            "missed": 31.841666666666665,
+            "n_event_losses": 16.325
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7492305908179198,
+            "recall_event": 0.7436317242059424,
+            "auroc": 0.8839007967093716,
+            "missed": 21.491666666666667,
+            "n_event_losses": 16.325
+          },
+          "satellite only": {
+            "recall_all": 0.46739426041322873,
+            "recall_event": 0.4171005393903774,
+            "auroc": 0.6192398988796789,
+            "missed": 45.65833333333333,
+            "n_event_losses": 16.325
+          },
+          "random": {
+            "recall_all": 0.34111547766627953,
+            "recall_event": 0.33899535734643205,
+            "auroc": 0.5065617162709248,
+            "missed": 56.46666666666667,
+            "n_event_losses": 16.325
+          }
+        },
+        "100": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5919646657885724,
+            "recall_event": 0.596189291552763,
+            "auroc": 0.6683329014311805,
+            "missed": 36.166666666666664,
+            "n_event_losses": 31.391666666666666
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7744853945064835,
+            "recall_event": 0.7418172961892793,
+            "auroc": 0.8303533266945722,
+            "missed": 19.966666666666665,
+            "n_event_losses": 31.391666666666666
+          },
+          "history only": {
+            "recall_all": 0.6293026394831206,
+            "recall_event": 0.6352941006642046,
+            "auroc": 0.8116024055094101,
+            "missed": 32.84166666666667,
+            "n_event_losses": 31.391666666666666
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7483027286674483,
+            "recall_event": 0.7444303345432105,
+            "auroc": 0.868039929656989,
+            "missed": 22.275,
+            "n_event_losses": 31.391666666666666
+          },
+          "satellite only": {
+            "recall_all": 0.4660323864154362,
+            "recall_event": 0.42594406091591125,
+            "auroc": 0.6199609852229379,
+            "missed": 47.28333333333333,
+            "n_event_losses": 31.391666666666666
+          },
+          "random": {
+            "recall_all": 0.3397503583043115,
+            "recall_event": 0.33323352933817396,
+            "auroc": 0.5051570467107873,
+            "missed": 58.458333333333336,
+            "n_event_losses": 31.391666666666666
+          }
+        },
+        "150": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5917532984158773,
+            "recall_event": 0.5923159087533958,
+            "auroc": 0.6600383470088192,
+            "missed": 38.325,
+            "n_event_losses": 46.18333333333333
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7404381776202413,
+            "recall_event": 0.6809728909931113,
+            "auroc": 0.8147732654956482,
+            "missed": 24.35,
+            "n_event_losses": 46.18333333333333
+          },
+          "history only": {
+            "recall_all": 0.6265936885236271,
+            "recall_event": 0.6243601001722916,
+            "auroc": 0.8009015782174571,
+            "missed": 35.03333333333333,
+            "n_event_losses": 46.18333333333333
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7285135989665129,
+            "recall_event": 0.7056195150242371,
+            "auroc": 0.8439507703602819,
+            "missed": 25.425,
+            "n_event_losses": 46.18333333333333
+          },
+          "satellite only": {
+            "recall_all": 0.46746247132118146,
+            "recall_event": 0.440384883119474,
+            "auroc": 0.6245189184025086,
+            "missed": 49.9,
+            "n_event_losses": 46.18333333333333
+          },
+          "random": {
+            "recall_all": 0.3407924540137703,
+            "recall_event": 0.33511518441883736,
+            "auroc": 0.5064672786265069,
+            "missed": 61.75833333333333,
+            "n_event_losses": 46.18333333333333
+          }
+        },
+        "250": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.557257942780068,
+            "recall_event": 0.541562516797977,
+            "auroc": 0.6317031436064661,
+            "missed": 47.5,
+            "n_event_losses": 73.30833333333334
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.6530365250072385,
+            "recall_event": 0.5842595722665871,
+            "auroc": 0.7733740232747379,
+            "missed": 37.18333333333333,
+            "n_event_losses": 73.30833333333334
+          },
+          "history only": {
+            "recall_all": 0.5773964239255481,
+            "recall_event": 0.5548216720615006,
+            "auroc": 0.7524815949038054,
+            "missed": 45.333333333333336,
+            "n_event_losses": 73.30833333333334
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.6425509075394014,
+            "recall_event": 0.5923096124346376,
+            "auroc": 0.777281977712725,
+            "missed": 38.30833333333333,
+            "n_event_losses": 73.30833333333334
+          },
+          "satellite only": {
+            "recall_all": 0.4764729696856985,
+            "recall_event": 0.46084817017673,
+            "auroc": 0.636601670766681,
+            "missed": 56.141666666666666,
+            "n_event_losses": 73.30833333333334
+          },
+          "random": {
+            "recall_all": 0.3398499727177666,
+            "recall_event": 0.33404808930456936,
+            "auroc": 0.5061687203855432,
+            "missed": 70.8,
+            "n_event_losses": 73.30833333333334
+          }
+        },
+        "400": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.486257636917779,
+            "recall_event": 0.4630413694945542,
+            "auroc": 0.5915101536958373,
+            "missed": 67.025,
+            "n_event_losses": 106.56666666666666
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.5580642243308199,
+            "recall_event": 0.5013402684912571,
+            "auroc": 0.7173509460344166,
+            "missed": 57.69166666666667,
+            "n_event_losses": 106.56666666666666
+          },
+          "history only": {
+            "recall_all": 0.49317630863380396,
+            "recall_event": 0.46273200391266317,
+            "auroc": 0.6766736565791346,
+            "missed": 66.15,
+            "n_event_losses": 106.56666666666666
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.5254643185480327,
+            "recall_event": 0.4749715000617434,
+            "auroc": 0.6882485084821865,
+            "missed": 61.90833333333333,
+            "n_event_losses": 106.56666666666666
+          },
+          "satellite only": {
+            "recall_all": 0.4952621983048923,
+            "recall_event": 0.4848254650713375,
+            "auroc": 0.6601854690809092,
+            "missed": 65.9,
+            "n_event_losses": 106.56666666666666
+          },
+          "random": {
+            "recall_all": 0.33648379150405283,
+            "recall_event": 0.3340179346312713,
+            "auroc": 0.5047030800433443,
+            "missed": 86.625,
+            "n_event_losses": 106.56666666666666
+          }
+        }
+      },
+      "best_policy": {
+        "50": "tie: prototype / register",
+        "100": "tie: register / prototype",
+        "150": "register only (what the team already knows)",
+        "250": "tie: register / prototype",
+        "400": "tie: prototype / satellite"
+      }
+    },
+    "farmer-recall error (sd_recall, UNMEASURABLE in SICKLE)": {
+      "parameter": "sd_recall",
+      "rows": {
+        "0": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5935746215983317,
+            "recall_event": 0.598230391637072,
+            "auroc": 0.6659863245322153,
+            "missed": 36.825,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7622811209138263,
+            "recall_event": 0.7177998728749247,
+            "auroc": 0.8247704396226709,
+            "missed": 21.525,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.6301040200457645,
+            "recall_event": 0.6336973325397449,
+            "auroc": 0.808744812989835,
+            "missed": 33.49166666666667,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "100": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5928303913820965,
+            "recall_event": 0.5964988294522776,
+            "auroc": 0.6629797262522807,
+            "missed": 36.88333333333333,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7513112743629743,
+            "recall_event": 0.6944142677812464,
+            "auroc": 0.8203282475328504,
+            "missed": 22.5,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.6276049860035241,
+            "recall_event": 0.6268612436276975,
+            "auroc": 0.804325156556898,
+            "missed": 33.71666666666667,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7362413281447471,
+            "recall_event": 0.7168431505258387,
+            "auroc": 0.8492186670176142,
+            "missed": 23.825,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "200": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.588082467187796,
+            "recall_event": 0.5851961483105554,
+            "auroc": 0.6549389676531441,
+            "missed": 37.3,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7263726582306522,
+            "recall_event": 0.649608000713478,
+            "auroc": 0.8082898928026505,
+            "missed": 24.766666666666666,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.619950825718983,
+            "recall_event": 0.6060169995915378,
+            "auroc": 0.7925156487110034,
+            "missed": 34.416666666666664,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7121311451837367,
+            "recall_event": 0.6714815120244322,
+            "auroc": 0.8236109508676627,
+            "missed": 26.008333333333333,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "400": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5619510621481094,
+            "recall_event": 0.539970642042486,
+            "auroc": 0.6320010625842023,
+            "missed": 39.65833333333333,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.6651456583314797,
+            "recall_event": 0.5734771906359788,
+            "auroc": 0.7729026938786234,
+            "missed": 30.3,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.585781397641829,
+            "recall_event": 0.5478072117629869,
+            "auroc": 0.7519328917659199,
+            "missed": 37.53333333333333,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.6413694396123371,
+            "recall_event": 0.5737328493772547,
+            "auroc": 0.7589615891997064,
+            "missed": 32.45,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        }
+      },
+      "best_policy": {
+        "0": "tie: register / prototype",
+        "100": "register only (what the team already knows)",
+        "200": "register only (what the team already knows)",
+        "400": "tie: register / prototype"
+      }
+    },
+    "inspection budget": {
+      "parameter": "budget",
+      "rows": {
+        "0.1": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.4479559468656855,
+            "recall_event": 0.2511111675018251,
+            "auroc": 0.6659863245322153,
+            "missed": 50.15,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.3767364938931238,
+            "recall_event": 0.12115228173518175,
+            "auroc": 0.8247704396226709,
+            "missed": 56.55833333333333,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.4479559468656855,
+            "recall_event": 0.2511111675018251,
+            "auroc": 0.808744812989835,
+            "missed": 50.15,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.48684458843964296,
+            "recall_event": 0.214608074845391,
+            "auroc": 0.8599488496580976,
+            "missed": 46.725,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.17008908252046162,
+            "recall_event": 0.15363597294294803,
+            "auroc": 0.6213475438545366,
+            "missed": 75.125,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.09970783533980959,
+            "recall_event": 0.10071944549060494,
+            "auroc": 0.5061846311589911,
+            "missed": 81.44166666666666,
+            "n_event_losses": 37.6
+          }
+        },
+        "0.2": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5750223341756353,
+            "recall_event": 0.5534512366195489,
+            "auroc": 0.6659863245322153,
+            "missed": 38.49166666666667,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.615114258443798,
+            "recall_event": 0.45247109137444236,
+            "auroc": 0.8247704396226709,
+            "missed": 34.93333333333333,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.5750223341756353,
+            "recall_event": 0.5534512366195489,
+            "auroc": 0.808744812989835,
+            "missed": 38.49166666666667,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.6825365008294547,
+            "recall_event": 0.585374271401509,
+            "auroc": 0.8599488496580976,
+            "missed": 28.783333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.30829974145565847,
+            "recall_event": 0.2853249239494191,
+            "auroc": 0.6213475438545366,
+            "missed": 62.61666666666667,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.20463794571550734,
+            "recall_event": 0.20770269108791498,
+            "auroc": 0.5061846311589911,
+            "missed": 71.93333333333334,
+            "n_event_losses": 37.6
+          }
+        },
+        "0.33": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5935746215983317,
+            "recall_event": 0.598230391637072,
+            "auroc": 0.6659863245322153,
+            "missed": 36.825,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7622811209138263,
+            "recall_event": 0.7177998728749247,
+            "auroc": 0.8247704396226709,
+            "missed": 21.525,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.6301040200457645,
+            "recall_event": 0.6336973325397449,
+            "auroc": 0.808744812989835,
+            "missed": 33.49166666666667,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "0.5": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5940949327860565,
+            "recall_event": 0.5995619324495649,
+            "auroc": 0.6659863245322153,
+            "missed": 36.775,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.8562795329223036,
+            "recall_event": 0.8393825810514209,
+            "auroc": 0.8247704396226709,
+            "missed": 13.0,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.7964391285495743,
+            "recall_event": 0.7935670804332553,
+            "auroc": 0.808744812989835,
+            "missed": 18.366666666666667,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.8362215840609655,
+            "recall_event": 0.8368080976737182,
+            "auroc": 0.8599488496580976,
+            "missed": 14.766666666666667,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.6442871041825325,
+            "recall_event": 0.6116515745936735,
+            "auroc": 0.6213475438545366,
+            "missed": 32.175,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.5093589240031633,
+            "recall_event": 0.5091412225448481,
+            "auroc": 0.5061846311589911,
+            "missed": 44.43333333333333,
+            "n_event_losses": 37.6
+          }
+        }
+      },
+      "best_policy": {
+        "0.1": "tie: history-first / history only",
+        "0.2": "register only (what the team already knows)",
+        "0.33": "tie: register / prototype",
+        "0.5": "tie: prototype / register"
+      }
+    },
+    "satellite informativeness (rho, real ~0.25)": {
+      "parameter": "rho_sat",
+      "rows": {
+        "0.0": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5935746215983317,
+            "recall_event": 0.598230391637072,
+            "auroc": 0.6659863245322153,
+            "missed": 36.825,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7028522308489243,
+            "recall_event": 0.6736689422536942,
+            "auroc": 0.7742585580131813,
+            "missed": 26.916666666666668,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.6301040200457645,
+            "recall_event": 0.6336973325397449,
+            "auroc": 0.808744812989835,
+            "missed": 33.49166666666667,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.32011876433098246,
+            "recall_event": 0.3208593062765929,
+            "auroc": 0.493592169990279,
+            "missed": 61.55,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "0.25": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5935746215983317,
+            "recall_event": 0.598230391637072,
+            "auroc": 0.6659863245322153,
+            "missed": 36.825,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7622811209138263,
+            "recall_event": 0.7177998728749247,
+            "auroc": 0.8247704396226709,
+            "missed": 21.525,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.6301040200457645,
+            "recall_event": 0.6336973325397449,
+            "auroc": 0.808744812989835,
+            "missed": 33.49166666666667,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "0.5": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5935746215983317,
+            "recall_event": 0.598230391637072,
+            "auroc": 0.6659863245322153,
+            "missed": 36.825,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.8204309303800419,
+            "recall_event": 0.7612187286622661,
+            "auroc": 0.8657169333744351,
+            "missed": 16.291666666666668,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.6301040200457645,
+            "recall_event": 0.6336973325397449,
+            "auroc": 0.808744812989835,
+            "missed": 33.49166666666667,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.6034030056546428,
+            "recall_event": 0.5424446358762971,
+            "auroc": 0.7282658189100836,
+            "missed": 35.9,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "0.8": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5935746215983317,
+            "recall_event": 0.598230391637072,
+            "auroc": 0.6659863245322153,
+            "missed": 36.825,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.8730939017484661,
+            "recall_event": 0.801780349078867,
+            "auroc": 0.8997821732224185,
+            "missed": 11.516666666666667,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.6301040200457645,
+            "recall_event": 0.6336973325397449,
+            "auroc": 0.808744812989835,
+            "missed": 33.49166666666667,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.7260459812181882,
+            "recall_event": 0.651221583874857,
+            "auroc": 0.8194204013446357,
+            "missed": 24.825,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        }
+      },
+      "best_policy": {
+        "0.0": "register only (what the team already knows)",
+        "0.25": "tie: register / prototype",
+        "0.5": "prototype (history, satellite fallback)",
+        "0.8": "prototype (history, satellite fallback)"
+      }
+    },
+    "event prevalence (share of field-seasons shocked)": {
+      "parameter": "shock_rate",
+      "rows": {
+        "0.0": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5935746215983317,
+            "recall_event": 0.598230391637072,
+            "auroc": 0.6659863245322153,
+            "missed": 36.825,
+            "n_event_losses": 37.6
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7622811209138263,
+            "recall_event": 0.7177998728749247,
+            "auroc": 0.8247704396226709,
+            "missed": 21.525,
+            "n_event_losses": 37.6
+          },
+          "history only": {
+            "recall_all": 0.6301040200457645,
+            "recall_event": 0.6336973325397449,
+            "auroc": 0.808744812989835,
+            "missed": 33.49166666666667,
+            "n_event_losses": 37.6
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7437262107227303,
+            "recall_event": 0.7341784475450067,
+            "auroc": 0.8599488496580976,
+            "missed": 23.158333333333335,
+            "n_event_losses": 37.6
+          },
+          "satellite only": {
+            "recall_all": 0.4653088046244864,
+            "recall_event": 0.4336074415635394,
+            "auroc": 0.6213475438545366,
+            "missed": 48.358333333333334,
+            "n_event_losses": 37.6
+          },
+          "random": {
+            "recall_all": 0.34026874520141986,
+            "recall_event": 0.3359376136215721,
+            "auroc": 0.5061846311589911,
+            "missed": 59.675,
+            "n_event_losses": 37.6
+          }
+        },
+        "0.05": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5684173447704995,
+            "recall_event": 0.5495429213595374,
+            "auroc": 0.6453185485259086,
+            "missed": 41.291666666666664,
+            "n_event_losses": 46.1
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.7156465819483239,
+            "recall_event": 0.6365809883803413,
+            "auroc": 0.8034061969088876,
+            "missed": 27.225,
+            "n_event_losses": 46.1
+          },
+          "history only": {
+            "recall_all": 0.6019382477982067,
+            "recall_event": 0.5714779245132313,
+            "auroc": 0.7835224086999896,
+            "missed": 38.09166666666667,
+            "n_event_losses": 46.1
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.7034266405239454,
+            "recall_event": 0.6511086724790959,
+            "auroc": 0.8252786809778319,
+            "missed": 28.366666666666667,
+            "n_event_losses": 46.1
+          },
+          "satellite only": {
+            "recall_all": 0.4699794504822099,
+            "recall_event": 0.44368957829052047,
+            "auroc": 0.6289204359680896,
+            "missed": 50.791666666666664,
+            "n_event_losses": 46.1
+          },
+          "random": {
+            "recall_all": 0.3263258127380445,
+            "recall_event": 0.3191122310725151,
+            "auroc": 0.4950411037536137,
+            "missed": 64.56666666666666,
+            "n_event_losses": 46.1
+          }
+        },
+        "0.1": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5546884913116081,
+            "recall_event": 0.5284579718179362,
+            "auroc": 0.6331095369529826,
+            "missed": 44.775,
+            "n_event_losses": 54.041666666666664
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.6814390689098088,
+            "recall_event": 0.5900786291417625,
+            "auroc": 0.7853432540438019,
+            "missed": 32.025,
+            "n_event_losses": 54.041666666666664
+          },
+          "history only": {
+            "recall_all": 0.5827262517586929,
+            "recall_event": 0.5406584381266115,
+            "auroc": 0.7659831136063535,
+            "missed": 41.958333333333336,
+            "n_event_losses": 54.041666666666664
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.6700661129813069,
+            "recall_event": 0.5999741630502574,
+            "auroc": 0.7992793349181103,
+            "missed": 33.18333333333333,
+            "n_event_losses": 54.041666666666664
+          },
+          "satellite only": {
+            "recall_all": 0.4722784069328931,
+            "recall_event": 0.4509559077399209,
+            "auroc": 0.6318940429819129,
+            "missed": 53.125,
+            "n_event_losses": 54.041666666666664
+          },
+          "random": {
+            "recall_all": 0.32541531119584577,
+            "recall_event": 0.320044963730045,
+            "auroc": 0.49539054129034243,
+            "missed": 67.975,
+            "n_event_losses": 54.041666666666664
+          }
+        },
+        "0.2": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5410262980561732,
+            "recall_event": 0.5167509357279213,
+            "auroc": 0.6205563617411844,
+            "missed": 51.041666666666664,
+            "n_event_losses": 70.625
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.6360293026679332,
+            "recall_event": 0.5539267981274776,
+            "auroc": 0.7644909175077618,
+            "missed": 40.43333333333333,
+            "n_event_losses": 70.625
+          },
+          "history only": {
+            "recall_all": 0.5617090141550354,
+            "recall_event": 0.5231312111108337,
+            "auroc": 0.7464816225899918,
+            "missed": 48.75833333333333,
+            "n_event_losses": 70.625
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.6186488748094028,
+            "recall_event": 0.5425028442670786,
+            "auroc": 0.7669573493350845,
+            "missed": 42.40833333333333,
+            "n_event_losses": 70.625
+          },
+          "satellite only": {
+            "recall_all": 0.47070648368555545,
+            "recall_event": 0.4543768574641047,
+            "auroc": 0.6353981992731191,
+            "missed": 58.85,
+            "n_event_losses": 70.625
+          },
+          "random": {
+            "recall_all": 0.3251853510532907,
+            "recall_event": 0.32253624329792374,
+            "auroc": 0.4941187872594919,
+            "missed": 75.09166666666667,
+            "n_event_losses": 70.625
+          }
+        }
+      },
+      "best_policy": {
+        "0.0": "tie: register / prototype",
+        "0.05": "tie: register / prototype",
+        "0.1": "tie: register / prototype",
+        "0.2": "tie: prototype / register"
+      }
+    },
+    "where shocks land (+1 poor plots, -1 good plots)": {
+      "parameter": "shock_site_bias",
+      "rows": {
+        "-1.0": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5415905764270754,
+            "recall_event": 0.5095577111662518,
+            "auroc": 0.6284822032457479,
+            "missed": 42.05,
+            "n_event_losses": 51.38333333333333
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.6656083503569498,
+            "recall_event": 0.5719666024677765,
+            "auroc": 0.7666402590422473,
+            "missed": 30.658333333333335,
+            "n_event_losses": 51.38333333333333
+          },
+          "history only": {
+            "recall_all": 0.5693087537645288,
+            "recall_event": 0.5216274054225712,
+            "auroc": 0.7513250002719289,
+            "missed": 39.525,
+            "n_event_losses": 51.38333333333333
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.6494005961903312,
+            "recall_event": 0.5684662627026728,
+            "auroc": 0.7771618295750364,
+            "missed": 32.15,
+            "n_event_losses": 51.38333333333333
+          },
+          "satellite only": {
+            "recall_all": 0.4601743905490045,
+            "recall_event": 0.4390293096300921,
+            "auroc": 0.6195902437101679,
+            "missed": 49.575,
+            "n_event_losses": 51.38333333333333
+          },
+          "random": {
+            "recall_all": 0.3248995349148457,
+            "recall_event": 0.31881998549162405,
+            "auroc": 0.4947133142943178,
+            "missed": 62.075,
+            "n_event_losses": 51.38333333333333
+          }
+        },
+        "-0.5": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.545837886453962,
+            "recall_event": 0.514350053942216,
+            "auroc": 0.6288104440670963,
+            "missed": 44.38333333333333,
+            "n_event_losses": 54.31666666666667
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.667185345256955,
+            "recall_event": 0.572736470033265,
+            "auroc": 0.773103951770727,
+            "missed": 32.53333333333333,
+            "n_event_losses": 54.31666666666667
+          },
+          "history only": {
+            "recall_all": 0.5713733119883435,
+            "recall_event": 0.5236775595187321,
+            "auroc": 0.7556714204773728,
+            "missed": 41.9,
+            "n_event_losses": 54.31666666666667
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.6531854436913708,
+            "recall_event": 0.5743486529561416,
+            "auroc": 0.7836864791527508,
+            "missed": 33.88333333333333,
+            "n_event_losses": 54.31666666666667
+          },
+          "satellite only": {
+            "recall_all": 0.4656333521216091,
+            "recall_event": 0.444160418124148,
+            "auroc": 0.6261010765061824,
+            "missed": 52.28333333333333,
+            "n_event_losses": 54.31666666666667
+          },
+          "random": {
+            "recall_all": 0.32489289744746824,
+            "recall_event": 0.31827960293541485,
+            "auroc": 0.49472971018594936,
+            "missed": 66.10833333333333,
+            "n_event_losses": 54.31666666666667
+          }
+        },
+        "0.0": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5524382537403627,
+            "recall_event": 0.5265935035300577,
+            "auroc": 0.6307168108863302,
+            "missed": 45.88333333333333,
+            "n_event_losses": 57.00833333333333
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.6709780447965874,
+            "recall_event": 0.5791870757532623,
+            "auroc": 0.780160017111699,
+            "missed": 33.725,
+            "n_event_losses": 57.00833333333333
+          },
+          "history only": {
+            "recall_all": 0.5793139896926928,
+            "recall_event": 0.5378022955668169,
+            "auroc": 0.7623210217173143,
+            "missed": 43.13333333333333,
+            "n_event_losses": 57.00833333333333
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.6599763047940247,
+            "recall_event": 0.587244024459314,
+            "auroc": 0.7925058124493074,
+            "missed": 34.85,
+            "n_event_losses": 57.00833333333333
+          },
+          "satellite only": {
+            "recall_all": 0.47066297724675576,
+            "recall_event": 0.44766236396703535,
+            "auroc": 0.6322782801584588,
+            "missed": 54.3,
+            "n_event_losses": 57.00833333333333
+          },
+          "random": {
+            "recall_all": 0.3260710312056465,
+            "recall_event": 0.3198138368638271,
+            "auroc": 0.49561732735379377,
+            "missed": 69.19166666666666,
+            "n_event_losses": 57.00833333333333
+          }
+        },
+        "0.5": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5582328522533229,
+            "recall_event": 0.537789762416043,
+            "auroc": 0.6323013058362851,
+            "missed": 47.13333333333333,
+            "n_event_losses": 59.88333333333333
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.6775288298252611,
+            "recall_event": 0.5889357398133613,
+            "auroc": 0.7897543267067645,
+            "missed": 34.4,
+            "n_event_losses": 59.88333333333333
+          },
+          "history only": {
+            "recall_all": 0.5882633592775197,
+            "recall_event": 0.5497804042884271,
+            "auroc": 0.7698527797117296,
+            "missed": 43.95,
+            "n_event_losses": 59.88333333333333
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.6669560007622038,
+            "recall_event": 0.6013477388239146,
+            "auroc": 0.8024901463956435,
+            "missed": 35.53333333333333,
+            "n_event_losses": 59.88333333333333
+          },
+          "satellite only": {
+            "recall_all": 0.4828733313042218,
+            "recall_event": 0.459451299853648,
+            "auroc": 0.6424530357821951,
+            "missed": 55.225,
+            "n_event_losses": 59.88333333333333
+          },
+          "random": {
+            "recall_all": 0.3272799324320734,
+            "recall_event": 0.32319349815244286,
+            "auroc": 0.4955198526988583,
+            "missed": 71.89166666666667,
+            "n_event_losses": 59.88333333333333
+          }
+        },
+        "1.0": {
+          "history-first (record fields only, then cold starts)": {
+            "recall_all": 0.5618947941188004,
+            "recall_event": 0.5441054616388494,
+            "auroc": 0.6338356835546779,
+            "missed": 48.53333333333333,
+            "n_event_losses": 62.266666666666666
+          },
+          "prototype (history, satellite fallback)": {
+            "recall_all": 0.6835238502340577,
+            "recall_event": 0.5939132920772852,
+            "auroc": 0.7994740266455561,
+            "missed": 35.041666666666664,
+            "n_event_losses": 62.266666666666666
+          },
+          "history only": {
+            "recall_all": 0.5978020669588584,
+            "recall_event": 0.559823823791516,
+            "auroc": 0.7783962963958609,
+            "missed": 44.583333333333336,
+            "n_event_losses": 62.266666666666666
+          },
+          "register only (what the team already knows)": {
+            "recall_all": 0.6723833397360449,
+            "recall_event": 0.6115979708686361,
+            "auroc": 0.8144087697580924,
+            "missed": 36.291666666666664,
+            "n_event_losses": 62.266666666666666
+          },
+          "satellite only": {
+            "recall_all": 0.49081486407828584,
+            "recall_event": 0.4610659988215779,
+            "auroc": 0.6526771170715321,
+            "missed": 56.44166666666667,
+            "n_event_losses": 62.266666666666666
+          },
+          "random": {
+            "recall_all": 0.327061081768561,
+            "recall_event": 0.3205566130630038,
+            "auroc": 0.49560532438068766,
+            "missed": 74.625,
+            "n_event_losses": 62.266666666666666
+          }
+        }
+      },
+      "best_policy": {
+        "-1.0": "tie: prototype / register",
+        "-0.5": "tie: register / prototype",
+        "0.0": "tie: register / prototype",
+        "0.5": "tie: register / prototype",
+        "1.0": "tie: register / prototype"
+      }
+    }
+  }
+}

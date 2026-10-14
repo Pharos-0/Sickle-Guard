@@ -1,0 +1,359 @@
+{
+  "protocol_version": 1,
+  "protocol_frozen": "2026-10-11",
+  "window_days": [
+    7,
+    21
+  ],
+  "n_field_seasons": 319,
+  "n_scorable": 316,
+  "not_scorable": [
+    [
+      "2082",
+      "no usable acquisition in window"
+    ],
+    [
+      "2285",
+      "no usable acquisition in window"
+    ],
+    [
+      "2286",
+      "no usable acquisition in window"
+    ]
+  ],
+  "n_not_scorable": 3,
+  "threshold_kg_per_acre": 1470.516979591837,
+  "sets": {
+    "held-out test split (PRIMARY)": {
+      "n": 62,
+      "n_bad": 11,
+      "permutation_null": {
+        "mean": 0.499139037433155,
+        "p2_5": 0.3118983957219252,
+        "p97_5": 0.6844919786096256,
+        "n_permutations": 10000
+      },
+      "signals": {
+        "decoupling (pre-specified)": {
+          "auroc": 0.5115864527629234,
+          "ci": [
+            0.2761226617083615,
+            0.6904960317460315
+          ],
+          "informative": false,
+          "budgets": {
+            "0.25": {
+              "budget": 0.25,
+              "n_visited": 16,
+              "n_caught": 2,
+              "recall": 0.18181818181818182,
+              "precision": 0.125
+            },
+            "0.33": {
+              "budget": 0.33,
+              "n_visited": 20,
+              "n_caught": 4,
+              "recall": 0.36363636363636365,
+              "precision": 0.2
+            },
+            "0.5": {
+              "budget": 0.5,
+              "n_visited": 31,
+              "n_caught": 6,
+              "recall": 0.5454545454545454,
+              "precision": 0.1935483870967742
+            }
+          }
+        },
+        "ndvi alone": {
+          "auroc": 0.5971479500891266,
+          "ci": [
+            0.26633580942622953,
+            0.8132649728679571
+          ],
+          "informative": false,
+          "budgets": {
+            "0.25": {
+              "budget": 0.25,
+              "n_visited": 16,
+              "n_caught": 5,
+              "recall": 0.45454545454545453,
+              "precision": 0.3125
+            },
+            "0.33": {
+              "budget": 0.33,
+              "n_visited": 20,
+              "n_caught": 5,
+              "recall": 0.45454545454545453,
+              "precision": 0.25
+            },
+            "0.5": {
+              "budget": 0.5,
+              "n_visited": 31,
+              "n_caught": 7,
+              "recall": 0.6363636363636364,
+              "precision": 0.22580645161290322
+            }
+          }
+        },
+        "mndwi alone": {
+          "auroc": 0.42780748663101603,
+          "ci": [
+            0.2541118131868132,
+            0.5952760891590673
+          ],
+          "informative": false,
+          "budgets": {
+            "0.25": {
+              "budget": 0.25,
+              "n_visited": 16,
+              "n_caught": 2,
+              "recall": 0.18181818181818182,
+              "precision": 0.125
+            },
+            "0.33": {
+              "budget": 0.33,
+              "n_visited": 20,
+              "n_caught": 3,
+              "recall": 0.2727272727272727,
+              "precision": 0.15
+            },
+            "0.5": {
+              "budget": 0.5,
+              "n_visited": 31,
+              "n_caught": 5,
+              "recall": 0.45454545454545453,
+              "precision": 0.16129032258064516
+            }
+          }
+        },
+        "history only": {
+          "auroc": 0.7967914438502673,
+          "ci": [
+            0.6096329857663025,
+            0.9358873906705535
+          ],
+          "informative": true,
+          "budgets": {
+            "0.25": {
+              "budget": 0.25,
+              "n_visited": 16,
+              "n_caught": 7,
+              "recall": 0.6363636363636364,
+              "precision": 0.4375
+            },
+            "0.33": {
+              "budget": 0.33,
+              "n_visited": 20,
+              "n_caught": 7,
+              "recall": 0.6363636363636364,
+              "precision": 0.35
+            },
+            "0.5": {
+              "budget": 0.5,
+              "n_visited": 31,
+              "n_caught": 9,
+              "recall": 0.8181818181818182,
+              "precision": 0.2903225806451613
+            }
+          }
+        }
+      },
+      "vs": {
+        "history only": {
+          "delta_auroc": -0.285204991087344,
+          "ci": [
+            -0.4730872252747253,
+            -0.15825580232092848
+          ],
+          "wins": false
+        },
+        "ndvi alone": {
+          "delta_auroc": -0.08556149732620322,
+          "ci": [
+            -0.17719966003864304,
+            0.08492509848641894
+          ],
+          "wins": false
+        },
+        "mndwi alone": {
+          "delta_auroc": 0.08377896613190733,
+          "ci": [
+            -0.128577694235589,
+            0.20455069930069916
+          ],
+          "wins": false
+        }
+      }
+    },
+    "all scorable field-seasons (secondary)": {
+      "n": 316,
+      "n_bad": 53,
+      "permutation_null": {
+        "mean": 0.499445383456489,
+        "p2_5": 0.41365951646459576,
+        "p97_5": 0.5844052658009901,
+        "n_permutations": 10000
+      },
+      "signals": {
+        "decoupling (pre-specified)": {
+          "auroc": 0.521127771002224,
+          "ci": [
+            0.439461341408205,
+            0.6008808381281643
+          ],
+          "informative": false,
+          "budgets": {
+            "0.25": {
+              "budget": 0.25,
+              "n_visited": 79,
+              "n_caught": 12,
+              "recall": 0.22641509433962265,
+              "precision": 0.1518987341772152
+            },
+            "0.33": {
+              "budget": 0.33,
+              "n_visited": 104,
+              "n_caught": 17,
+              "recall": 0.32075471698113206,
+              "precision": 0.16346153846153846
+            },
+            "0.5": {
+              "budget": 0.5,
+              "n_visited": 158,
+              "n_caught": 27,
+              "recall": 0.5094339622641509,
+              "precision": 0.17088607594936708
+            }
+          }
+        },
+        "ndvi alone": {
+          "auroc": 0.6143195351172968,
+          "ci": [
+            0.5198932882867294,
+            0.6993562032810331
+          ],
+          "informative": true,
+          "budgets": {
+            "0.25": {
+              "budget": 0.25,
+              "n_visited": 79,
+              "n_caught": 20,
+              "recall": 0.37735849056603776,
+              "precision": 0.25316455696202533
+            },
+            "0.33": {
+              "budget": 0.33,
+              "n_visited": 104,
+              "n_caught": 25,
+              "recall": 0.4716981132075472,
+              "precision": 0.2403846153846154
+            },
+            "0.5": {
+              "budget": 0.5,
+              "n_visited": 158,
+              "n_caught": 33,
+              "recall": 0.6226415094339622,
+              "precision": 0.2088607594936709
+            }
+          }
+        },
+        "mndwi alone": {
+          "auroc": 0.4138747399383026,
+          "ci": [
+            0.3389141269649957,
+            0.4920111873456841
+          ],
+          "informative": false,
+          "budgets": {
+            "0.25": {
+              "budget": 0.25,
+              "n_visited": 79,
+              "n_caught": 4,
+              "recall": 0.07547169811320754,
+              "precision": 0.05063291139240506
+            },
+            "0.33": {
+              "budget": 0.33,
+              "n_visited": 104,
+              "n_caught": 7,
+              "recall": 0.1320754716981132,
+              "precision": 0.0673076923076923
+            },
+            "0.5": {
+              "budget": 0.5,
+              "n_visited": 158,
+              "n_caught": 20,
+              "recall": 0.37735849056603776,
+              "precision": 0.12658227848101267
+            }
+          }
+        },
+        "history only": {
+          "auroc": 0.8384030418250951,
+          "ci": [
+            0.7779212427462621,
+            0.8889236942377511
+          ],
+          "informative": true,
+          "budgets": {
+            "0.25": {
+              "budget": 0.25,
+              "n_visited": 79,
+              "n_caught": 35,
+              "recall": 0.660377358490566,
+              "precision": 0.4430379746835443
+            },
+            "0.33": {
+              "budget": 0.33,
+              "n_visited": 104,
+              "n_caught": 38,
+              "recall": 0.7169811320754716,
+              "precision": 0.36538461538461536
+            },
+            "0.5": {
+              "budget": 0.5,
+              "n_visited": 158,
+              "n_caught": 42,
+              "recall": 0.7924528301886793,
+              "precision": 0.26582278481012656
+            }
+          }
+        }
+      },
+      "vs": {
+        "history only": {
+          "delta_auroc": -0.3172752708228711,
+          "ci": [
+            -0.40241266676099774,
+            -0.22798399669826702
+          ],
+          "wins": false
+        },
+        "ndvi alone": {
+          "delta_auroc": -0.0931917641150728,
+          "ci": [
+            -0.14155607409371704,
+            -0.03988056636402941
+          ],
+          "wins": false
+        },
+        "mndwi alone": {
+          "delta_auroc": 0.10725303106392137,
+          "ci": [
+            0.04571358543417366,
+            0.1632955486799648
+          ],
+          "wins": true
+        }
+      }
+    }
+  },
+  "verdict": "NOT demonstrated",
+  "verdict_reasons": {
+    "auroc_interval_excludes_chance": false,
+    "beats_history_only": false,
+    "beats_each_component_alone": false
+  },
+  "sensitivity_note": "The pre-specified window is -7/+21 days. Other windows are a robustness report and were not used to choose the verdict."
+}
