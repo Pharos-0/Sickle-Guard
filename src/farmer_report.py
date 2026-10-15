@@ -43,8 +43,11 @@ Measured on this dataset (see THREE_VALIDATIONS.md, forward-in-time split):
 
 The report is therefore built on the field's own past harvests where they
 exist, and says so. The satellite estimate appears only for a field with no
-record, labelled as weak, because in that case it is the only thing
-available and it does beat knowing nothing.
+record, labelled as weak, because in that case it is the only field-specific
+number available. It is not shown to beat the area average for such a field
+(-14.3 kg/acre, 95 % CI [-30.4, +3.6], results/metrics/does_satellite_add.json),
+so the report prints it with "NO RELIABLE ESTIMATE" and "Do not act on the
+number itself".
 
 WHAT IT IS NOT
 --------------
