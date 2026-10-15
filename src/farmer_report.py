@@ -343,8 +343,12 @@ def report(r, est, basis, pct, flagged, cfg, lang, rank=None, total=None):
             print("  " + "!" * 60)
     w = 66
     print("=" * w)
+    try:                     # the data stores the year as 2019.0
+        year = f"{int(float(r['year']))}"
+    except (TypeError, ValueError):
+        year = r["year"]
     print(f"  {S['title']}   {S['field']} {r['plot']:.0f}   "
-          f"{S['season']} {r['season']} {r['year']}")
+          f"{S['season']} {r['season']} {year}")
     print("=" * w)
     print(f"  {S['est']}: {est:.0f} {S['unit']}")
     print(f"  {S['basis']}: {S['hist'] if basis == 'history' else S['sat']}")
