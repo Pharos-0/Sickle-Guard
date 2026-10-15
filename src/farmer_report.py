@@ -57,7 +57,6 @@ checks them against an official source.
 from __future__ import annotations
 
 import argparse
-import ast
 import csv
 import json
 import sys
@@ -92,7 +91,7 @@ SEEDS = [0, 1, 2]
 STR = {
     "en": {
         "title": "FIELD REPORT", "field": "Field", "season": "Season",
-        "est": "Estimated yield", "basis": "Based on",
+        "est": "Estimated yield", "unit": "kg/acre", "basis": "Based on",
         "hist": "this field's own past harvests",
         "sat": "satellite imagery (no past harvest on record)",
         "vs": "Compared with nearby fields",
@@ -101,18 +100,99 @@ STR = {
         "whatnow": "WHAT TO DO NOW",
         "conf": "HOW MUCH TO TRUST THIS",
     },
-    "ta": {
-        "title": "வயல் அறிக்கை", "field": "வயல்", "season": "பருவம்",
-        "est": "மதிப்பிடப்பட்ட விளைச்சல்", "basis": "அடிப்படை",
-        "hist": "இந்த வயலின் முந்தைய அறுவடைகள்",
-        "sat": "செயற்கைக்கோள் படம் (முந்தைய அறுவடை பதிவு இல்லை)",
-        "vs": "அருகிலுள்ள வயல்களுடன் ஒப்பிடுகையில்",
-        "flag": "கவனத்திற்கு குறிக்கப்பட்டுள்ளது",
-        "noflag": "இந்த அமைப்பால் குறிக்கப்படவில்லை",
-        "whatnow": "இப்போது என்ன செய்வது",
-        "conf": "இதை எவ்வளவு நம்பலாம்",
-    },
 }
+# Headings and labels, keyed as in the translation workbook.
+HEAD_IDS = {"title": "A1", "field": "A2", "season": "A3", "est": "A4",
+            "unit": "A5", "basis": "A6", "hist": "A7", "sat": "A8",
+            "vs": "A9", "flag": "B1", "noflag": "C1", "conf": "D1",
+            "whatnow": "E1"}
+
+# Every sentence of the report body, as one string per workbook ID. The
+# English report prints these exactly as before, from REPORT_LINES; a test
+# checks that each block's lines rejoin to these sentences.
+EN_SENT = {
+    "B2": "This field is among the lower estimates in its area. That is a "
+          "reason to look, not a finding of loss.",
+    "B3": "Most fields flagged this way yield below average MOST YEARS. Being "
+          "flagged is usually a statement about the land, not about this "
+          "season.",
+    "C2": "THIS IS NOT EVIDENCE THAT YOUR CROP IS FINE.",
+    "C3": "This system misses losses. If you think your crop was damaged, "
+          "report it anyway.",
+    "D2": "Moderate. Built from this field's own past harvests, which on test "
+          "data predicted yield far better than the satellite model (error 200 "
+          "vs 346 kg/acre).",
+    "D3": "NO RELIABLE ESTIMATE.",
+    "D4": "No past harvest on record, so the figure above is a satellite "
+          "guess.",
+    "D5": "On test data it was NOT shown to beat simply using the area average "
+          "(gain 14 kg/acre, interval -30 to +4, includes zero).",
+    "D6": "Do not act on the number itself.",
+    "D7": "This warning means there is NO RECORD for this field. It does NOT "
+          "mean this estimate is worse than the ones without the warning: "
+          "tested, the difference in error is +41 kg/acre, interval -58 to "
+          "+130, which includes zero.",
+    "D8": "This system CANNOT tell whether this particular season was bad for "
+          "this field.",
+    "D9": "That was tested and did not work: on fields that are sometimes below "
+          "and sometimes above the threshold, ranking AUROC is 0.626 [0.386, "
+          "0.887], which includes chance.",
+    "D9b": "In plain terms: this score does not reliably pick out which fields "
+           "need more attention.",
+    "D10": "Rank in this list: {rank} of {total} (lowest first).",
+    "E2": "1. If your crop was damaged, report it NOW. Do not wait for any "
+          "report, including this one.",
+    "E7": "[UNVERIFIED]",
+    "E8": "2. Contact one of these to report or to check status:",
+    "E13": "[UNVERIFIED - confirm first]",
+    "E14": "3. Confirm the numbers above with your bank, the Common Service "
+           "Centre, or the District Agriculture Officer. They could not be "
+           "verified against an official page.",
+}
+
+# The English report's line breaks, unchanged. A block prints its IDs'
+# sentences together, because the English wraps some sentences across
+# shared lines (D3-D6, D8-D9).
+REPORT_LINES = {
+    ("B2",): ["      This field is among the lower estimates in its area.",
+              "      That is a reason to look, not a finding of loss."],
+    ("B3",): ["      Most fields flagged this way yield below average MOST",
+              "      YEARS. Being flagged is usually a statement about the",
+              "      land, not about this season."],
+    ("C2",): ["      THIS IS NOT EVIDENCE THAT YOUR CROP IS FINE."],
+    ("C3",): ["      This system misses losses. If you think your crop was",
+              "      damaged, report it anyway."],
+    ("D2",): ["      Moderate. Built from this field's own past harvests,",
+              "      which on test data predicted yield far better than the",
+              "      satellite model (error 200 vs 346 kg/acre)."],
+    ("D3", "D4", "D5", "D6"): [
+        "      NO RELIABLE ESTIMATE. No past harvest on record, so",
+        "      the figure above is a satellite guess. On test data it",
+        "      was NOT shown to beat simply using the area average",
+        "      (gain 14 kg/acre, interval -30 to +4, includes zero).",
+        "      Do not act on the number itself."],
+    ("D7",): ["      This warning means there is NO RECORD for this field.",
+              "      It does NOT mean this estimate is worse than the ones",
+              "      without the warning: tested, the difference in error is",
+              "      +41 kg/acre, interval -58 to +130, which includes zero."],
+    ("D8", "D9"): [
+        "      This system CANNOT tell whether this particular season was",
+        "      bad for this field. That was tested and did not work:",
+        "      on fields that are sometimes below and sometimes above the",
+        "      threshold, ranking AUROC is 0.626 [0.386, 0.887], which",
+        "      includes chance."],
+    ("D9b",): ["      In plain terms: this score does not reliably pick out",
+               "      which fields need more attention."],
+    ("E2",): ["   1. If your crop was damaged, report it NOW. Do not wait for",
+              "      any report, including this one."],
+    ("E8",): ["   2. Contact one of these to report or to check status:"],
+    ("E14",): ["   3. Confirm the numbers above with your bank, the Common",
+               "      Service Centre, or the District Agriculture Officer.",
+               "      They could not be verified against an official page."],
+}
+
+TRANSLATIONS = {"ta": Path(__file__).resolve().parents[1] / "configs"
+                / "report_translations_ta.yaml"}
 
 
 def parse(d):
@@ -172,117 +252,154 @@ def contacts():
     return yaml.safe_load(CONTACTS.read_text(encoding="utf8"))
 
 
-def untranslated_fraction() -> tuple[int, int]:
-    """How much of the report is NOT covered by the translation table.
+def _norm(t: str) -> str:
+    return " ".join(str(t).split())
 
-    Counted from the source rather than maintained by hand, so it cannot
-    go stale: a sentence added in English and never translated changes
-    this number immediately.
-    """
-    src = ast.parse(Path(__file__).read_text(encoding="utf8"))
-    fn = next(n for n in ast.walk(src)
-              if isinstance(n, ast.FunctionDef) and n.name == "report")
-    via = lit = 0
-    for node in ast.walk(fn):
-        if isinstance(node, ast.Call) and getattr(node.func, "id", "") == "print":
-            txt = ast.unparse(node)
-            if "S[" in txt:
-                via += 1
-            elif any(isinstance(c, ast.Constant) and isinstance(c.value, str)
-                     and len(c.value.strip()) > 12 for c in ast.walk(node)):
-                lit += 1
-    return lit, via + lit
+
+def current_english(cfg=None) -> dict:
+    """The English each translatable ID currently says, from the code and
+    from configs/scheme_contacts.yaml. A translation is valid only while
+    the English it was made from equals this."""
+    cfg = cfg if cfg is not None else contacts()
+    en = {HEAD_IDS[k]: STR["en"][k] for k in HEAD_IDS}
+    en["C1"] = STR["en"]["noflag"] + "."
+    en.update(EN_SENT)
+    if cfg:
+        dl = cfg.get("deadlines", [])
+        for (a, b), d in zip((("E3", "E4"), ("E5", "E6")), dl):
+            en[a], en[b] = _norm(d["applies_to"]), _norm(d["limit"])
+        for k, c in zip(("E9", "E10", "E11", "E12"), cfg.get("contacts", [])):
+            en[k] = f"{c['name']}: {c['value']}"
+        notes = cfg.get("mandatory_notices", {})
+        for k, key in (("E15", "never_discourage"), ("E16", "not_official")):
+            if notes.get(key):
+                en[k] = _norm(notes[key])
+    return en
+
+
+def translations(lang: str, cfg=None) -> dict:
+    """{ID: translated text} for every entry still matching the English."""
+    f = TRANSLATIONS.get(lang)
+    if not f or not f.exists():
+        return {}
+    ents = (yaml.safe_load(f.read_text(encoding="utf8")) or {}).get(
+        "entries", {})
+    now = current_english(cfg)
+    return {k: v["ta"] for k, v in ents.items()
+            if k in now and v.get("ta") and _norm(v.get("en", "")) == _norm(now[k])}
+
+
+def untranslated_fraction(lang: str = "ta", cfg=None) -> tuple[int, int]:
+    """(IDs with no valid translation, all translatable IDs).
+
+    Derived from the translation file and the current English, never kept
+    by hand: changing an English sentence makes its translation invalid,
+    and the count rises by itself."""
+    now = current_english(cfg)
+    have = translations(lang, cfg)
+    return sum(1 for k in now if k not in have), len(now)
 
 
 def report(r, est, basis, pct, flagged, cfg, lang, rank=None, total=None):
-    S = STR.get(lang, STR["en"])
+    import textwrap as _tw
+    tr = translations(lang, cfg) if lang != "en" else {}
+    S = dict(STR["en"])
+    for key, rid in HEAD_IDS.items():
+        if rid in tr:
+            S[key] = tr[rid].rstrip(".") if key == "noflag" else tr[rid]
+
+    def block(ids, first="      ", rest="      ", fmt=None):
+        """Print one block: the translation if every sentence in it has
+        one, otherwise the English lines exactly as they always were."""
+        if all(i in tr for i in ids):
+            text = " ".join(tr[i] for i in ids)
+            if fmt:
+                text = text.format(**fmt)
+            for ln in _tw.wrap(text, width=64, initial_indent=first,
+                               subsequent_indent=rest):
+                print(ln)
+        else:
+            for ln in REPORT_LINES[tuple(ids)]:
+                print(ln.format(**fmt) if fmt else ln)
+
+    def cfg_text(rid, english):
+        return tr.get(rid, english)
+
     # A report whose headings are translated and whose warnings are not is
     # worse than one that is wholly in English: the headings signal that
     # the document was prepared for this reader, which invites trust in
-    # cautions they cannot read. Rather than machine-translate safety text
-    # -- a mistranslated "report damage now, do not wait" is a real harm --
-    # the report says plainly that it is not localised.
+    # cautions they cannot read. Wherever a sentence has no valid
+    # translation it stays in English, and the report says so first.
     if lang != "en":
-        _lit, _tot = untranslated_fraction()
-        print()
-        print("  " + "!" * 60)
-        print(f"  THIS REPORT IS NOT TRANSLATED. {_lit} of {_tot} lines "
-              f"below are in")
-        print("  English, including every safety warning. The headings are")
-        print("  translated and the warnings are not, which can make the")
-        print("  report look prepared for you when it is not.")
-        print("  Ask someone to read the English text with you, and do not")
-        print("  rely on the headings alone.")
-        print("  " + "!" * 60)
+        _miss, _tot = untranslated_fraction(lang, cfg)
+        if _miss:
+            print()
+            print("  " + "!" * 60)
+            print(f"  THIS REPORT IS NOT FULLY TRANSLATED. {_miss} of {_tot} "
+                  f"sentences")
+            print("  below are in English, possibly including safety")
+            print("  warnings. Ask someone to read the English text with")
+            print("  you, and do not rely on the headings alone.")
+            print("  " + "!" * 60)
     w = 66
     print("=" * w)
     print(f"  {S['title']}   {S['field']} {r['plot']:.0f}   "
           f"{S['season']} {r['season']} {r['year']}")
     print("=" * w)
-    print(f"  {S['est']}: {est:.0f} kg/acre")
+    print(f"  {S['est']}: {est:.0f} {S['unit']}")
     print(f"  {S['basis']}: {S['hist'] if basis == 'history' else S['sat']}")
     print(f"  {S['vs']}: {pct:.0f}%")
     print()
     if flagged:
         print(f"  >>> {S['flag']} <<<")
-        print("      This field is among the lower estimates in its area.")
-        print("      That is a reason to look, not a finding of loss.")
-        print("      Most fields flagged this way yield below average MOST")
-        print("      YEARS. Being flagged is usually a statement about the")
-        print("      land, not about this season.")
+        block(["B2"])
+        block(["B3"])
     else:
         print(f"  {S['noflag']}.")
-        print("      THIS IS NOT EVIDENCE THAT YOUR CROP IS FINE.")
-        print("      This system misses losses. If you think your crop was")
-        print("      damaged, report it anyway.")
+        block(["C2"])
+        block(["C3"])
     print()
     print(f"  {S['conf']}")
     if basis == "history":
-        print("      Moderate. Built from this field's own past harvests,")
-        print("      which on test data predicted yield far better than the")
-        print("      satellite model (error 200 vs 346 kg/acre).")
+        block(["D2"])
     else:
-        print("      NO RELIABLE ESTIMATE. No past harvest on record, so")
-        print("      the figure above is a satellite guess. On test data it")
-        print("      was NOT shown to beat simply using the area average")
-        print("      (gain 14 kg/acre, interval -30 to +4, includes zero).")
-        print("      Do not act on the number itself.")
-        print("      This warning means there is NO RECORD for this field.")
-        print("      It does NOT mean this estimate is worse than the ones")
-        print("      without the warning: tested, the difference in error is")
-        print("      +41 kg/acre, interval -58 to +130, which includes zero.")
-    print("      This system CANNOT tell whether this particular season was")
-    print("      bad for this field. That was tested and did not work:")
-    print("      on fields that are sometimes below and sometimes above the")
-    print("      threshold, ranking AUROC is 0.626 [0.386, 0.887], which")
-    print("      includes chance.")
+        block(["D3", "D4", "D5", "D6"])
+        block(["D7"])
+    block(["D8", "D9"])
+    block(["D9b"])
     if rank is not None:
-        print(f"      Rank in this list: {rank} of {total} (lowest first).")
+        if "D10" in tr:
+            block(["D10"], fmt={"rank": rank, "total": total})
+        else:
+            print(f"      Rank in this list: {rank} of {total} (lowest first).")
     print()
     print(f"  {S['whatnow']}")
-    print("   1. If your crop was damaged, report it NOW. Do not wait for")
-    print("      any report, including this one.")
+    block(["E2"], first="   ")
     if cfg:
-        for d in cfg.get("deadlines", []):
-            mark = "" if d.get("verified") else "  [UNVERIFIED]"
-            import textwrap as _tw
-            for ln in _tw.wrap(d["applies_to"], width=56):
-                print(f"      - {ln}" if ln == _tw.wrap(d["applies_to"], 56)[0]
-                      else f"        {ln}")
-            print(f"        {d['limit']}{mark}")
-        print("   2. Contact one of these to report or to check status:")
-        for c in cfg.get("contacts", []):
-            mark = "" if c.get("verified") else "  [UNVERIFIED - confirm first]"
-            print(f"      - {c['name']}: {c['value']}{mark}")
-        print("   3. Confirm the numbers above with your bank, the Common")
-        print("      Service Centre, or the District Agriculture Officer.")
-        print("      They could not be verified against an official page.")
+        unver = cfg_text("E7", EN_SENT["E7"])
+        ids = (("E3", "E4"), ("E5", "E6"))
+        for (ia, il), d in zip(ids, cfg.get("deadlines", [])):
+            mark = "" if d.get("verified") else f"  {unver}"
+            applies = cfg_text(ia, _norm(d["applies_to"]))
+            limit = cfg_text(il, _norm(d["limit"]))
+            width = 60 if ia in tr else 56
+            lines = _tw.wrap(applies, width=width)
+            for k, ln in enumerate(lines):
+                print(f"      - {ln}" if k == 0 else f"        {ln}")
+            print(f"        {limit}{mark}")
+        block(["E8"], first="   ")
+        unc = cfg_text("E13", EN_SENT["E13"])
+        for k, c in zip(("E9", "E10", "E11", "E12"),
+                        cfg.get("contacts", [])):
+            mark = "" if c.get("verified") else f"  {unc}"
+            print(f"      - {cfg_text(k, c['name'] + ': ' + str(c['value']))}"
+                  f"{mark}")
+        block(["E14"], first="   ")
         print()
-        import textwrap
-        for k in ("never_discourage", "not_official"):
-            txt = " ".join(cfg.get("mandatory_notices", {}).get(k, "").split())
+        for rid, key in (("E15", "never_discourage"), ("E16", "not_official")):
+            txt = _norm(cfg.get("mandatory_notices", {}).get(key, ""))
             if txt:
-                for line in textwrap.wrap(txt, width=62):
+                for line in _tw.wrap(cfg_text(rid, txt), width=62):
                     print("   " + line)
                 print()
     print("=" * w)
@@ -293,7 +410,7 @@ def main() -> int:
     ap.add_argument("--uid")
     ap.add_argument("--village-list", action="store_true")
     ap.add_argument("--budget", type=float, default=0.33)
-    ap.add_argument("--lang", default="en", choices=sorted(STR))
+    ap.add_argument("--lang", default="en", choices=sorted(set(STR) | set(TRANSLATIONS)))
     ap.add_argument("--split", default="test")
     args = ap.parse_args()
 

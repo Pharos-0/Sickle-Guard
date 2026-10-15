@@ -174,14 +174,13 @@ def test_app_reuses_the_cli_logic_rather_than_reimplementing_it():
 # --------------------------------------------------------------------------
 # Localisation honesty
 # --------------------------------------------------------------------------
-def test_non_english_report_declares_it_is_not_translated():
-    """A half-translated report must say so.
+def test_tamil_report_is_fully_translated():
+    """The Tamil report carries no 'not translated' banner.
 
-    `--lang ta` localises the headings and leaves every safety warning in
-    English. Tamil headings signal that the document was prepared for the
-    reader, which invites trust in cautions they cannot read, so the
-    report carries an explicit banner until the safety text is translated
-    and reviewed by a native speaker.
+    The translation (configs/report_translations_ta.yaml, first author, a
+    native Tamil speaker, 2026-10-16) covers every sentence. Each entry is
+    used only while the English it was made from is unchanged; any stale
+    sentence falls back to English and the banner returns by itself.
     """
     import subprocess
     import sys as _sys
@@ -189,8 +188,8 @@ def test_non_english_report_declares_it_is_not_translated():
         [_sys.executable, "-X", "utf8", str(PROJ / "src/farmer_report.py"),
          "--uid", "2063", "--lang", "ta"],
         capture_output=True, text=True, encoding="utf8", cwd=str(PROJ)).stdout
-    assert "NOT TRANSLATED" in out
-    assert "every safety warning" in out
+    assert "NOT FULLY TRANSLATED" not in out
+    assert "\u0bb5\u0baf\u0bb2\u0bcd" in out          # "field" in Tamil
 
 
 def test_english_report_carries_no_translation_banner():
@@ -200,17 +199,16 @@ def test_english_report_carries_no_translation_banner():
         [_sys.executable, "-X", "utf8", str(PROJ / "src/farmer_report.py"),
          "--uid", "2063"],
         capture_output=True, text=True, encoding="utf8", cwd=str(PROJ)).stdout
-    assert "NOT TRANSLATED" not in out
+    assert "TRANSLATED" not in out
 
 
-def test_the_untranslated_count_is_derived_not_asserted():
-    """If someone translates the warnings, the banner must shrink by itself."""
+def test_the_untranslated_count_is_derived_not_asserted(monkeypatch):
+    """The count is computed from the translation file and the current
+    English, so it rises by itself when an English sentence changes."""
     import sys as _sys
     _sys.path.insert(0, str(PROJ / "src"))
-    from farmer_report import untranslated_fraction
-    lit, tot = untranslated_fraction()
-    assert 0 < lit <= tot
-    assert lit > 20, (
-        "the count is read from the source; if the safety text has been "
-        "translated this test should be updated deliberately, not the "
-        "banner removed")
+    import farmer_report as fr
+    miss, tot = fr.untranslated_fraction("ta")
+    assert miss == 0 and tot == len(fr.current_english())
+    monkeypatch.setitem(fr.EN_SENT, "C3", fr.EN_SENT["C3"] + " (edited)")
+    assert fr.untranslated_fraction("ta")[0] == 1

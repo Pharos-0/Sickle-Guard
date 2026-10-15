@@ -187,8 +187,12 @@ def test_tamil_renders_without_crashing():
     """Previously raised UnicodeEncodeError on a cp1252 console."""
     out = run("--uid", "2063", "--lang", "ta")
     assert "வயல்" in out
-    # safety text must survive translation mode
-    assert "report it" in out.lower()
+    # safety text must survive translation mode: the instruction to report
+    # damage now, in the translation's own words (E2)
+    sys.path.insert(0, str(PROJ / "src"))
+    import farmer_report as fr
+    e2 = " ".join(fr.translations("ta")["E2"].split())
+    assert e2 in " ".join(out.split())
 
 
 def test_unknown_field_fails_loudly_rather_than_guessing():

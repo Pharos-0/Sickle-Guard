@@ -180,12 +180,73 @@ def test_flagged_report_says_it_is_not_a_finding_of_loss(world):
 
 
 # --------------------------------------------------------- language
-def test_tamil_report_declares_its_safety_text_untranslated(world):
+NUMS = re.compile(r"[-+]?\d+(?:,\d{3})*(?:\.\d+)?")
+
+
+def test_tamil_report_carries_the_safety_sentences_in_tamil(world):
+    """Fully translated: the key warnings appear in Tamil, not English."""
+    tr = fr.translations("ta")
     i = world["cold"][0]
     rep = render(world["feats"][i], world["est"][i], "satellite", False,
                  lang="ta")
-    assert "NOT TRANSLATED" in rep
-    assert "every safety warning" in rep
+    assert "NOT FULLY TRANSLATED" not in rep
+    flat = " ".join(rep.split())
+    for rid in ("C2", "C3", "D3", "D6", "D8", "E2"):
+        assert " ".join(tr[rid].split()) in flat, f"{rid} missing in Tamil"
+    assert "NOT EVIDENCE THAT YOUR CROP IS FINE" not in rep.upper()
+
+
+@pytest.mark.parametrize("basis,flagged", [("satellite", False),
+                                           ("history", True)])
+def test_tamil_report_keeps_every_number(world, basis, flagged):
+    """Numbers carry the evidence and the helpline; translation must not
+    drop, add or change one."""
+    i = world["cold"][0]
+    r = world["feats"][i]
+    en = render(r, 1850.0, basis, flagged, lang="en", rank=3, total=62)
+    ta = render(r, 1850.0, basis, flagged, lang="ta", rank=3, total=62)
+    assert sorted(NUMS.findall(en)) == sorted(NUMS.findall(ta))
+
+
+@pytest.mark.parametrize("flagged", [False, True])
+def test_tamil_wording_does_not_depend_on_the_number(world, flagged):
+    """Invariance holds in Tamil too: a high estimate cannot soften it."""
+    i = world["cold"][0]
+    r = world["feats"][i]
+    texts = {safety_text(render(r, est, "satellite", flagged, lang="ta"))
+             for est in (300.0, 900.0, 1500.0, 2200.0, 3500.0)}
+    assert len(texts) == 1
+
+
+def test_a_stale_translation_falls_back_to_english_and_says_so(world,
+                                                               monkeypatch):
+    """If an English safety sentence changes, its old Tamil must not be
+    printed; the English is, under a banner saying the report is not fully
+    translated."""
+    monkeypatch.setitem(fr.EN_SENT, "C2", fr.EN_SENT["C2"])   # unchanged
+    i = world["cold"][0]
+    r = world["feats"][i]
+    monkeypatch.setitem(fr.EN_SENT, "C2",
+                        "THIS IS NOT EVIDENCE THAT YOUR CROP IS FINE TODAY.")
+    rep = render(r, 1850.0, "satellite", False, lang="ta")
+    assert "NOT FULLY TRANSLATED" in rep
+    assert "NOT EVIDENCE THAT YOUR CROP IS FINE" in rep.upper()
+
+
+def test_translation_file_has_no_stale_entries():
+    """Every sentence has a valid translation; an edit to the English fails
+    here until the translation is redone, rather than silently degrading."""
+    now = fr.current_english()
+    have = fr.translations("ta")
+    stale = sorted(set(now) - set(have))
+    assert not stale, f"re-translate: {stale}"
+
+
+def test_english_blocks_rejoin_to_their_sentences():
+    """The English line breaks and the sentences translators saw agree."""
+    for ids, lines in fr.REPORT_LINES.items():
+        joined = " ".join(" ".join(ln.split()) for ln in lines)
+        assert joined == " ".join(fr.EN_SENT[i] for i in ids), ids
 
 
 # ------------------------------------------------------------ the guard bites

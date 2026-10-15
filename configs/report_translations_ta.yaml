@@ -1,0 +1,135 @@
+language: ta
+translated_by: Pharos Sophy Samuel T J (first author; native Tamil speaker)
+imported: '2026-10-16'
+source_workbook: SICKLE-Guard_report_Tamil_translation_completed.xlsx
+review: translated by one native speaker; not yet checked by a second speaker or with farmers
+rule: an entry is used only while its 'en' matches the report's current English exactly
+entries:
+  A1:
+    en: FIELD REPORT
+    ta: வயல் அறிக்கை
+  A2:
+    en: Field
+    ta: வயல்
+  A3:
+    en: Season
+    ta: பருவம்
+  A4:
+    en: Estimated yield
+    ta: மதிப்பிடப்பட்ட விளைச்சல்
+  A5:
+    en: kg/acre
+    ta: கிலோ / ஏக்கர்
+  A6:
+    en: Based on
+    ta: இதன் அடிப்படை
+  A7:
+    en: this field's own past harvests
+    ta: இந்த வயலின் முந்தைய அறுவடைகள்
+  A8:
+    en: satellite imagery (no past harvest on record)
+    ta: செயற்கைக்கோள் படங்கள் (முந்தைய அறுவடைப் பதிவு இல்லை)
+  A9:
+    en: Compared with nearby fields
+    ta: அருகிலுள்ள வயல்களுடன் ஒப்பிடுகையில்
+  B1:
+    en: FLAGGED FOR ATTENTION
+    ta: கவனத்திற்காகக் குறிக்கப்பட்டது
+  B2:
+    en: This field is among the lower estimates in its area. That is a reason to look, not a finding of loss.
+    ta: இந்தப் பகுதியிலுள்ள ஒப்பீட்டளவில் குறைந்த விளைச்சல் மதிப்பீடுகளில் இந்த வயலும் ஒன்று. இதைச் சரிபார்க்க வேண்டிய காரணமாக எடுத்துக்கொள்ளுங்கள்; இழப்பு ஏற்பட்டுவிட்டது என்பதற்கான முடிவாக அல்ல.
+  B3:
+    en: Most fields flagged this way yield below average MOST YEARS. Being flagged is usually a statement about the land, not about this season.
+    ta: இவ்வாறு குறிக்கப்படும் பெரும்பாலான வயல்களில், பெரும்பாலான ஆண்டுகளில் விளைச்சல் சராசரிக்குக் கீழே இருக்கும். இந்தக் குறிப்பு பொதுவாக நிலத்தின் வழக்கமான தன்மையைப் பற்றியது; இந்தப் பருவத்தில் என்ன நடந்தது என்பதைப் பற்றியது அல்ல.
+  C1:
+    en: Not flagged by this system.
+    ta: இந்த அமைப்பு இந்த வயலைக் குறிக்கவில்லை.
+  C2:
+    en: THIS IS NOT EVIDENCE THAT YOUR CROP IS FINE.
+    ta: உங்கள் பயிர் நன்றாக உள்ளது என்பதற்கான ஆதாரம் இது அல்ல.
+  C3:
+    en: This system misses losses. If you think your crop was damaged, report it anyway.
+    ta: இந்த அமைப்பு பயிர் இழப்புகளைத் தவறவிடுகிறது. உங்கள் பயிர் சேதமடைந்ததாக நீங்கள் நினைத்தால், இருந்தாலும் அதைத் தெரிவியுங்கள்.
+  D1:
+    en: HOW MUCH TO TRUST THIS
+    ta: இதை எவ்வளவு நம்பலாம்
+  D2:
+    en: Moderate. Built from this field's own past harvests, which on test data predicted yield far better than the satellite model (error 200 vs 346 kg/acre).
+    ta: மிதமான நம்பகத்தன்மை. இந்த வயலின் முந்தைய அறுவடைகளை அடிப்படையாகக் கொண்டது. சோதனைத் தரவுகளில், இது செயற்கைக்கோள் மாதிரியை விட விளைச்சலை மிகவும் நன்றாகக் கணித்தது (பிழை 200 எதிராக 346 கிலோ/ஏக்கர்).
+  D3:
+    en: NO RELIABLE ESTIMATE.
+    ta: நம்பகமான மதிப்பீடு இல்லை.
+  D4:
+    en: No past harvest on record, so the figure above is a satellite guess.
+    ta: முந்தைய அறுவடைப் பதிவு இல்லை; எனவே மேலே உள்ள எண் செயற்கைக்கோள் தரவின் அடிப்படையிலான ஒரு கணிப்பு மட்டுமே.
+  D5:
+    en: On test data it was NOT shown to beat simply using the area average (gain 14 kg/acre, interval -30 to +4, includes zero).
+    ta: சோதனைத் தரவுகளில், இந்தக் கணிப்பு பகுதியின் சராசரி விளைச்சலை மட்டும் பயன்படுத்துவதை விடச் சிறந்தது என்று நிரூபிக்கப்படவில்லை (முன்னேற்றம் 14 கிலோ/ஏக்கர்; இடைவெளி -30 முதல் +4 வரை; இதில் பூஜ்ஜியம் அடங்குகிறது).
+  D6:
+    en: Do not act on the number itself.
+    ta: இந்த எண்ணை மட்டும் வைத்து எந்த முடிவும் எடுக்க வேண்டாம்.
+  D7:
+    en: 'This warning means there is NO RECORD for this field. It does NOT mean this estimate is worse than the ones without the warning: tested, the difference in error is +41 kg/acre, interval -58 to +130, which includes zero.'
+    ta: 'இந்த எச்சரிக்கை இந்த வயலுக்கு முந்தைய அறுவடைப் பதிவு இல்லை என்பதைக் குறிக்கிறது. எச்சரிக்கை இல்லாத வயல்களைவிட இந்த மதிப்பீடு மோசமானது என்று இதன் பொருள் அல்ல: சோதனையில் பிழை வித்தியாசம் +41 கிலோ/ஏக்கர்; இடைவெளி -58 முதல் +130 வரை, இதில் பூஜ்ஜியம் அடங்குகிறது.'
+  D8:
+    en: This system CANNOT tell whether this particular season was bad for this field.
+    ta: இந்த குறிப்பிட்ட வயலில் இந்தப் பருவம் மோசமாக இருந்ததா என்பதை இந்த அமைப்பால் கண்டறிய முடியாது.
+  D9:
+    en: 'That was tested and did not work: on fields that are sometimes below and sometimes above the threshold, ranking AUROC is 0.626 [0.386, 0.887], which includes chance.'
+    ta: 'இதைச் சோதித்தபோது பயனுள்ள முடிவு கிடைக்கவில்லை: சில பருவங்களில் வரம்புக்குக் கீழும் சில பருவங்களில் மேலுமாக இருக்கும் வயல்களை வரிசைப்படுத்திய மதிப்பெண் AUROC 0.626 [0.386, 0.887]. இந்த இடைவெளியில் சீரற்ற தேர்வின் அளவும் அடங்குகிறது.'
+  D10:
+    en: 'Rank in this list: {rank} of {total} (lowest first).'
+    ta: 'இந்தப் பட்டியலில் உள்ள இடம்: {rank} / {total} (குறைந்த மதிப்பீடு முதலில்).'
+  E1:
+    en: WHAT TO DO NOW
+    ta: இப்போது என்ன செய்ய வேண்டும்
+  E2:
+    en: 1. If your crop was damaged, report it NOW. Do not wait for any report, including this one.
+    ta: 1. உங்கள் பயிர் சேதமடைந்திருந்தால், அதை இப்போதே தெரிவியுங்கள். இந்த அறிக்கை உட்பட எந்த அறிக்கைக்காகவும் காத்திருக்க வேண்டாம்.
+  E3:
+    en: localised calamity (hailstorm, landslide, inundation, cloudburst) and post-harvest loss
+    ta: உள்ளூர்மயமான பேரிடர் (ஆலங்கட்டி மழை, நிலச்சரிவு, வெள்ளநீர் புகுதல், திடீர் கனமழை) மற்றும் அறுவடைக்குப் பிந்தைய இழப்பு
+  E4:
+    en: report within 72 hours of the event
+    ta: நிகழ்வு நடந்த 72 மணி நேரத்திற்குள் தெரிவிக்கவும்
+  E5:
+    en: widespread loss across a notified area (e.g. drought, flood)
+    ta: அறிவிக்கப்பட்ட பகுதி முழுவதும் பரவலான இழப்பு (எ.கா., வறட்சி, வெள்ளம்)
+  E6:
+    en: no individual intimation required
+    ta: தனிப்பட்ட முறையில் தகவல் தெரிவிக்க வேண்டிய அவசியமில்லை
+  E7:
+    en: '[UNVERIFIED]'
+    ta: '[UNVERIFIED]'
+  E8:
+    en: '2. Contact one of these to report or to check status:'
+    ta: '2. இழப்பைத் தெரிவிக்க அல்லது நிலையை அறிய, கீழே உள்ள வழிகளில் ஒன்றைத் தொடர்புகொள்ளுங்கள்:'
+  E9:
+    en: 'Krishi Rakshak Portal & Helpline (KRPH): 14447'
+    ta: 'கிருஷி ரக்ஷக் போர்டல் & உதவி எண் (KRPH): 14447'
+  E10:
+    en: 'PMFBY WhatsApp: 7065514447'
+    ta: 'PMFBY WhatsApp: 7065514447'
+  E11:
+    en: 'Crop Insurance mobile app: search ''Crop Insurance'' by Govt. of India on the app store'
+    ta: 'மொபைல் செயலி: செயலி அங்காடியில் இந்திய அரசின் ''Crop Insurance'' என்று தேடுங்கள்.'
+  E12:
+    en: 'Claim status: pmfby.gov.in -> Farmer Corner -> Application Status'
+    ta: 'கோரிக்கை நிலை: pmfby.gov.in -> Farmer Corner -> Application Status'
+  E13:
+    en: '[UNVERIFIED - confirm first]'
+    ta: '[UNVERIFIED - confirm first]'
+  E14:
+    en: 3. Confirm the numbers above with your bank, the Common Service Centre, or the District Agriculture Officer. They could not be verified against an official page.
+    ta: 3. மேலே உள்ள எண்களை உங்கள் வங்கி, பொது சேவை மையம் (Common Service Centre) அல்லது மாவட்ட வேளாண்மை அலுவலரிடம் உறுதிப்படுத்துங்கள். அதிகாரப்பூர்வ இணையப் பக்கத்தில் இவற்றை உறுதிப்படுத்த முடியவில்லை.
+    note: step number '3.' restored on import
+  E15:
+    en: This system CANNOT tell you whether you have a valid claim. If you believe your crop was damaged, report it through the official channels within the deadline, whatever this report says.
+    ta: உங்களுக்கு செல்லுபடியாகும் காப்பீட்டுக் கோரிக்கை உள்ளதா என்பதை இந்த அமைப்பால் தீர்மானிக்க முடியாது. உங்கள் பயிர் சேதமடைந்ததாக நீங்கள் நம்பினால், இந்த அறிக்கை என்ன சொன்னாலும், காலக்கெடுவுக்குள் அதிகாரப்பூர்வ வழிகள் மூலம் அதைத் தெரிவியுங்கள்.
+  E16:
+    en: This is a research prototype. It is not connected to PMFBY, is not an insurer, and its output has no official standing.
+    ta: இது ஒரு ஆராய்ச்சி முன்மாதிரி. இது PMFBY-யுடன் இணைக்கப்படவில்லை; இது காப்பீட்டு நிறுவனம் அல்ல; இதன் வெளியீட்டிற்கு அதிகாரப்பூர்வ அங்கீகாரம் இல்லை.
+  D9b:
+    en: 'In plain terms: this score does not reliably pick out which fields need more attention.'
+    ta: 'பொதுவான விளக்கம்: இந்த மதிப்பெண், எந்த வயல்களுக்கு அதிக கவனம் தேவை என்பதை நம்பகமாகத் தேர்ந்தெடுக்கவில்லை.'
+    origin: translator's comment on D9; English written to match

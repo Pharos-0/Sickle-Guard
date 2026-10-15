@@ -33,7 +33,10 @@ sys.path.insert(0, str(ROOT / "src"))
 import farmer_report as fr  # noqa: E402
 
 OUT = ROOT / "translation" / "SICKLE-Guard_report_Tamil_translation.xlsx"
-EN, TA = fr.STR["en"], fr.STR["ta"]
+EN = fr.STR["en"]
+# current Tamil: the imported translation, wherever it is still valid
+TR = fr.translations("ta")
+TA = {k: TR.get(rid, "") for k, rid in fr.HEAD_IDS.items()}
 CFG = fr.contacts()
 
 ARIAL = "Arial"
@@ -131,6 +134,8 @@ def rows():
          keep_num + " 'AUROC' is a technical score; it may be better to keep "
          "the number and add a plain explanation. Suggest wording in your "
          "comments."),
+        ("D9b", "Trust", ALWAYS, "", fr.EN_SENT["D9b"], "",
+         "Plain explanation of D9, added at the translator's suggestion."),
         ("D10", "Trust", "report lists a rank", "",
          "Rank in this list: {rank} of {total} (lowest first).", "",
          "Keep {rank} and {total} exactly as written; the program fills them "
@@ -188,6 +193,14 @@ def rows():
     ]
 
 
+def rows_with_current():
+    """rows() with column F showing the valid imported translation."""
+    out = []
+    for rid, sec, when, prio, en, ta, note in rows():
+        out.append((rid, sec, when, prio, en, TR.get(rid, ta), note))
+    return out
+
+
 def report_text(lang, variant):
     buf = io.StringIO()
     with contextlib.redirect_stdout(buf):
@@ -223,10 +236,10 @@ def main() -> int:
         ("", 10, False, None),
         ("What this is", 11, True, None),
         ("Every sentence a farmer can see in the SICKLE-Guard field report, in "
-         f"the order it appears. {sum(1 for x in rows() if x[5])} headings "
-         "and labels already have a Tamil version; every sentence below "
-         "them, including every safety warning, is still in English. The "
-         "report will not be offered in "
+         f"the order it appears. {sum(1 for x in rows_with_current() if x[5])} "
+         f"of {len(rows())} already have a valid Tamil version (column F); "
+         "use this sheet to review or revise them, or to translate any "
+         "that are missing. The report will not be offered in "
          "Tamil until a native speaker has translated and checked it.", 10,
          False, None),
         ("", 10, False, None),
@@ -294,7 +307,7 @@ def main() -> int:
                  italic=True, color="666666", fill=GREY)
         c.border = BOX
     r = 3
-    for rid, sec, when, prio, en, ta, note in rows():
+    for rid, sec, when, prio, en, ta, note in rows_with_current():
         vals = [rid, sec, when, prio, en, ta, "", "", note]
         for j, v in enumerate(vals, 1):
             col = chr(64 + j)
@@ -336,7 +349,7 @@ def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     wb.save(OUT)
     n = len(rows())
-    n_ta = sum(1 for x in rows() if x[5])
+    n_ta = sum(1 for x in rows_with_current() if x[5])
     n_safe = sum(1 for x in rows() if x[3] == SAFETY)
     print(f"wrote {OUT}")
     print(f"  {n} sentences to translate ({n_ta} have a Tamil version to "
