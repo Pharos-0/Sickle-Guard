@@ -5,30 +5,33 @@ r"""Field-by-field assessment: the practical pipeline.
 
 THE DESIGN FOLLOWS A MEASURED RESULT, NOT A PREFERENCE
 -------------------------------------------------------
-src/site_vs_season.py compared the satellite model against a baseline
-that sees no imagery at all and only averages the field's previous
-harvests, over 131 plots under grouped cross-validation:
+src/causal_history.py compared, under grouped cross-validation over 131
+plots, a field's own history -- the mean yield of its seasons HARVESTED
+BEFORE this season was SOWN, never a later one -- with the satellite model:
 
-    field with >=1 prior season   plot history, no imagery   MAE 197.4
-    brand-new field, no history   satellite model            MAE 277.9
-    no information at all         global mean                MAE 303.0
+    field with history (188 of 319)   own history, no imagery   MAE 201.6
+                                      satellite model           MAE 290.7
+    brand-new field (131 of 319)      satellite model           MAE 259.5
+                                      area average              MAE 273.8
 
-Plot history beats the satellite model by 80.5 kg/acre, 95% CI
-[+40.9, +124.8] over plots. So this tool uses history whenever it
-exists and falls back to the satellite model only for a field with no
-record. The satellite model closes 24% of the gap between knowing
-nothing and knowing the field, and that cold-start gain is real:
--25.1 kg/acre, 95% CI [-41.6, -8.8].
+Where history exists it beats the satellite model by 89.1 kg/acre, 95% CI
+[-129.5, -50.7]. For a brand-new field the satellite model is NOT shown to
+beat the area average: -14.3 kg/acre, 95% CI [-30.4, +3.6]
+(src/does_satellite_add.py). So this tool uses history whenever it exists,
+falls back to the satellite model only for a field with no record, and says
+that this estimate is not reliable.
 
-Reporting a satellite number for a field whose history is on file would
-be presenting the worse of two available estimates.
+Until 2026-10-16 this tool averaged a field's OTHER seasons, later ones
+included: the leak src/causal_history.py was written to remove. It gave a
+history-based estimate to fields that had no earlier harvest. It now shares
+farmer_report's loader and history, and tests/test_assess_field_history.py
+requires the two to agree on every field-season.
 
 WHAT IT CANNOT DO
 -----------------
-Detect a bad season. A field's deviation from its own history is not
-predictable from this imagery: MAE 195.7 against 197.4 for predicting
-no deviation at all, paired CI [-8.8, +5.2], and bad-season AUROC of
-0.586-0.598 with every interval containing chance.
+Detect a bad season. On plots that are sometimes above and sometimes below
+the threshold, ranking falls to AUROC 0.626, 95% CI [0.386, 0.887], which
+includes chance (src/label_validity.py).
 
 It does not decide eligibility, compute a payout, or produce an
 Insurance Unit figure. The dataset has no Gram Panchayat identity, no
@@ -37,10 +40,10 @@ at this field", never "this claim is approved or denied".
 
 EVIDENCE GRADES CARRIED ON EVERY OUTPUT
 ---------------------------------------
-  level, field with history   MODERATE. r = +0.72 from history alone.
-  level, cold start           WEAK but real. r = +0.47; beats the
-                              global mean by 25 kg/acre, CI excludes 0.
-  between-field ranking       MODERATE. Supported out-of-fold.
+  level, field with history   MODERATE. Own-history MAE 201.6 kg/acre.
+  level, cold start           WEAK. Not shown to beat the area average.
+  between-field ranking       MODERATE. Out-of-fold AUROC 0.824
+                              [0.745, 0.891]; printed from the artefact.
   within-field season change  NOT DEMONSTRATED. Do not use for this.
   prediction interval         CALIBRATED BUT UNINFORMATIVE. 90%
                               coverage, but near-constant width (7
@@ -62,6 +65,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from models import BACKEND, make_rf, tree_predictions   # noqa: E402
 from reliability import cols_all, matrix                # noqa: E402
+import farmer_report as fr                              # noqa: E402
 
 PROJ = Path(__file__).resolve().parents[1]
 FEATS = PROJ / "results" / "features.csv"
@@ -69,32 +73,29 @@ SEEDS = [0, 1, 2, 3, 4]
 
 
 def load_rows():
-    with FEATS.open(encoding="utf8") as fh:
-        rows = list(csv.DictReader(fh))
-    for r in rows:
-        r["yield"] = float(r["yield"])
-        r["plot"] = float(r["plot"])
-    return rows
+    """The report's own loader: the feature table plus sowing and
+    harvest dates, which the causal history needs."""
+    return fr.load()
 
 
 def plot_history(rows):
-    """Mean of each field-season's OTHER seasons at the same plot.
+    """A field-season's history: the mean yield of its seasons HARVESTED
+    BEFORE it was SOWN, exactly as the report computes it. NaN where there
+    is no such season, the genuine cold start. Never a later season."""
+    return fr.causal_history(rows)
 
-    Uses past harvests, which a scheme assessing a registered field
-    knows. Never uses the field-season's own label. Returns NaN where
-    the plot has no other season, the genuine cold-start case.
-    """
-    from collections import defaultdict
-    byplot = defaultdict(list)
-    for i, r in enumerate(rows):
-        byplot[r["plot"]].append(i)
-    hist = np.full(len(rows), np.nan)
-    for _, v in byplot.items():
-        for i in v:
-            others = [j for j in v if j != i]
-            if others:
-                hist[i] = float(np.mean([rows[j]["yield"] for j in others]))
-    return hist
+
+def _year(y):
+    """The data stores the year as 2019.0."""
+    try:
+        return f"{int(float(y))}"
+    except (TypeError, ValueError):
+        return y
+
+
+def _metric(name):
+    return json.loads((PROJ / "results" / "metrics" / name)
+                      .read_text(encoding="utf8"))
 
 
 def build(rows, cols, fit_splits=("train", "val")):
@@ -190,9 +191,14 @@ def main() -> int:
         if not tgt:
             raise SystemExit(f"no rows in split {args.split!r}")
 
-    pred_sat, lo, hi, spread = score(tgt)
-    hist_all = plot_history(rows)
+    # This tool's own forests give the interval and the disagreement only.
+    # The satellite estimate itself is the report's (farmer_report.satellite),
+    # so a field gets the same number from both tools.
+    _, lo, hi, spread = score(tgt)
     pos_of = {r["uid"]: i for i, r in enumerate(rows)}
+    sat_all = fr.satellite(rows)
+    pred_sat = np.array([sat_all[pos_of[r["uid"]]] for r in tgt])
+    hist_all = plot_history(rows)
     hist = np.array([hist_all[pos_of[r["uid"]]] for r in tgt])
 
     # History where it exists; satellite only for a cold-start field.
@@ -209,7 +215,7 @@ def main() -> int:
         rank = int(np.where(order == i)[0][0]) + 1
         out.append({
             "uid": r["uid"], "plot": f"{r['plot']:.0f}",
-            "season": r["season"], "year": r["year"],
+            "season": r["season"], "year": _year(r["year"]),
             "predicted_yield_kg_per_acre": round(float(pred[i]), 1),
             "estimate_source": str(source[i]),
             "satellite_estimate": round(float(pred_sat[i]), 1),
@@ -240,8 +246,10 @@ def main() -> int:
             print(f"                       the model would have said "
                   f"{o['satellite_estimate']:.0f} kg/acre")
         else:
-            print("                       no prior season on file, so "
-                  "the satellite model is used")
+            print("                       no earlier season on file, so "
+                  "the satellite model is used;")
+            print("                       it is NOT shown to beat the area "
+                  "average: do not act on the number")
         half = (o['interval_90_hi'] - o['interval_90_lo']) / 2
         print(f"  90% interval         {o['interval_90_lo']:.0f} to "
               f"{o['interval_90_hi']:.0f}   (+/-{half:.0f})")
@@ -255,15 +263,20 @@ def main() -> int:
         print(f"  VERIFY IN FIELD?     "
               f"{'YES' if o['verify'] else 'not under this budget'}")
         print("")
-        print("  SEASONAL DETERIORATION: not assessed. A field's "
-              "deviation from its own")
-        print("  history is not predictable from this imagery "
-              "(AUROC 0.59, CI spans chance).")
-        print("  This tool cannot tell you whether THIS season was bad.")
-        print(f"\n  evidence grade: ranking MODERATE (r=+0.57 out-of-fold); "
-              f"magnitude WEAK;\n  within-season detection NOT DEMONSTRATED. "
-              f"This is a prioritisation aid,\n  not a yield measurement and "
-              f"not an insurance decision.")
+        ev = _metric("label_validity.json")["ranking_by_subset"][
+            "EVENT plots only (the real case)"]
+        rk = _metric("does_satellite_add.json")["ranking"][
+            "hybrid = SICKLE-Guard"]
+        print("  SEASONAL DETERIORATION: not assessed. On plots that are "
+              "sometimes above")
+        print(f"  and sometimes below the threshold, ranking AUROC is "
+              f"{ev['auroc']:.3f} [{ev['ci'][0]:.3f}, {ev['ci'][1]:.3f}],")
+        print("  which includes chance. This tool cannot tell you whether "
+              "THIS season was bad.")
+        print(f"\n  evidence grade: ranking MODERATE (AUROC {rk['auroc']:.3f} "
+              f"out-of-fold); magnitude WEAK;\n  within-season detection NOT "
+              f"DEMONSTRATED. This is a prioritisation aid,\n  not a yield "
+              f"measurement and not an insurance decision.")
         print(f"  [held-out reference yield was "
               f"{o['reference_yield_kg_per_acre']:.0f} kg/acre]")
     else:

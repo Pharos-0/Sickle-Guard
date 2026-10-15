@@ -3,6 +3,19 @@
 2026-10-11. Maps each objective to evidence. Statuses are PASS, PARTIAL,
 FAIL or BLOCKED, each justified by a named artefact.
 
+> **Correction, 2026-10-16.** The history figures below (history beats the
+> satellite pipeline by 80.5 kg/acre; plot-history MAE 197.4; a "real"
+> cold-start gain of −25.1 kg/acre) come from a baseline that averaged a
+> field's other seasons, later ones included. With history restricted to
+> seasons harvested before sowing (`src/causal_history.py`), history still
+> beats the satellite model where it exists, by 89.1 kg/acre, 95 % CI
+> [−129.5, −50.7]; but for a brand-new field the satellite model is not
+> shown to beat the area average (−14.3 kg/acre, 95 % CI [−30.4, +3.6],
+> `src/does_satellite_add.py`). `src/assess_field.py`, cited below, used the
+> leaky history until 2026-10-16 and now shares the report's;
+> `tests/test_assess_field_history.py` holds the two together. This record
+> is otherwise left as written.
+
 ---
 
 ## B. What was discovered
