@@ -10,10 +10,14 @@ insurer, and its output has no official standing.**
 
 ## What it does, and what the evidence says about each part
 
-Everything below is measured, not asserted. The headline numbers come from
-a forward-in-time split — train on seasons sown before June 2020, test on
-those sown after — which no model selection in this project ever touched.
-See `THREE_VALIDATIONS.md`.
+Everything below is measured, not asserted. The numbers come from two
+held-out designs, neither touched by model selection: a forward-in-time
+split (train on seasons sown before June 2020, test on those sown after;
+`results/metrics/forward_eval.json`) and grouped cross-validation by plot,
+which has more fields with no harvest record (`src/does_satellite_add.py`,
+`src/label_validity.py`). See `THREE_VALIDATIONS.md`. The ranking AUROC in
+the first row is from grouped cross-validation; the yield-estimate rows and
+the 145.7 kg/acre comparison below are from the forward split.
 
 | capability | measured | verdict |
 |---|---|---|
@@ -30,8 +34,9 @@ past harvests beats it by 145.7 kg/acre [−198.4, −92.8] and by +0.247 AUROC
 [+0.128, +0.374].
 
 Pushed further, the satellite component does not survive at all. On the
-forward split causal history covered **100 %** of test fields, so the 0.904
-above is the history table and the satellite model contributed nothing to
+forward split causal history covered **100 %** of test fields, so that
+split's ranking AUROC of 0.904 (`forward_eval.json`) is the history table's,
+and the satellite model contributed nothing to
 it. Tested where a fallback can matter — grouped CV, 41 % cold starts —
 against a history-only system using the area average for new fields:
 
@@ -505,3 +510,13 @@ The second check is the one that bites. If a rerun moves a number, the
 rendered string changes and every document quoting it fails until it is
 rewritten — so the prose cannot quietly fall behind the evidence.
 Registry and amendments: `configs/claims.yaml`.
+
+## Data and licence
+
+The SICKLE data, trained weights and reference code belong to their authors
+(Sani et al., 2024, WACV) and are distributed by them on request; none of it
+is included here. To run this prototype, request SICKLE from its authors and
+point `SICKLE_DATA_ROOT` at your copy.
+
+The code in this repository is released under the MIT licence (see
+`LICENSE`). The licence covers this code only, not SICKLE.
