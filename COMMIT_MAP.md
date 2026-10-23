@@ -1,0 +1,20 @@
+# Commit map: history rewrite of 2026-10-23
+
+On 2026-10-23 this repository's history was rewritten before publication:
+commit metadata was normalised to a single author. Every commit was kept,
+with its original date, message and content unchanged, so the order in
+which files were committed is preserved. Commit IDs changed.
+
+This table maps each old ID to its new one (old, then new, newest first).
+
+```
+02a4b6135ba7856e66331f68b5175bbe4ddcba57 52c7e6139156405c24781c6e212f6d901e2cca2f
+f93af2060f40eb59c460d9c27404ab0c675a18bb 5ce8669f71a9ee4eb6750c32ee745f0be05b5637
+f406f7b7bd0594857f8e4e8516507a0f16573959 9077198739b71cc2cf7504b84f777ad1ef05f8cd
+267a094e699cb5f03834c20995b3ae52ccdddaee 2cb6347acae42b9ddfec97f0bc6cab80fa27a043
+c51af6de2fe8b57a6e33d8b60ac1fe9ef8143e14 75dbdb3b448657eea6055a2d3da4ca01baf2938c
+2e3c5ef178bb62edabb6f4d3594d62ee0622c265 9a5b5526679b7cbcab8c6a108e6eac0ddee2c963
+d2c5036c902c27d116d1c8f165934ac5cbaf26b6 9cd234c4ae5c2270c4b658b702215c502dfcf11d
+0767c6d278d0edac9d83aa475815addef668ab84 4020c39ca8eab0f72af932886a9de0a9f5ec38cb
+3310a05c4d162b29c41923238bb78512501c63d5 c38e899f98fa8974185c0a2d2a25e7631d9906a8
+```
